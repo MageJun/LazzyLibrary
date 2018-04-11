@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/CommonUI/CommonUI.iml" filepath="$PROJECT_DIR$/CommonUI/CommonUI.iml" />
       <module fileurl="file://$PROJECT_DIR$/PersonAndroidDemo.iml" filepath="$PROJECT_DIR$/PersonAndroidDemo.iml" />
-      <module fileurl="file://$PROJECT_DIR$/RecycleViewDemo/app.iml" filepath="$PROJECT_DIR$/RecycleViewDemo/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RecycleViewDemo/RecycleViewDemo.iml" filepath="$PROJECT_DIR$/RecycleViewDemo/RecycleViewDemo.iml" />
+      <module fileurl="file://G:\Dev\WorkSpace\Android_AS\PersonAndroidDemo\RecycleViewDemo\app.iml" filepath="G:\Dev\WorkSpace\Android_AS\PersonAndroidDemo\RecycleViewDemo\app.iml" />
     </modules>
   </component>
 </project>

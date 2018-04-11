@@ -1,1 +1,1 @@
-include ':RecycleViewDemo'
+include ':RecycleViewDemo', ':CommonUI'
