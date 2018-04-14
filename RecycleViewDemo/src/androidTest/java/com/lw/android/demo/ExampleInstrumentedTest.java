@@ -3,9 +3,16 @@ package com.lw.android.demo;
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
+import android.util.Log;
+
+import com.lw.android.demo.model.PersonalData;
+import com.lw.android.demo.model.service.GlobalServiceManager;
+import com.lw.android.demo.model.service.IPersonService;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -22,5 +29,13 @@ public class ExampleInstrumentedTest {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
         assertEquals("com.lw.android.demo", appContext.getPackageName());
+    }
+
+   @Test
+    public void testPersonService(){
+        IPersonService service = GlobalServiceManager.getIPersonService();
+
+        List<PersonalData> list = service.listPersons();
+        assertNotNull(list);
     }
 }
