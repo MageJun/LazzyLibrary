@@ -8,9 +8,20 @@ public class PersonalData {
 
     private String name;
 
+    private String imgUrl;
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
     public String getName() {
         return name;
     }
+
 
     public void setName(String name) {
         this.name = name;
@@ -20,6 +31,7 @@ public class PersonalData {
     public String toString() {
         return "PersonalData{" +
                 "name='" + name + '\'' +
+                ", imgUrl='" + imgUrl + '\'' +
                 '}';
     }
 }

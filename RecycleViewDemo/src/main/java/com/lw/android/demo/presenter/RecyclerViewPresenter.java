@@ -1,65 +1,57 @@
 package com.lw.android.demo.presenter;
 
-import android.os.Handler;
-import android.os.HandlerThread;
-import android.os.Message;
-
 import com.lw.android.demo.model.PersonalData;
 import com.lw.android.demo.model.service.GlobalServiceManager;
 import com.lw.android.demo.model.service.IPersonService;
+import com.lw.android.demo.model.service.PersonServiceDataModelListener;
+import com.lw.android.demo.view.RecyclerViewer;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by zed on 2018/4/13.
  */
 
-public class RecyclerViewPresenter extends BasePresenter {
+public class RecyclerViewPresenter extends BasePresenter implements PersonServiceDataModelListener{
 
-
-    public interface Listener{
-        void dateRefreshCompleted(List<PersonalData> data);
-    }
 
     private IPersonService mPersonService;
 
+    private RecyclerViewer<PersonalData> mViewer;
+
     private List<PersonalData> mData;
 
-    private Listener mListener;
-
-    private HandlerThread mHadlerThread = new HandlerThread("RVPresenterThread");
-
-    private Handler handler = new Handler(mHadlerThread.getLooper(), new Handler.Callback() {
-        @Override
-        public boolean handleMessage(Message msg) {
-            return false;
-        }
-    });
-
-    public RecyclerViewPresenter(){
+    public RecyclerViewPresenter(RecyclerViewer viewer){
         mPersonService = GlobalServiceManager.getIPersonService();
-        mHadlerThread.start();
+        mPersonService.setPersonServiceListener(this);
+        this.mViewer = viewer;
     }
 
-    public void setmListener(Listener listener){
-        this.mListener = listener;
+    public void getData(){
+        showProgress();
+        mPersonService.listPersons();
     }
 
-    public List<PersonalData> getData(){
-        if(mData==null){
-            requestData();
-        }
-
-        return mData;
+    private void showProgress(){
+        mViewer.showProgress();
     }
 
-    public void refreshData(){
-        requestData();
+    private void hideProgress(){
+        mViewer.hideProgress();
+
     }
 
-    private void requestData(){
-        mData  = mPersonService.listPersons();
+
+    @Override
+    public void onError(int mode) {
+        hideProgress();
     }
+
+    @Override
+    public void onSuccess(List<PersonalData> datas) {
+        hideProgress();
+        mViewer.onDataNotifytion(datas);
+    }
+
 
 }
