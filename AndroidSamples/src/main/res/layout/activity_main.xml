@@ -1,18 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:swipeLayout="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.lw.demo.adnroid.samples.MainActivity">
+    android:orientation="horizontal"
+    >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <!--swipeLayout:layout_right_menu="@layout/layout_right_menu"-->
+    <com.lw.android.commonui.customView.SwipeMenuLayout
 
-</android.support.constraint.ConstraintLayout>
+        android:layout_width="0dp"
+        android:layout_weight="0.5"
+        android:layout_height="match_parent"
+        swipeLayout:layout_right_menu="@layout/layout_right_menu"
+        swipeLayout:layout_content="@layout/layout_content"
+        >
+    </com.lw.android.commonui.customView.SwipeMenuLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="0.5"
+        android:background="@drawable/ic_launcher_background">
+
+    </LinearLayout>
+</LinearLayout>
