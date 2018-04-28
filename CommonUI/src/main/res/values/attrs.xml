@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 定义的name必须和自定义的View的类名相同，否则使用时不会自动提示 -->
+    <declare-styleable name="SwipeMenuLayout">
+        <attr name="layout_left_menu" format="integer"/>
+        <attr name="layout_right_menu" format="integer"/>
+        <attr name="layout_content" format="integer"/>
+        <attr name="isShowLeftMenu" format="boolean"/>
+        <attr name="isShowRightMenu" format="boolean"/>
+    </declare-styleable>
+    
+</resources>

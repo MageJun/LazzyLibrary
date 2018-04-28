@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="commonui_color_bg">#cb38c2c2</color>
+    <color name="commonui_color_item1">#cbd4ac2a</color>
+    <color name="commonui_color_item2">#cbb7082b</color>
+    <color name="commonui_color_item3">#cb1897d7</color>
+</resources>
