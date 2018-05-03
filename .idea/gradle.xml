@@ -5,12 +5,14 @@
       <GradleProjectSettings>
         <option name="distributionType" value="LOCAL" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleHome" value="$PROJECT_DIR$/../../../Gradle/gradle-3.4/gradle-3.4" />
+        <option name="gradleHome" value="G:\Dev\IDE\AS\gradle\gradle-4.1" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/AndroidSamples" />
             <option value="$PROJECT_DIR$/CommonUI" />
             <option value="$PROJECT_DIR$/RecycleViewDemo" />
+            <option value="$PROJECT_DIR$/ZedDemo" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/AndroidSamples/AndroidSamples.iml" filepath="$PROJECT_DIR$/AndroidSamples/AndroidSamples.iml" />
       <module fileurl="file://$PROJECT_DIR$/CommonUI/CommonUI.iml" filepath="$PROJECT_DIR$/CommonUI/CommonUI.iml" />
       <module fileurl="file://$PROJECT_DIR$/PersonAndroidDemo.iml" filepath="$PROJECT_DIR$/PersonAndroidDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/RecycleViewDemo/RecycleViewDemo.iml" filepath="$PROJECT_DIR$/RecycleViewDemo/RecycleViewDemo.iml" />
-      <module fileurl="file://G:\Dev\WorkSpace\Android_AS\PersonAndroidDemo\RecycleViewDemo\app.iml" filepath="G:\Dev\WorkSpace\Android_AS\PersonAndroidDemo\RecycleViewDemo\app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ZedDemo/ZedDemo.iml" filepath="$PROJECT_DIR$/ZedDemo/ZedDemo.iml" />
     </modules>
   </component>
 </project>

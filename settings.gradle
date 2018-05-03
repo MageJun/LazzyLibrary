@@ -1,1 +1,1 @@
-include ':RecycleViewDemo', ':CommonUI'
+include ':RecycleViewDemo', ':CommonUI', ':ZedDemo', ':AndroidSamples'

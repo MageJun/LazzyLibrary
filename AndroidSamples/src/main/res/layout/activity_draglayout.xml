@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.lw.android.commonui.customView.DragLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/del"
+        android:onClick="onClick"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="滑动删除"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:background="@color/commonui_color_item2"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="显示区"
+        android:gravity="center"
+        android:background="@color/commonui_color_bg"/>
+    </com.lw.android.commonui.customView.DragLayout>
+
+</LinearLayout>

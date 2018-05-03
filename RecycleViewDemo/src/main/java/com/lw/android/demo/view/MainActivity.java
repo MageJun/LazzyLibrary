@@ -91,6 +91,7 @@ public class MainActivity extends BaseActivity implements RecyclerViewer<Persona
         ItemTouchHelper helper = new ItemTouchHelper(callBack);
         helper.attachToRecyclerView(mRecyclerView);
 
+
         mPresenter = new RecyclerViewPresenter(this);
 
 
