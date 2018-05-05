@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="xydj_title_height">50dp</dimen>
+    <dimen name="xydj_title_textsize">20sp</dimen>
+    <dimen name="xydj_list_item_textsize">15sp</dimen>
+    <dimen name="xydj_user_icon">50dp</dimen>
+    <dimen name="xydj_userinfo_list_icon">15dp</dimen>
+</resources>

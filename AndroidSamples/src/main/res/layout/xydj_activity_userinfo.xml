@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/xydj_bg">
+
+    <include
+        android:id="@+id/title"
+        layout="@layout/xydj_layout_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/xydj_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        android:layout_marginBottom="50dp"
+        android:scrollbars="none"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+
+            <RelativeLayout
+                android:id="@+id/icon_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/xydj_roungrect_bg"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/icon"
+                    android:layout_width="@dimen/xydj_user_icon"
+                    android:layout_height="@dimen/xydj_user_icon"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_launcher_background" />
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/icon"
+                    android:text="李小明" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/arrow" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/group_msg"
+                style="@style/XYDJUserInfoListItemStyle"
+               >
+
+                <ImageView
+                    android:id="@+id/group_msg_icon"
+                    android:layout_width="@dimen/xydj_userinfo_list_icon"
+                    android:layout_height="@dimen/xydj_userinfo_list_icon"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_launcher_background" />
+
+                <TextView
+                    style="@style/XYDJListItemText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/group_msg_icon"
+                    android:text="@string/xydj_userinfo_groupmsginfo" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/arrow" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/friends_invite_infos"
+                style="@style/XYDJUserInfoListItemStyle"
+                >
+
+                <ImageView
+                    android:id="@+id/friends_invite_icon"
+                    android:layout_width="@dimen/xydj_userinfo_list_icon"
+                    android:layout_height="@dimen/xydj_userinfo_list_icon"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_launcher_background" />
+
+                <TextView
+                    style="@style/XYDJListItemText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/friends_invite_icon"
+                    android:text="@string/xydj_userinfo_friendsinvite" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/arrow" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/ptt_setting"
+                style="@style/XYDJUserInfoListItemStyle"
+                >
+
+                <ImageView
+                    android:id="@+id/ptt_setting_icon"
+                    android:layout_width="@dimen/xydj_userinfo_list_icon"
+                    android:layout_height="@dimen/xydj_userinfo_list_icon"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_launcher_background" />
+
+                <TextView
+                    style="@style/XYDJListItemText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/ptt_setting_icon"
+                    android:text="@string/xydj_userinfo_pttsetting" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/arrow" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/update_vip"
+                style="@style/XYDJUserInfoListItemStyle"
+                >
+
+                <ImageView
+                    android:id="@+id/update_vip_icon"
+                    android:layout_width="@dimen/xydj_userinfo_list_icon"
+                    android:layout_height="@dimen/xydj_userinfo_list_icon"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_launcher_background" />
+
+                <TextView
+                    style="@style/XYDJListItemText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/update_vip_icon"
+                    android:text="@string/xydj_userinfo_update_2_vip" />
+
+                <ImageView
+                    android:id="@+id/arraw"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/arrow" />
+
+                <TextView
+                    android:id="@+id/expiry_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:layout_toLeftOf="@id/arraw"
+                    android:textSize="13sp"
+                    android:textColor="@color/xydj_gray_text_color"
+                    android:text="2088-08-08到期" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/settings"
+                style="@style/XYDJUserInfoListItemStyle"
+                >
+
+                <ImageView
+                    android:id="@+id/settings_icon"
+                    android:layout_width="@dimen/xydj_userinfo_list_icon"
+                    android:layout_height="@dimen/xydj_userinfo_list_icon"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_launcher_background" />
+
+                <TextView
+                    style="@style/XYDJListItemText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/settings_icon"
+                    android:text="@string/xydj_userinfo_settings" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/arrow" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
+                <TextView
+                    android:id="@+id/opinion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/xydj_gray_text_color"
+                    android:text="@string/xydj_userinfo_opinion"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/opinion"
+                    android:layout_marginTop="10dp"
+                    android:padding="10dp"
+                    android:background="@drawable/xydj_roungrect_bg">
+                    <EditText
+                        android:id="@+id/opinion_edt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:textCursorDrawable="@null"
+                        android:gravity="top|left"
+                        android:textColorHint="@color/xydj_gray_text_color"
+                        android:hint="@string/xydj_userinfo_opinion_hint"/>
+
+                    <Button
+                        android:layout_marginTop="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/opinion_edt"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentBottom="true"
+                        android:text="@string/xydj_userinfo_opinion_submit"/>
+                </RelativeLayout>
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</android.support.constraint.ConstraintLayout>

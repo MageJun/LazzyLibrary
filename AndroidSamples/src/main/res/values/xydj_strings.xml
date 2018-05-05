@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="xydj_userinfo_groupmsginfo">群组邀请信息</string>
+    <string name="xydj_userinfo_friendsinvite">好友申请信息</string>
+    <string name="xydj_userinfo_pttsetting">对讲设置</string>
+    <string name="xydj_userinfo_update_2_vip">升级为付费版</string>
+    <string name="xydj_userinfo_settings">设置</string>
+    <string name="xydj_userinfo_opinion">意见反馈</string>
+    <string name="xydj_userinfo_opinion_hint">告诉我们您在使用中遇到的问题或宝贵的建议</string>
+    <string name="xydj_userinfo_opinion_submit">提交</string>
+    <string name="xydj_userinfo_expire">到期</string>
+</resources>

@@ -1,25 +1,65 @@
 package com.lw.demo.adnroid.samples;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.LinearLayout;
 
-public class MainActivity extends AppCompatActivity {
+import com.zed3.sipua.ui.ItemDividerDecoration;
+import com.zed3.sipua.ui.adapter.FriendsListAdapter;
+import com.zed3.sipua.ui.bean.FrindInfo;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainActivity extends Activity {
+
+        private FriendsListAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_draglayout);
+        setContentView(R.layout.activity_main_draglistdemo);
+
+        RecyclerView listView = findViewById(R.id.contentList);
+
+        mAdapter = new FriendsListAdapter();
+        int direction = LinearLayout.VERTICAL;
+        LinearLayoutManager lManager = new LinearLayoutManager(this);
+        lManager.setOrientation(direction);
+
+        listView.setLayoutManager(lManager);
+
+        listView.setAdapter(mAdapter);
+
+        ItemDividerDecoration decoration = new ItemDividerDecoration(this, direction);
+        decoration.setOffset(8);
+        decoration.setColor(getResources().getColor(R.color.commonui_color_item1));
+
+        listView.addItemDecoration(decoration);
+
+        mAdapter.addData(createData(20));
+        mAdapter.setListener(new FriendsListAdapter.RecyclerViewOnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int position) {
+                mAdapter.delete(position);
+            }
+        });
     }
 
-    public void onClick(View v){
-
-
-        switch (v.getId()){
-            case R.id.del:
-                Toast.makeText(this,"删除", Toast.LENGTH_SHORT).show();
-                break;
+    private List<FrindInfo> createData(int count){
+        List<FrindInfo> infos = new ArrayList<FrindInfo>();
+        for (int i = 0;i<count;i++){
+            FrindInfo info = new FrindInfo();
+            info.setName("Name "+i+" 明");
+            infos.add(info);
         }
+        return infos;
     }
+
+
 }

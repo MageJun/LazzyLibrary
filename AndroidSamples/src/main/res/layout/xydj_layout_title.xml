@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fitsSystemWindows="true"
+    android:clipToPadding="true"
+    android:background="@color/xydj_title_bg">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/xydj_title_height"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我"
+            android:layout_centerInParent="true"
+            android:textColor="@color/xydj_normal_text_color"
+            android:textSize="@dimen/xydj_title_textsize"
+            />
+    </RelativeLayout>
+
+
+</android.support.constraint.ConstraintLayout>
