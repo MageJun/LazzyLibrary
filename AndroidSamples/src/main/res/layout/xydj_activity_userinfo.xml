@@ -247,6 +247,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/xydj_gray_text_color"
+                    android:textSize="15sp"
                     android:text="@string/xydj_userinfo_opinion"/>
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -263,6 +264,7 @@
                         android:textCursorDrawable="@null"
                         android:gravity="top|left"
                         android:textColorHint="@color/xydj_gray_text_color"
+                        android:textSize="13sp"
                         android:hint="@string/xydj_userinfo_opinion_hint"/>
 
                     <Button
