@@ -10,4 +10,6 @@
     <color name="xydj_gray_text_color">#9A9A9A</color>
     <color name="xydj_color_white">#FFFFFF</color>
     <color name="xydj_color_black">#000000</color>
+    <color name="xydj_tab_gray_bg">#ADADAD</color>
+    <color name="xydj_color_red">#FF0000</color>
 </resources>

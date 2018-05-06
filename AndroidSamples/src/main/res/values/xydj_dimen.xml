@@ -5,4 +5,5 @@
     <dimen name="xydj_list_item_textsize">15sp</dimen>
     <dimen name="xydj_user_icon">50dp</dimen>
     <dimen name="xydj_userinfo_list_icon">15dp</dimen>
+    <dimen name="xydj_groupinvite_item_padding">8dp</dimen>
 </resources>

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SimpleItemAnimator;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -41,7 +42,9 @@ public class MainActivity extends Activity {
         decoration.setColor(getResources().getColor(R.color.commonui_color_item1));
 
         listView.addItemDecoration(decoration);
-
+        SimpleItemAnimator animator = (SimpleItemAnimator) listView.getItemAnimator();
+        animator.setChangeDuration(0);//动画执行时间改为0，解决默认动画的闪屏动画问题
+        animator.setSupportsChangeAnimations(false);
         mAdapter.addData(createData(20));
         mAdapter.setListener(new FriendsListAdapter.RecyclerViewOnItemClickListener() {
             @Override

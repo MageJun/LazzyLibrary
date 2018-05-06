@@ -1,5 +1,6 @@
 package com.zed3.sipua.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -20,7 +21,8 @@ public class UserInfoActivity extends BaseActivity {
 
                 break;
             case R.id.group_msg:
-
+                Intent intent = new Intent(this,GroupInviteInfoActivity.class);
+                startActivity(intent);
                 break;
             case R.id.friends_invite_infos:
 
