@@ -27,15 +27,15 @@ public class DragLayout extends FrameLayout {
     }
 
     public interface SwipeStatusChangeListener {
-        void onDraging(DragLayout mSwipeLayout);
+        void onDraging(DragLayout dragLayout);
 
-        void onOpen(DragLayout mSwipeLayout);
+        void onOpen(DragLayout dragLayout);
 
-        void onClose(DragLayout mSwipeLayout);
+        void onClose(DragLayout dragLayout);
 
-        void onStartOpen(DragLayout mSwipeLayout);
+        void onStartOpen(DragLayout dragLayout);
 
-        void onStartClose(DragLayout mSwipeLayout);
+        void onStartClose(DragLayout dragLayout);
     }
 
 
