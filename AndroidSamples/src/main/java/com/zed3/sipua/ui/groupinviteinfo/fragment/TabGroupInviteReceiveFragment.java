@@ -63,7 +63,6 @@ public class TabGroupInviteReceiveFragment extends Fragment implements GroupInvi
         super.onCreate(savedInstanceState);
     }
 
-
     private RecyclerView mListView;
     private GroupInviteReceiveAdapter mAdapter;
     private LinearLayoutManager mLayoutManager;
@@ -87,11 +86,17 @@ public class TabGroupInviteReceiveFragment extends Fragment implements GroupInvi
         ItemDividerDecoration divider = new ItemDividerDecoration(getActivity(), LinearLayout.VERTICAL);
         divider.setOffset(2);
         mListView.addItemDecoration(divider);
-        mPresenter = new GroupInvitePresenter(this);
+        mPresenter = new GroupInvitePresenter();
+        mPresenter.attach(this);
         mPresenter.setDataHandleListener(this);
         mPresenter.loadData();
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mPresenter.detach(this);
+    }
 
     @Override
     public void showProgress() {

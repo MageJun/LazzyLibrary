@@ -9,7 +9,7 @@ public interface IGroupInviteService {
     void getReceiveGroupInviteList(GroupInviteRequestListener listener);
     void deleteData(GroupInviteReceiveDataMap.GroupInviteReceiveData data,int pos);
     void setDataHandleListener(GroupInviteDataHandleListener listener);
-
+    void quit();
     public interface GroupInviteRequestListener{
         void onSuccess(List<GroupInviteReceiveDataMap> data);
         void onFailed(int code);

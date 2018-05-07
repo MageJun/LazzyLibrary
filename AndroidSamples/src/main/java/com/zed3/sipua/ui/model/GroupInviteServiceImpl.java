@@ -73,6 +73,15 @@ public class GroupInviteServiceImpl implements IGroupInviteService {
         this.mDataHandleListener = listener;
     }
 
+    @Override
+    public void quit() {
+        if(mHandThread!=null){
+            mHandler.removeMessages(MSG_GET_DATA_LIST);
+            mHandler.removeMessages(MSG_DATA_HANDLE_DEL);
+            mHandThread.quit();
+        }
+    }
+
     private List<GroupInviteReceiveDataMap> createTempData(int count){
         List<GroupInviteReceiveDataMap> mMaps = new ArrayList<GroupInviteReceiveDataMap>();
         for (int i = 0;i<count;i++){
