@@ -12,4 +12,9 @@
     <color name="xydj_color_black">#000000</color>
     <color name="xydj_tab_gray_bg">#ADADAD</color>
     <color name="xydj_color_red">#FF0000</color>
+    <color name="xydj_item_del_bg">#E51C23</color>
+    <color name="xydj_item_text_color">#101010</color>
+    <color name="xydj_item_smaller_text_color">#B0ACB0</color>
+    <color name="xydj_item_normal_text_color_1">#737073</color>
+    <color name="xydj_item_normal_text_color_2">#A8A7A8</color>
 </resources>

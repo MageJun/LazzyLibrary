@@ -6,18 +6,18 @@
     android:layout_height="match_parent"
     android:background="@color/xydj_bg">
 
-    <include
+  <!--  <include
         android:id="@+id/title"
         layout="@layout/xydj_layout_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    app:layout_constraintTop_toBottomOf="@+id/title"-->
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:background="@color/xydj_bg"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title"
         android:layout_marginBottom="50dp"
         android:scrollbars="none"
         >
@@ -59,8 +59,8 @@
                     android:text="李小明" />
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/xydj_item_right_arrow"
+                    android:layout_height="@dimen/xydj_item_right_arrow"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:src="@drawable/arrow" />
@@ -91,8 +91,8 @@
                     android:text="@string/xydj_userinfo_groupmsginfo" />
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/xydj_item_right_arrow"
+                    android:layout_height="@dimen/xydj_item_right_arrow"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:src="@drawable/arrow" />
@@ -123,8 +123,8 @@
                     android:text="@string/xydj_userinfo_friendsinvite" />
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/xydj_item_right_arrow"
+                    android:layout_height="@dimen/xydj_item_right_arrow"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:src="@drawable/arrow" />
@@ -155,8 +155,8 @@
                     android:text="@string/xydj_userinfo_pttsetting" />
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/xydj_item_right_arrow"
+                    android:layout_height="@dimen/xydj_item_right_arrow"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:src="@drawable/arrow" />
@@ -187,8 +187,8 @@
 
                 <ImageView
                     android:id="@+id/arraw"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/xydj_item_right_arrow"
+                    android:layout_height="@dimen/xydj_item_right_arrow"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:src="@drawable/arrow" />
@@ -229,8 +229,8 @@
                     android:text="@string/xydj_userinfo_settings" />
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/xydj_item_right_arrow"
+                    android:layout_height="@dimen/xydj_item_right_arrow"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:src="@drawable/arrow" />

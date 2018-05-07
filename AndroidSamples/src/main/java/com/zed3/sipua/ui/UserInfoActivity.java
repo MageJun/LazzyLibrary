@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.lw.demo.adnroid.samples.R;
+import com.zed3.sipua.ui.groupinviteinfo.GroupInviteInfoActivity;
 
 public class UserInfoActivity extends BaseActivity {
 

@@ -1,4 +1,4 @@
-package com.zed3.sipua.ui.fragment;
+package com.zed3.sipua.ui.groupinviteinfo.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

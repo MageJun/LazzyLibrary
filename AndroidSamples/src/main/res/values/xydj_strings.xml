@@ -10,4 +10,11 @@
     <string name="xydj_userinfo_opinion_submit">提交</string>
     <string name="xydj_userinfo_expire">到期</string>
     <string name="xydj_del">删除</string>
+    <string name="xydj_status_accepted">已同意</string>
+    <string name="xydj_btn_accepted">同意</string>
+    <string name="xydj_back">返回</string>
+    <string name="xydj_idle_state_info">您当前处于未接听任何群组信息的空置状态</string>
+    <string name="xydj_invite_member_friend">邀请好友</string>
+    <string name="xydj_invite_member_tel">通过手机号邀请</string>
+    <string name="xydj_invite_member_share_pwd">通过分享群口令邀请</string>
 </resources>

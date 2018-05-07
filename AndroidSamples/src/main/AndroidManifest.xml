@@ -20,9 +20,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.zed3.sipua.ui.GroupInviteInfoActivity"
+            android:name="com.zed3.sipua.ui.groupinviteinfo.GroupInviteInfoActivity"
             android:label="@string/title_activity_group_invite_info"
             android:theme="@style/XYDJAppTheme.NoActionBar"></activity>
+        <activity android:name="com.zed3.sipua.ui.group.IdelStateActivity">
+
+        </activity>
+
+        <activity android:name="com.zed3.sipua.ui.group.InviteMemberActivity">
+
+        </activity>
     </application>
 
 </manifest>

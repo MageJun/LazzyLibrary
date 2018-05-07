@@ -5,11 +5,12 @@
     android:layout_height="match_parent"
     >
 
-    <include android:id="@+id/title"
+    <!--<include android:id="@+id/title"
         layout="@layout/xydj_layout_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        />-->
 
     <TextView
         android:id="@+id/receve_id"
@@ -17,7 +18,7 @@
         android:layout_width="0dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/send_id"
-        app:layout_constraintTop_toBottomOf="@+id/title"
+
         android:text="发给我的"
         android:gravity="center"
         android:padding="10dp"

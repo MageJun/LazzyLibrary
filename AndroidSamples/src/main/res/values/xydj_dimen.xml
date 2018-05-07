@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="xydj_title_height">50dp</dimen>
-    <dimen name="xydj_title_textsize">20sp</dimen>
-    <dimen name="xydj_list_item_textsize">15sp</dimen>
+    <dimen name="xydj_title_textsize">18sp</dimen>
+    <dimen name="xydj_title_back_textsize">16sp</dimen>
+    <dimen name="xydj_tab_item_textsize">14sp</dimen>
+    <dimen name="xydj_list_item_textsize">14sp</dimen>
+    <dimen name="xydj_list_item_smaller_textsize">12sp</dimen>
     <dimen name="xydj_user_icon">50dp</dimen>
     <dimen name="xydj_userinfo_list_icon">15dp</dimen>
     <dimen name="xydj_groupinvite_item_padding">8dp</dimen>
+    <dimen name="xydj_ptt_icon_hw">120dp</dimen>
+    <dimen name="xydj_idle_state_info_w">140dp</dimen>
+    <dimen name="xydj_item_right_arrow">24dp</dimen>
 </resources>

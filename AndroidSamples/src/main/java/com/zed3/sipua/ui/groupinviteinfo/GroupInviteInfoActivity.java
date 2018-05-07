@@ -1,4 +1,4 @@
-package com.zed3.sipua.ui;
+package com.zed3.sipua.ui.groupinviteinfo;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -7,8 +7,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.lw.demo.adnroid.samples.R;
-import com.zed3.sipua.ui.fragment.TabGroupInviteReceiveFragment;
-import com.zed3.sipua.ui.fragment.TabGroupInviteSendFragment;
+import com.zed3.sipua.ui.BaseActivity;
+import com.zed3.sipua.ui.groupinviteinfo.fragment.TabGroupInviteReceiveFragment;
+import com.zed3.sipua.ui.groupinviteinfo.fragment.TabGroupInviteSendFragment;
 
 public class GroupInviteInfoActivity extends BaseActivity {
 

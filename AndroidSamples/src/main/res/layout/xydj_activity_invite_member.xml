@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:id="@+id/invite_friend"
+        style="@style/XYDJUserInfoListItemStyle"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent">
+
+        <TextView
+            style="@style/XYDJListItemText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:text="@string/xydj_invite_member_friend" />
+
+        <ImageView
+            android:layout_width="@dimen/xydj_item_right_arrow"
+            android:layout_height="@dimen/xydj_item_right_arrow"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/arrow" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/invite_tel"
+        style="@style/XYDJUserInfoListItemStyle"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/invite_friend"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent">
+
+        <TextView
+            style="@style/XYDJListItemText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:text="@string/xydj_invite_member_tel" />
+
+        <ImageView
+            android:layout_width="@dimen/xydj_item_right_arrow"
+            android:layout_height="@dimen/xydj_item_right_arrow"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/arrow" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/invite_share_pwd"
+        style="@style/XYDJUserInfoListItemStyle"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/invite_tel"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent">
+
+        <TextView
+            style="@style/XYDJListItemText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:text="@string/xydj_invite_member_share_pwd" />
+
+        <ImageView
+            android:layout_width="@dimen/xydj_item_right_arrow"
+            android:layout_height="@dimen/xydj_item_right_arrow"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/arrow"
+            android:scaleType="centerInside"/>
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

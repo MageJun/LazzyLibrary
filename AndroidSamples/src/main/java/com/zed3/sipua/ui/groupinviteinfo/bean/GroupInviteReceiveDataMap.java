@@ -1,5 +1,6 @@
-package com.zed3.sipua.ui.bean;
+package com.zed3.sipua.ui.groupinviteinfo.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class GroupInviteReceiveDataMap {
@@ -45,7 +46,7 @@ public class GroupInviteReceiveDataMap {
                 '}';
     }
 
-    public static class GroupInviteReceiveData {
+    public static class GroupInviteReceiveData implements Serializable {
 
         private String groupName;//群组名
 
@@ -55,7 +56,11 @@ public class GroupInviteReceiveDataMap {
 
         private long time;//邀请时间
 
-        private int status;//邀请状态 0 未同意  1 已同意
+        public enum Status{
+            ACCEPTED,
+            WAIT;
+        }
+        private Status status=Status.ACCEPTED;//邀请状态 0 未同意  1 已同意
 
         private boolean isMap;//
 
@@ -93,11 +98,11 @@ public class GroupInviteReceiveDataMap {
             this.time = time;
         }
 
-        public int getStatus() {
+        public Status getStatus() {
             return status;
         }
 
-        public void setStatus(int status) {
+        public void setStatus(Status status) {
             this.status = status;
         }
 
