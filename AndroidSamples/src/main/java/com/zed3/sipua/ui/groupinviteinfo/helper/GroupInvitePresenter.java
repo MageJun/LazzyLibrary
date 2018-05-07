@@ -25,10 +25,16 @@ public class GroupInvitePresenter extends BasePresenter<GroupInviteInfoViewer> i
 
 
     public void loadData(){
+        if(!checkViewer()){
+            return ;
+        }
         mViewer.showProgress();
-        mGropuInviteService.getReceiveGroupInviteList(new IGroupInviteService.GroupInviteRequestListener() {
+        mGropuInviteService.getReceiveGroupInviteList(new IGroupInviteService.GroupInviteRequestListener<List<GroupInviteReceiveDataMap>>() {
             @Override
             public void onSuccess(List<GroupInviteReceiveDataMap> data) {
+                if(!checkViewer()){
+                    return ;
+                }
                 mViewer.dismissProgress();
                 mViewer.dataLoadComplete(data);
             }
@@ -47,8 +53,8 @@ public class GroupInvitePresenter extends BasePresenter<GroupInviteInfoViewer> i
 
     @Override
     public void detach(GroupInviteInfoViewer groupInviteInfoViewer) {
-        this.mViewer = null;
         mGropuInviteService.quit();
+        this.mViewer = null;
     }
 
     public interface  DataHandleListener<T>{
@@ -57,14 +63,25 @@ public class GroupInvitePresenter extends BasePresenter<GroupInviteInfoViewer> i
 
 
     public void delete(GroupInviteReceiveDataMap.GroupInviteReceiveData data,int pos){
+        if(!checkViewer()){
+            return ;
+        }
         mViewer.showProgress();
         mGropuInviteService.deleteData(data,pos);
     }
 
     @Override
     public void onDeleteSuccess(GroupInviteReceiveData data,int pos) {
+        if(!checkViewer()){
+            return ;
+        }
         mViewer.dismissProgress();
         mDataHandleListener.onDeleteSuccess(data,pos);
+    }
+
+
+    private boolean checkViewer(){
+        return mViewer!=null;
     }
 
 

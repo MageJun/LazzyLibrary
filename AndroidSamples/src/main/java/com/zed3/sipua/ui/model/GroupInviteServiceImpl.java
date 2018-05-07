@@ -16,6 +16,7 @@ public class GroupInviteServiceImpl implements IGroupInviteService {
     private GroupInviteDataHandleListener mDataHandleListener;
     private static final int MSG_GET_DATA_LIST= 0;
     private static final int MSG_DATA_HANDLE_DEL = 1;
+    private static final int MSG_GET_GROUP_SHARE_PWD = 2;//请求群分型口令
 
     private Handler.Callback mCallBack = new Handler.Callback() {
         @Override
@@ -34,6 +35,18 @@ public class GroupInviteServiceImpl implements IGroupInviteService {
                         mDataHandleListener.onDeleteSuccess(data,pos);
                     }
                     break;
+                case MSG_GET_GROUP_SHARE_PWD://请求群口令
+                    GroupInviteRequestListener lis = (GroupInviteRequestListener) msg.obj;
+                    //TODO执行获取共享口令的操作，需要从服务器获取
+                    //模拟网络请求等待2S
+                    try {
+                        Thread.sleep(2*1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    String pwd = "123456";
+                    lis.onSuccess(pwd);
+                    break;
             }
             return false;
         }
@@ -50,6 +63,14 @@ public class GroupInviteServiceImpl implements IGroupInviteService {
     public void getReceiveGroupInviteList(GroupInviteRequestListener listener) {
         Message msg = Message.obtain();
         msg.what = MSG_GET_DATA_LIST;
+        msg.obj = listener;
+        mHandler.sendMessage(msg);
+    }
+
+    @Override
+    public void getGroupInvitePWD(GroupInviteRequestListener listener) {
+        Message msg = Message.obtain();
+        msg.what = MSG_GET_GROUP_SHARE_PWD;
         msg.obj = listener;
         mHandler.sendMessage(msg);
     }

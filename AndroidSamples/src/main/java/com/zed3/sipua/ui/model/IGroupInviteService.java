@@ -7,15 +7,17 @@ import java.util.List;
 public interface IGroupInviteService {
 
     void getReceiveGroupInviteList(GroupInviteRequestListener listener);
+    void getGroupInvitePWD(GroupInviteRequestListener listener);
     void deleteData(GroupInviteReceiveDataMap.GroupInviteReceiveData data,int pos);
     void setDataHandleListener(GroupInviteDataHandleListener listener);
     void quit();
-    public interface GroupInviteRequestListener{
-        void onSuccess(List<GroupInviteReceiveDataMap> data);
+
+     interface GroupInviteRequestListener<T>{
+        void onSuccess(T data);
         void onFailed(int code);
     }
 
-    public interface GroupInviteDataHandleListener<T>{
+     interface GroupInviteDataHandleListener<T>{
         void onDeleteSuccess(T data,int pos);
     }
 
