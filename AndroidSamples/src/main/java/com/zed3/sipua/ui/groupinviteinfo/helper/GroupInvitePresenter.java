@@ -1,7 +1,5 @@
 package com.zed3.sipua.ui.groupinviteinfo.helper;
 
-import android.support.annotation.NonNull;
-
 import com.zed3.sipua.ui.groupinviteinfo.bean.GroupInviteReceiveDataMap;
 import com.zed3.sipua.ui.groupinviteinfo.bean.GroupInviteReceiveDataMap.GroupInviteReceiveData;
 import com.zed3.sipua.ui.model.GlobalService;
@@ -10,9 +8,9 @@ import com.zed3.sipua.ui.presenter.BasePresenter;
 
 import java.util.List;
 
-public class GroupInvitePresenter extends BasePresenter<GroupInviteViewer> implements IGroupInviteService.GroupInviteDataHandleListener<GroupInviteReceiveData> {
+public class GroupInvitePresenter extends BasePresenter<GroupInviteInfoViewer> implements IGroupInviteService.GroupInviteDataHandleListener<GroupInviteReceiveData> {
 
-    private GroupInviteViewer mViewer;
+    private GroupInviteInfoViewer mViewer;
     private IGroupInviteService mGropuInviteService;
     private DataHandleListener mDataHandleListener;
 
@@ -43,12 +41,12 @@ public class GroupInvitePresenter extends BasePresenter<GroupInviteViewer> imple
     }
 
     @Override
-    public void attach(GroupInviteViewer groupInviteViewer) {
-            this.mViewer = groupInviteViewer;
+    public void attach(GroupInviteInfoViewer groupInviteInfoViewer) {
+            this.mViewer = groupInviteInfoViewer;
     }
 
     @Override
-    public void detach(GroupInviteViewer groupInviteViewer) {
+    public void detach(GroupInviteInfoViewer groupInviteInfoViewer) {
         this.mViewer = null;
         mGropuInviteService.quit();
     }

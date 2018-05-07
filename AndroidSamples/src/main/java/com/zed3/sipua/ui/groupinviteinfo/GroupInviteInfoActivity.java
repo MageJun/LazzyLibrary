@@ -8,12 +8,12 @@ import android.widget.TextView;
 
 import com.lw.demo.adnroid.samples.R;
 import com.zed3.sipua.ui.BaseActivity;
-import com.zed3.sipua.ui.groupinviteinfo.fragment.TabGroupInviteReceiveFragment;
+import com.zed3.sipua.ui.groupinviteinfo.fragment.TabGroupInviteInfoReceiveFragment;
 import com.zed3.sipua.ui.groupinviteinfo.fragment.TabGroupInviteSendFragment;
 
 public class GroupInviteInfoActivity extends BaseActivity {
 
-    private TabGroupInviteReceiveFragment mReceiveFragment;
+    private TabGroupInviteInfoReceiveFragment mReceiveFragment;
     private TabGroupInviteSendFragment mSendFragment;
 
     @Override
@@ -41,8 +41,8 @@ public class GroupInviteInfoActivity extends BaseActivity {
         switch (pos){
             case 0:
                 if(mReceiveFragment==null){
-                    mReceiveFragment= new TabGroupInviteReceiveFragment();
-                    transaction.add(R.id.group_invite_content,mReceiveFragment,R.id.receve_id+TabGroupInviteReceiveFragment.TAG);
+                    mReceiveFragment= new TabGroupInviteInfoReceiveFragment();
+                    transaction.add(R.id.group_invite_content,mReceiveFragment,R.id.receve_id+ TabGroupInviteInfoReceiveFragment.TAG);
                 }
                 transaction.show(mReceiveFragment);
                 break;

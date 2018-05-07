@@ -19,15 +19,15 @@ import com.zed3.sipua.ui.groupinviteinfo.adapter.GroupInviteReceiveAdapter;
 import com.zed3.sipua.ui.groupinviteinfo.bean.GroupInviteReceiveDataMap;
 import com.zed3.sipua.ui.groupinviteinfo.bean.GroupInviteReceiveDataMap.GroupInviteReceiveData;
 import com.zed3.sipua.ui.groupinviteinfo.helper.GroupInvitePresenter;
-import com.zed3.sipua.ui.groupinviteinfo.helper.GroupInviteViewer;
+import com.zed3.sipua.ui.groupinviteinfo.helper.GroupInviteInfoViewer;
 import com.zed3.sipua.ui.groupinviteinfo.helper.OnItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TabGroupInviteReceiveFragment extends Fragment implements GroupInviteViewer<List<GroupInviteReceiveDataMap>>,OnItemClickListener<GroupInviteReceiveData>,GroupInvitePresenter.DataHandleListener<GroupInviteReceiveData>{
+public class TabGroupInviteInfoReceiveFragment extends Fragment implements GroupInviteInfoViewer<List<GroupInviteReceiveDataMap>>,OnItemClickListener<GroupInviteReceiveData>,GroupInvitePresenter.DataHandleListener<GroupInviteReceiveData>{
 
-    public static final String TAG = TabGroupInviteReceiveFragment.class.getSimpleName();
+    public static final String TAG = TabGroupInviteInfoReceiveFragment.class.getSimpleName();
     private List<GroupInviteReceiveDataMap> mData=new ArrayList<GroupInviteReceiveDataMap>();
     private static final int MSG_PROGRESS_HIDE = 0;
     private static final int MSG_PROGRESS_SHOW = 1;

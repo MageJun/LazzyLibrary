@@ -1,6 +1,6 @@
 package com.zed3.sipua.ui.groupinviteinfo.helper;
 
-public interface GroupInviteViewer<T> {
+public interface GroupInviteInfoViewer<T> {
 
     void showProgress();
 
