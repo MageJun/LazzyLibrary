@@ -10,16 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/XYDJAppTheme">
         <activity android:name=".MainActivity"></activity>
-        <activity android:name="com.zed3.sipua.ui.UserInfoActivity"></activity>
+        <activity android:name="com.zed3.sipua.xydj.UserInfoActivity"></activity>
         <activity
-            android:name="com.zed3.sipua.ui.groupinviteinfo.GroupInviteInfoActivity"
+            android:name="com.zed3.sipua.xydj.ui.groupinviteinfo.GroupInviteInfoActivity"
             android:label="@string/title_activity_group_invite_info"
             android:theme="@style/XYDJAppTheme.NoActionBar" />
-        <activity android:name="com.zed3.sipua.ui.group.IdelStateActivity"></activity>
-        <activity android:name="com.zed3.sipua.ui.group.InviteMemberActivity">
+        <activity android:name="com.zed3.sipua.xydj.ui.group.IdelStateActivity"></activity>
+        <activity android:name="com.zed3.sipua.xydj.ui.group.InviteMemberActivity">
 
         </activity>
-        <activity android:name="com.zed3.sipua.ui.TestDemoMainActivity">
+        <activity android:name="com.zed3.sipua.xydj.TestDemoMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

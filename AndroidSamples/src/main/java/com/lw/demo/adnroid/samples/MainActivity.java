@@ -1,18 +1,16 @@
 package com.lw.demo.adnroid.samples;
 
 import android.app.Activity;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.zed3.sipua.ui.ItemDividerDecoration;
-import com.zed3.sipua.ui.adapter.FriendsListAdapter;
-import com.zed3.sipua.ui.bean.FrindInfo;
+import com.zed3.sipua.xydj.ItemDividerDecoration;
+import com.zed3.sipua.xydj.ui.adapter.FriendsListAdapter;
+import com.zed3.sipua.xydj.ui.bean.FrindInfo;
 
 import java.util.ArrayList;
 import java.util.List;
