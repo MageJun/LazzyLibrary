@@ -1,11 +1,19 @@
 package com.zed3.sipua.ui.group;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AlertDialog;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lw.demo.adnroid.samples.R;
@@ -20,7 +28,6 @@ public class InviteMemberActivity extends BaseActivity implements GroupViewer {
     private static final int MSG_REQUEST_PWD_SUCCESS = 1;
     private static final int MSG_REQUEST_PWD_FAILED = 2;
     private static final int MSG_QUIT = 3;
-    private static final int MSG_SHARE_PWD = 4;
     private Handler mHandler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -35,18 +42,53 @@ public class InviteMemberActivity extends BaseActivity implements GroupViewer {
                     case MSG_QUIT:
                         finish();
                         break;
-                    case MSG_SHARE_PWD:
-                        Toast.makeText(InviteMemberActivity.this,"口令分享成功",Toast.LENGTH_SHORT).show();
-                        mHandler.sendEmptyMessage(MSG_QUIT);
-                        break;
                 }
 
         }
     };
 
-    private void createAndShowAlertDialog(String pwd) {
+    private void createAndShowAlertDialog(final String pwd) {
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View contentView = inflater.inflate(R.layout.xydj_custom_dialog,null);
+        TextView title = contentView.findViewById(R.id.tv_title);
+        TextView msg = contentView.findViewById(R.id.tv_message);
+        Button btn_cancel= contentView.findViewById(R.id.dialog_cancel);
+        Button btn_ok = contentView.findViewById(R.id.dialog_ok);
+        title.setText(R.string.xydj_group_pwd);
+        msg.setText(pwd);
+
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("本群口令");
+        final AlertDialog dialog = builder.create();
+        dialog.show();
+        Window window = dialog.getWindow();
+        //替换布局
+        window.setContentView(contentView);
+        //修改window窗口宽高
+        window.setLayout((int) getResources().getDimension(R.dimen.xydj_custom_dialog_width),
+                (int) getResources().getDimension(R.dimen.xydj_custom_dialog_height));
+
+
+
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                mHandler.sendEmptyMessage(MSG_QUIT);
+            }
+        });
+        btn_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                ClipboardManager clipboardManager = (ClipboardManager) InviteMemberActivity.this.getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData data = ClipData.newPlainText("text",pwd);
+                clipboardManager.setPrimaryClip(data);
+                Toast.makeText(InviteMemberActivity.this,"口令分享成功",Toast.LENGTH_SHORT).show();
+                mHandler.sendEmptyMessage(MSG_QUIT);
+            }
+        });
+        /*builder.setTitle("本群口令");
         builder.setMessage(pwd);
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
             @Override
@@ -61,8 +103,7 @@ public class InviteMemberActivity extends BaseActivity implements GroupViewer {
                 dialog.dismiss();
                 mHandler.sendEmptyMessage(MSG_SHARE_PWD);
             }
-        });
-        builder.create().show();
+        });*/
     }
 
 

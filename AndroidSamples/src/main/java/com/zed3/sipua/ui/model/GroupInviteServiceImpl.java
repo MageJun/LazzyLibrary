@@ -40,7 +40,7 @@ public class GroupInviteServiceImpl implements IGroupInviteService {
                     //TODO执行获取共享口令的操作，需要从服务器获取
                     //模拟网络请求等待2S
                     try {
-                        Thread.sleep(2*1000);
+                        Thread.sleep(1*1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

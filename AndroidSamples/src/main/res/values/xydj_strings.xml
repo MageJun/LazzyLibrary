@@ -17,4 +17,7 @@
     <string name="xydj_invite_member_friend">邀请好友</string>
     <string name="xydj_invite_member_tel">通过手机号邀请</string>
     <string name="xydj_invite_member_share_pwd">通过分享群口令邀请</string>
+    <string name="xydj_cancel">取消</string>
+    <string name="xydj_share">分享</string>
+    <string name="xydj_group_pwd">本群口令</string>
 </resources>
