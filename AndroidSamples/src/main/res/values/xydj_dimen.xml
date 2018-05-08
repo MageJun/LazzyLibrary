@@ -16,6 +16,7 @@
     <dimen name="xydj_custom_dialog_height">200dp</dimen>
     <dimen name="xydj_custom_dialog_btn_bg_stroke_width">1dp</dimen>
     <dimen name="xydj_custom_dialog_btn_bg_corner">4dp</dimen>
+    <dimen name="xydj_text_size_1">13sp</dimen>
     <dimen name="xydj_custom_dialog_btn_width">80dp</dimen>
     <dimen name="xydj_custom_dialog_btn_height">30dp</dimen>
 </resources>

@@ -3,7 +3,6 @@ package com.zed3.sipua.ui.group;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -11,7 +10,6 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,7 +47,7 @@ public class InviteMemberActivity extends BaseActivity implements GroupViewer {
 
     private void createAndShowAlertDialog(final String pwd) {
         LayoutInflater inflater = LayoutInflater.from(this);
-        View contentView = inflater.inflate(R.layout.xydj_custom_dialog,null);
+        View contentView = inflater.inflate(R.layout.xydj_custom_dialog_share_pwd,null);
         TextView title = contentView.findViewById(R.id.tv_title);
         TextView msg = contentView.findViewById(R.id.tv_message);
         Button btn_cancel= contentView.findViewById(R.id.dialog_cancel);
@@ -88,22 +86,6 @@ public class InviteMemberActivity extends BaseActivity implements GroupViewer {
                 mHandler.sendEmptyMessage(MSG_QUIT);
             }
         });
-        /*builder.setTitle("本群口令");
-        builder.setMessage(pwd);
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-                mHandler.sendEmptyMessage(MSG_QUIT);
-            }
-        });
-        builder.setPositiveButton("分享", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-                mHandler.sendEmptyMessage(MSG_SHARE_PWD);
-            }
-        });*/
     }
 
 

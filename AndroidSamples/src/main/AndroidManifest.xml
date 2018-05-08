@@ -9,20 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/XYDJAppTheme">
-        <activity android:name=".MainActivity">
-
-        </activity>
-        <activity android:name="com.zed3.sipua.ui.UserInfoActivity">
-        </activity>
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name="com.zed3.sipua.ui.UserInfoActivity"></activity>
         <activity
             android:name="com.zed3.sipua.ui.groupinviteinfo.GroupInviteInfoActivity"
             android:label="@string/title_activity_group_invite_info"
-            android:theme="@style/XYDJAppTheme.NoActionBar"></activity>
-        <activity android:name="com.zed3.sipua.ui.group.IdelStateActivity">
+            android:theme="@style/XYDJAppTheme.NoActionBar" />
+        <activity android:name="com.zed3.sipua.ui.group.IdelStateActivity"></activity>
+        <activity android:name="com.zed3.sipua.ui.group.InviteMemberActivity">
 
         </activity>
-
-        <activity android:name="com.zed3.sipua.ui.group.InviteMemberActivity">
+        <activity android:name="com.zed3.sipua.ui.TestDemoMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
