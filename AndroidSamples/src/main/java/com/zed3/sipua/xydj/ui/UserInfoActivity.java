@@ -1,4 +1,4 @@
-package com.zed3.sipua.xydj;
+package com.zed3.sipua.xydj.ui;
 
 import android.content.Intent;
 import android.os.Bundle;

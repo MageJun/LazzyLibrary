@@ -15,7 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lw.demo.adnroid.samples.R;
-import com.zed3.sipua.xydj.BaseActivity;
+import com.zed3.sipua.xydj.ui.BaseActivity;
 import com.zed3.sipua.xydj.ui.group.helper.GroupViewer;
 import com.zed3.sipua.xydj.ui.group.helper.InvitePresenter;
 

@@ -23,4 +23,13 @@
         <item name="android:layout_marginTop"> 1dp</item>
     </style>
 
+    <style name="XYDJGroupInfoItemStyle">
+        <item name=" android:layout_width"> 0dp</item>
+        <item name=" android:layout_height"> wrap_content</item>
+        <item name=" android:background"> @color/xydj_color_white</item>
+        <item name="android:onClick">onClick</item>
+        <item name="android:layout_marginTop"> 1dp</item>
+        <item name="android:paddingBottom">@dimen/xydj_group_member_info_item_padding_rl</item>
+        <item name="android:paddingTop">@dimen/xydj_group_member_info_item_padding_rl</item>
+    </style>
 </resources>

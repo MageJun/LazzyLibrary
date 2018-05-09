@@ -1,17 +1,20 @@
-package com.zed3.sipua.xydj;
+package com.zed3.sipua.xydj.ui;
 
+import android.content.ClipData;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
 public class ItemDividerDecoration extends RecyclerView.ItemDecoration {
 
 
+    private static final String TAG = ItemDividerDecoration.class.getSimpleName();
     private Context mContext;
 
     /**
@@ -24,13 +27,13 @@ public class ItemDividerDecoration extends RecyclerView.ItemDecoration {
         this.direction = direction;
     }
 
-    private int offset;//偏移量
-    private int color;//分割线颜色
+    protected int offset;//偏移量
+    protected int color;//分割线颜色
 
-    private int direction = LinearLayout.VERTICAL;//方向
+    protected int direction = LinearLayout.VERTICAL;//方向
 
 
-    private Drawable mDrawble;//分割线背景图片
+    protected Drawable mDrawble;//分割线背景图片
 
     public void setOffset(int offset){
         this.offset = offset;
@@ -55,6 +58,10 @@ public class ItemDividerDecoration extends RecyclerView.ItemDecoration {
     }
 
 
+    protected boolean isOverrideOnDraw(){
+        return true;
+    }
+
     /**
      * 可以在RecyclerView 的itemView的下方画内容
      * @param c
@@ -64,11 +71,17 @@ public class ItemDividerDecoration extends RecyclerView.ItemDecoration {
     @Override
     public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
         super.onDraw(c, parent, state);
+        if(!isOverrideOnDraw()){
+            return ;
+        }
 
         int childCount = parent.getChildCount();
 
         for(int i = 0;i<childCount;i++){
             if(i ==0){
+                continue;
+            }
+            if(i==childCount-1){
                 continue;
             }
             View child = parent.getChildAt(i);
@@ -96,7 +109,7 @@ public class ItemDividerDecoration extends RecyclerView.ItemDecoration {
 
                 break;
             case LinearLayout.HORIZONTAL:
-                //垂直方向，除了第一个ItemView，其它的ItemView画自己和上一个ItemView之间的部分
+                //水平方向，除了第一个ItemView，其它的ItemView画自己和上一个ItemView之间的部分
                 //顶部：从父布局的左边paddingTop开始
                 //左边：当前ItemView的左边，减去间隔距离offset
                 //下边：父布局高度，减去paddingBottom开始
@@ -120,7 +133,9 @@ public class ItemDividerDecoration extends RecyclerView.ItemDecoration {
      */
     @Override
     public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state) {
+        Log.i(TAG,"onDrawOver");
         super.onDrawOver(c, parent, state);
+
     }
 
     /**

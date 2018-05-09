@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.lw.demo.adnroid.samples.R;
-import com.zed3.sipua.xydj.BaseActivity;
+import com.zed3.sipua.xydj.ui.BaseActivity;
 import com.zed3.sipua.xydj.ui.groupinviteinfo.fragment.TabGroupInviteInfoReceiveFragment;
 import com.zed3.sipua.xydj.ui.groupinviteinfo.fragment.TabGroupInviteSendFragment;
 

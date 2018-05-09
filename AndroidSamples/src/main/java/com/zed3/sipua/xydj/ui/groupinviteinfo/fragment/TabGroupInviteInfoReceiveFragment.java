@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.lw.demo.adnroid.samples.R;
-import com.zed3.sipua.xydj.ItemDividerDecoration;
+import com.zed3.sipua.xydj.ui.ItemDividerDecoration;
 import com.zed3.sipua.xydj.ui.groupinviteinfo.adapter.GroupInviteReceiveAdapter;
 import com.zed3.sipua.xydj.ui.groupinviteinfo.bean.GroupInviteReceiveDataMap;
 import com.zed3.sipua.xydj.ui.groupinviteinfo.bean.GroupInviteReceiveDataMap.GroupInviteReceiveData;

@@ -1,4 +1,4 @@
-package com.zed3.sipua.xydj;
+package com.zed3.sipua.xydj.ui;
 
 import android.graphics.Color;
 import android.os.Build;
@@ -41,6 +41,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         TextView tv = title.findViewById(R.id.title_text);
         tv.setText(rid);
     }
+
+    public void setTitleCenterText(String text){
+        TextView tv = title.findViewById(R.id.title_text);
+        tv.setText(text);
+    }
+
 
     @Override
     public void setContentView(int layoutResID) {
@@ -109,5 +115,23 @@ public abstract class BaseActivity extends AppCompatActivity {
 
         }
 
+    }
+
+    protected void onTitleLeftBackOnClick(){
+        finish();
+    }
+    protected void onTitleLeftMenuOnClick(){
+        finish();
+    }
+
+    public void onTitleClick(View view){
+        switch (view.getId()){
+            case R.id.title_left_back:
+                onTitleLeftBackOnClick();
+                break;
+            case R.id.title_left_menu:
+                onTitleLeftMenuOnClick();
+                break;
+        }
     }
 }

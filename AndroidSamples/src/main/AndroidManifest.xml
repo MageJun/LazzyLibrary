@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/XYDJAppTheme">
         <activity android:name=".MainActivity"></activity>
-        <activity android:name="com.zed3.sipua.xydj.UserInfoActivity"></activity>
+        <activity android:name="com.zed3.sipua.xydj.ui.UserInfoActivity"></activity>
         <activity
             android:name="com.zed3.sipua.xydj.ui.groupinviteinfo.GroupInviteInfoActivity"
             android:label="@string/title_activity_group_invite_info"
@@ -19,13 +19,17 @@
         <activity android:name="com.zed3.sipua.xydj.ui.group.InviteMemberActivity">
 
         </activity>
-        <activity android:name="com.zed3.sipua.xydj.TestDemoMainActivity">
+        <activity android:name="com.zed3.sipua.xydj.ui.TestDemoMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.zed3.sipua.xydj.ui.group.GroupInfoActivity"/>
+        <activity android:name="com.zed3.sipua.xydj.ui.group.GroupMemberListActivity"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name="com.zed3.sipua.xydj.ui.group.GroupMemeberDetailActivity"/>
     </application>
 
 </manifest>

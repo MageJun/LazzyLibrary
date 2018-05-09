@@ -17,14 +17,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:padding="8dp"
         android:visibility="gone"
+        android:onClick="onTitleClick"
         >
 
         <ImageView
             android:id="@+id/back_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:scaleType="centerCrop"
+            android:layout_width="@dimen/xydj_title_left_arraw"
+            android:layout_height="@dimen/xydj_title_left_arraw"
+            android:scaleType="centerInside"
             android:src="@drawable/arrow2"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -33,12 +33,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/xydj_del"
+            android:text="@string/xydj_back"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintVertical_bias="0.5"
             app:layout_constraintLeft_toRightOf="@id/back_icon"
-            android:layout_marginLeft="5dp"/>
+            android:textColor="@color/xydj_color_white"
+            android:textSize="@dimen/xydj_text_size_2"
+            />
     </android.support.constraint.ConstraintLayout>
 
 
@@ -49,6 +51,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:padding="2dp"
+        android:onClick="onTitleClick"
         >
 
         <ImageView

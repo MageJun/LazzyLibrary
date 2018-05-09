@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/xydj_color_white"
+    >
+
+    <android.support.constraint.Guideline
+        android:id="@+id/top_guide_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="@dimen/xydj_group_member_info_padding_rl" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/left_guide_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/xydj_group_member_info_padding_rl" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/right_guide_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/xydj_group_member_info_padding_rl" />
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/group_member_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@id/left_guide_line"
+        app:layout_constraintRight_toRightOf="@id/right_guide_line"
+        app:layout_constraintTop_toTopOf="@id/top_guide_line"
+        >
+        <TextView
+            android:id="@+id/tv_group_memeber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="群成员"
+            android:textColor="@color/xydj_item_text_color"
+            android:textSize="@dimen/xydj_list_item_textsize"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+        <ImageView
+            android:id="@+id/member_list_arraw"
+            android:layout_width="@dimen/xydj_item_right_arrow"
+            android:layout_height="@dimen/xydj_item_right_arrow"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:onClick="onClick"
+            app:srcCompat="@drawable/arrow" />
+
+        <TextView
+            android:id="@+id/member_number_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:text="15人"
+            android:textColor="@color/xydj_item_normal_text_color_1"
+            android:textSize="@dimen/xydj_list_item_textsize"
+            app:layout_constraintEnd_toStartOf="@+id/member_list_arraw"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/member_list_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/group_member_title"
+        app:layout_constraintLeft_toLeftOf="@id/left_guide_line"
+        app:layout_constraintRight_toRightOf="@id/right_guide_line"
+        android:paddingBottom="20dp"
+        android:orientation="horizontal"
+        android:scrollbars="none"
+        android:overScrollMode="never"
+        android:background="@color/xydj_color_white"
+        ></android.support.v7.widget.RecyclerView>
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/member_list_view"
+        android:background="@color/xydj_bg"/>
+
+    <RelativeLayout
+        android:id="@+id/group_name_line"
+        style="@style/XYDJGroupInfoItemStyle"
+        app:layout_constraintTop_toBottomOf="@id/line"
+        app:layout_constraintLeft_toLeftOf="@id/left_guide_line"
+        app:layout_constraintRight_toRightOf="@id/right_guide_line"
+        >
+
+        <TextView
+            style="@style/XYDJListItemText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="群组名称" />
+
+        <ImageView
+            android:id="@+id/group_name_arraw"
+            android:layout_width="@dimen/xydj_item_right_arrow"
+            android:layout_height="@dimen/xydj_item_right_arrow"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/arrow"
+            />
+        <TextView
+            android:id="@+id/group_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/group_name_arraw"
+            android:textSize="13sp"
+            android:textColor="@color/xydj_gray_text_color"
+            android:text="事业发展部" />
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/line1"
+        app:layout_constraintTop_toBottomOf="@id/group_name_line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/xydj_custom_dialog_btn_bg_stroke_width"
+        android:background="@color/xydj_bg"/>
+
+
+    <RelativeLayout
+        android:id="@+id/group_pws_share_line"
+        style="@style/XYDJGroupInfoItemStyle"
+        app:layout_constraintTop_toBottomOf="@id/line1"
+        app:layout_constraintLeft_toLeftOf="@id/left_guide_line"
+        app:layout_constraintRight_toRightOf="@id/right_guide_line"
+        >
+
+        <TextView
+            style="@style/XYDJListItemText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="群口令分享" />
+
+        <ImageView
+            android:layout_width="@dimen/xydj_item_right_arrow"
+            android:layout_height="@dimen/xydj_item_right_arrow"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/arrow" />
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/line2"
+        app:layout_constraintTop_toBottomOf="@id/group_pws_share_line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/xydj_custom_dialog_btn_bg_stroke_width"
+        android:background="@color/xydj_bg"/>
+
+
+    <RelativeLayout
+        android:id="@+id/expiry_date_line"
+        style="@style/XYDJGroupInfoItemStyle"
+        app:layout_constraintTop_toBottomOf="@id/line2"
+        app:layout_constraintLeft_toLeftOf="@id/left_guide_line"
+        app:layout_constraintRight_toRightOf="@id/right_guide_line"
+        >
+
+        <TextView
+            style="@style/XYDJListItemText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="群有效时间" />
+
+        <TextView
+            android:id="@+id/expiry_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:textSize="13sp"
+            android:textColor="@color/xydj_gray_text_color"
+            android:text="长期有效" />
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/line3"
+        app:layout_constraintTop_toBottomOf="@id/expiry_date_line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/xydj_custom_dialog_btn_bg_stroke_width"
+        android:background="@color/xydj_bg"/>
+
+    <RelativeLayout
+        android:id="@+id/group_maxmember_line"
+        style="@style/XYDJGroupInfoItemStyle"
+        app:layout_constraintTop_toBottomOf="@id/line3"
+        app:layout_constraintLeft_toLeftOf="@id/left_guide_line"
+        app:layout_constraintRight_toRightOf="@id/right_guide_line"
+        >
+
+        <TextView
+            style="@style/XYDJListItemText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="群成员上限" />
+
+        <TextView
+            android:id="@+id/group_maxmember"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:textSize="13sp"
+            android:textColor="@color/xydj_gray_text_color"
+            android:text="500人" />
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/line4"
+        app:layout_constraintTop_toBottomOf="@id/group_maxmember_line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/xydj_custom_dialog_btn_bg_stroke_width"
+        android:background="@color/xydj_bg"/>
+
+    <RelativeLayout
+        android:id="@+id/nick_name_line"
+        style="@style/XYDJGroupInfoItemStyle"
+        app:layout_constraintTop_toBottomOf="@id/line4"
+        app:layout_constraintLeft_toLeftOf="@id/left_guide_line"
+        app:layout_constraintRight_toRightOf="@id/right_guide_line"
+        >
+
+        <TextView
+            style="@style/XYDJListItemText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="我在本群的昵称" />
+
+        <ImageView
+            android:id="@+id/nick_name_arraw"
+            android:layout_width="@dimen/xydj_item_right_arrow"
+            android:layout_height="@dimen/xydj_item_right_arrow"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/arrow" />
+        <TextView
+            android:id="@+id/nick_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/nick_name_arraw"
+            android:textSize="13sp"
+            android:textColor="@color/xydj_gray_text_color"
+            android:text="李明" />
+
+    </RelativeLayout>
+    <View
+        android:id="@+id/line5"
+        app:layout_constraintTop_toBottomOf="@id/nick_name_line"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@color/xydj_bg"/>
+    <TextView
+        android:id="@+id/exit_group"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/xydj_group_member_item_icon_wh"
+        app:layout_constraintTop_toBottomOf="@id/line5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:gravity="center"
+        android:text="退出群组"
+        android:textSize="@dimen/xydj_list_item_textsize"
+        android:textColor="@color/xydj_item_text_color"
+        />
+
+    <View
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/exit_group"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:background="@color/xydj_bg"/>
+
+
+
+</android.support.constraint.ConstraintLayout>

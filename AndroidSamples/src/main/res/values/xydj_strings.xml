@@ -23,4 +23,8 @@
     <string name="xydj_group_pwd">本群口令</string>
     <string name="xydj_group_name">群组名称 :</string>
     <string name="xydj_group_create">新建群组</string>
+    <string name="xydj_group_member_info_addfriend">添加为好友</string>
+    <string name="xydj_group_member_detail_reamark">修改备注</string>
+    <string name="xydj_group_member_detail_account">账号 :</string>
+    <string name="xydj_group_member_detail_nickname">昵称 :</string>
 </resources>

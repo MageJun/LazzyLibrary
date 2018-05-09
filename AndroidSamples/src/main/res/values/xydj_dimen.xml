@@ -17,6 +17,17 @@
     <dimen name="xydj_custom_dialog_btn_bg_stroke_width">1dp</dimen>
     <dimen name="xydj_custom_dialog_btn_bg_corner">4dp</dimen>
     <dimen name="xydj_text_size_1">13sp</dimen>
+    <dimen name="xydj_text_size_2">16sp</dimen>
     <dimen name="xydj_custom_dialog_btn_width">80dp</dimen>
     <dimen name="xydj_custom_dialog_btn_height">30dp</dimen>
+    <dimen name="xydj_group_member_item_icon_wh">40dp</dimen>
+    <dimen name="xydj_group_member_item_margin">20dp</dimen>
+    <dimen name="xydj_group_member_item_status_wh">12dp</dimen>
+    <dimen name="xydj_group_member_info_padding_rl">20dp</dimen>
+    <dimen name="xydj_group_member_info_item_padding_rl">10dp</dimen>
+    <dimen name="xydj_group_member_list_search_icon_wh">12dp</dimen>
+    <dimen name="xydj_group_member_list_info_margih">10dp</dimen>
+    <dimen name="xydj_title_left_arraw">30dp</dimen>
+    <dimen name="xydj_group_member_detail_head_icon_wh">100dp</dimen>
+    <dimen name="xydj_group_member_detail_remark_icon_wh">20dp</dimen>
 </resources>

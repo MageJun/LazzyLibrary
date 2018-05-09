@@ -8,7 +8,7 @@ import android.support.v7.widget.SimpleItemAnimator;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.zed3.sipua.xydj.ItemDividerDecoration;
+import com.zed3.sipua.xydj.ui.ItemDividerDecoration;
 import com.zed3.sipua.xydj.ui.adapter.FriendsListAdapter;
 import com.zed3.sipua.xydj.ui.bean.FrindInfo;
 

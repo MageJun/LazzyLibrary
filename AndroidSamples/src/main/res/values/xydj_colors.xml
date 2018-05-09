@@ -19,4 +19,5 @@
     <color name="xydj_item_normal_text_color_2">#A8A7A8</color>
     <color name="xydj_custom_dialog_btn_bg_stroke">#BBBBBB</color>
     <color name="xydj_text_color_1">#383738</color>
+    <color name="xydj_group_member_detail_text_color">#828182</color>
 </resources>
