@@ -3,6 +3,7 @@ package com.zed3.sipua.xydj.ui.group;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -15,6 +16,8 @@ import com.zed3.sipua.xydj.ui.ItemDividerDecoration;
 import com.zed3.sipua.xydj.ui.group.adapter.GroupMemeberListAdapter;
 import com.zed3.sipua.xydj.ui.group.bean.CustomGroupMemberInfo;
 import com.zed3.sipua.xydj.ui.group.bean.PttCustomGrp;
+import com.zed3.sipua.xydj.ui.group.adapter.OnItemClickListener;
+import com.zed3.sipua.xydj.ui.helper.MessageHelper;
 
 import java.util.List;
 
@@ -69,7 +72,7 @@ public class GroupInfoActivity extends BaseActivity {
             String expDate = mGrp.getExpiryDate();
             String expDateFinal = getFinalExpDate(expDate);
             mExpiryDateTV.setText(expDateFinal);
-            mMemberNumberTv.setText(mGrp.getMaxMember()+"人");
+            mMaxMemberTV.setText(mGrp.getMaxMember()+"人");
 
             if(count<members.size()){
                 memeberListAdapter.setData(members.subList(0,count));
@@ -93,11 +96,11 @@ public class GroupInfoActivity extends BaseActivity {
         mMemberNumberTv = findViewById(R.id.member_number_tv);
         mGroupNameTV = findViewById(R.id.group_name);
         mExpiryDateTV = findViewById(R.id.expiry_date);
-        mMemberNumberTv = findViewById(R.id.group_maxmember);
+        mMaxMemberTV = findViewById(R.id.group_maxmember);
         mNickNameTV = findViewById(R.id.nick_name);
     }
 
-    private GroupMemeberListAdapter.OnItemClickListener<CustomGroupMemberInfo> mItemClickListener = new GroupMemeberListAdapter.OnItemClickListener<CustomGroupMemberInfo>() {
+    private OnItemClickListener<CustomGroupMemberInfo> mItemClickListener = new OnItemClickListener<CustomGroupMemberInfo>() {
         @Override
         public void onItemClick(View v, int pos) {
 
@@ -171,6 +174,21 @@ public class GroupInfoActivity extends BaseActivity {
                 Intent memberListIntent = new Intent(this,GroupMemberListActivity.class);
                 memberListIntent.putExtra("grp",mGrp);
                 startSpecifyActivity(memberListIntent);
+                break;
+                //退出群组
+            case R.id.exit_group:
+                MessageHelper.getInstance().createDialog(this
+                        , getResources().getString(R.string.xydj_exit_group_notify_title)
+                        , getResources().getString(R.string.xydj_exit_group_notify_creator)
+                        ,getResources().getString(R.string.xydj_ok)
+                        ,null
+                        , new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                //TODO 退组操作
+                            }
+                        }
+                        ,null);
                 break;
         }
     }

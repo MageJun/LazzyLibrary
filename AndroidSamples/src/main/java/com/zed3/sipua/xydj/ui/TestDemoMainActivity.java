@@ -29,7 +29,7 @@ public class TestDemoMainActivity extends BaseActivity {
                 break;
             case R.id.show_group_member:
                 Intent groupInfoIntent = new Intent(this, GroupInfoActivity.class);
-                PttCustomGrp tmpGrp = createTmpGrp("自建组1号",20);
+                PttCustomGrp tmpGrp = createTmpGrp("自建组1号",60);
                 groupInfoIntent.putExtra("grp",tmpGrp);
                 startSpecifyActivity(groupInfoIntent);
                 break;

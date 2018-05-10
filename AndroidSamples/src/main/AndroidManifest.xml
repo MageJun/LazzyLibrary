@@ -30,6 +30,8 @@
         <activity android:name="com.zed3.sipua.xydj.ui.group.GroupMemberListActivity"
             android:windowSoftInputMode="adjustPan"/>
         <activity android:name="com.zed3.sipua.xydj.ui.group.GroupMemeberDetailActivity"/>
+        <activity android:name="com.zed3.sipua.xydj.ui.group.GroupMemeberDeleteActivity"
+            android:windowSoftInputMode="adjustPan"/>
     </application>
 
 </manifest>

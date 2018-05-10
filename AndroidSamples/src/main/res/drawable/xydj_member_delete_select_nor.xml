@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval"
+    android:useLevel="false">
+
+    <size android:width="@dimen/xydj_group_member_delete_select_wh"
+        android:height="@dimen/xydj_group_member_delete_select_wh"/>
+    <solid android:color="@color/xydj_color_white"/>
+
+</shape>

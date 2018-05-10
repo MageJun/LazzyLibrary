@@ -1,7 +1,6 @@
 package com.zed3.sipua.xydj.ui.group.adapter;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,7 +11,6 @@ import android.widget.TextView;
 
 import com.lw.demo.adnroid.samples.R;
 import com.zed3.sipua.xydj.ui.group.bean.CustomGroupMemberInfo;
-import com.zed3.sipua.xydj.ui.group.helper.GroupViewer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,13 +23,6 @@ public class GroupMemeberListAdapter extends RecyclerView.Adapter<GroupMemeberLi
     private List<CustomGroupMemberInfo> mData = new ArrayList<CustomGroupMemberInfo>();
     private Context mContext;
     private OnItemClickListener<CustomGroupMemberInfo> mListener;
-
-    public interface OnItemClickListener<T>{
-        void onItemClick(View v,int pos);
-        void onDataItemClick(View v,int pos,T t);
-        void onAddItemClick();
-        void onSubTraction();
-    }
 
     public GroupMemeberListAdapter(Context context){
         this.mContext = context;

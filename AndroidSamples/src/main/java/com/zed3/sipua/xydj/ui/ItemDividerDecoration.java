@@ -155,7 +155,7 @@ public class ItemDividerDecoration extends RecyclerView.ItemDecoration {
      */
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-//        super.getItemOffsets(outRect, view, parent, state);
+        super.getItemOffsets(outRect, view, parent, state);
 
         switch (direction) {
             case LinearLayout.VERTICAL:

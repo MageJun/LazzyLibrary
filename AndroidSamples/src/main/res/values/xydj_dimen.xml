@@ -30,4 +30,7 @@
     <dimen name="xydj_title_left_arraw">30dp</dimen>
     <dimen name="xydj_group_member_detail_head_icon_wh">100dp</dimen>
     <dimen name="xydj_group_member_detail_remark_icon_wh">20dp</dimen>
+    <dimen name="xydj_group_member_delete_select_wh">22dp</dimen>
+    <dimen name="xydj_group_member_delete_item_div">5dp</dimen>
+    <dimen name="xydj_group_member_delete_select_arraw">30dp</dimen>
 </resources>

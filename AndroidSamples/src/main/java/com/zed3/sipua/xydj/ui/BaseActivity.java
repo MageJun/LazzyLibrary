@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -37,15 +38,56 @@ public abstract class BaseActivity extends AppCompatActivity {
         return false;
     }
 
+    public boolean isShowLeftBtn(){return false;}
+
+    public boolean isShoRightBtn(){return false;}
+
     public void setTitleCenterText(int rid){
+        if(!isShowTitle()){
+            return ;
+        }
         TextView tv = title.findViewById(R.id.title_text);
         tv.setText(rid);
     }
 
     public void setTitleCenterText(String text){
+        if(!isShowTitle()){
+            return ;
+        }
         TextView tv = title.findViewById(R.id.title_text);
         tv.setText(text);
     }
+
+    public void setLeftBtnText(String text){
+        if(!isShowTitle()){
+            return ;
+        }
+        Button tv = title.findViewById(R.id.title_btn_left);
+        tv.setText(text);
+    }
+
+    public void setLeftBtnText(int rid){
+        if(!isShowTitle()){
+            return ;
+        }
+        Button tv = title.findViewById(R.id.title_btn_left);
+        tv.setText(rid);
+    }
+    public void setRightBtnText(String text){
+        if(!isShowTitle()){
+            return ;
+        }
+        Button tv = title.findViewById(R.id.title_btn_right);
+        tv.setText(text);
+    }
+    public void setRightBtnText(int rid){
+        if(!isShowTitle()){
+            return ;
+        }
+        Button tv = title.findViewById(R.id.title_btn_right);
+        tv.setText(rid);
+    }
+
 
 
     @Override
@@ -91,11 +133,13 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected  void initTitleView(){
+        title = findViewById(R.id.title_layout);
         if(isShowTitle()){
-            title = findViewById(R.id.title_layout);
             View left_back =  title.findViewById(R.id.title_left_back);
             View left_menu = title.findViewById(R.id.title_left_menu);
-            View center = title.findViewById(R.id.title_center);
+            View center = title.findViewById(R.id.title_text);
+            View left_btn =title.findViewById(R.id.title_btn_left);
+            View right_btn= title.findViewById(R.id.title_btn_right);
             left_back.setVisibility(View.GONE);
             left_menu.setVisibility(View.GONE);
             center.setVisibility(View.INVISIBLE);
@@ -104,6 +148,12 @@ public abstract class BaseActivity extends AppCompatActivity {
                 left_back.setVisibility(View.VISIBLE);
             }else if(isShowTitleLeftMenu()){
                 left_menu.setVisibility(View.VISIBLE);
+            }else if(isShowLeftBtn()){
+                left_btn.setVisibility(View.VISIBLE);
+            }
+
+            if(isShoRightBtn()){
+                right_btn.setVisibility(View.VISIBLE);
             }
 
             if(isShowTitleCenter()){
@@ -113,6 +163,8 @@ public abstract class BaseActivity extends AppCompatActivity {
             }
 
 
+        }else{
+            title.setVisibility(View.GONE);
         }
 
     }
@@ -123,6 +175,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onTitleLeftMenuOnClick(){
         finish();
     }
+    protected  void onTitleLeftBtnClick(){}
+    protected  void onTitleRightBtnClick(){}
 
     public void onTitleClick(View view){
         switch (view.getId()){
@@ -132,6 +186,14 @@ public abstract class BaseActivity extends AppCompatActivity {
             case R.id.title_left_menu:
                 onTitleLeftMenuOnClick();
                 break;
+            case R.id.title_btn_left:
+                onTitleLeftBtnClick();
+                break;
+            case R.id.title_btn_right:
+                onTitleRightBtnClick();
+                break;
         }
     }
+
+
 }

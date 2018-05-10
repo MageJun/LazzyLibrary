@@ -27,4 +27,8 @@
     <string name="xydj_group_member_detail_reamark">修改备注</string>
     <string name="xydj_group_member_detail_account">账号 :</string>
     <string name="xydj_group_member_detail_nickname">昵称 :</string>
+    <string name="xydj_group_member_delte_mychoice">我的选择</string>
+    <string name="xydj_exit_group_notify_creator">您确定要退出该群？您是该群的管理员，退出该群后，该群即解散。</string>
+    <string name="xydj_exit_group_notify_member">您确定要退出该群？退出后您将不再接受该群的任何消息。</string>
+    <string name="xydj_exit_group_notify_title">退出群组</string>
 </resources>

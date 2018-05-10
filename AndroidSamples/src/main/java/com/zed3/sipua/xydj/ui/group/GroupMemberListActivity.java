@@ -15,6 +15,7 @@ import com.zed3.sipua.xydj.ui.BaseActivity;
 import com.zed3.sipua.xydj.ui.GridDividerDecoration;
 import com.zed3.sipua.xydj.ui.ItemDividerDecoration;
 import com.zed3.sipua.xydj.ui.group.adapter.GroupMemeberListAdapter;
+import com.zed3.sipua.xydj.ui.group.adapter.OnItemClickListener;
 import com.zed3.sipua.xydj.ui.group.bean.CustomGroupMemberInfo;
 import com.zed3.sipua.xydj.ui.group.bean.PttCustomGrp;
 
@@ -55,7 +56,6 @@ public class GroupMemberListActivity extends BaseActivity {
     }
 
     private void initData() {
-        memeberListAdapter = new GroupMemeberListAdapter(this);
         int count =calcElementCount();
         GridLayoutManager layoutManager = new GridLayoutManager(this,count);
         int itemMarginWidth = getResources().getDimensionPixelOffset(R.dimen.xydj_group_member_item_margin);
@@ -67,6 +67,10 @@ public class GroupMemberListActivity extends BaseActivity {
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(memeberListAdapter);
         mRecyclerView.addItemDecoration(decoration);
+        updateAndShowGrpInfo();
+    }
+
+    private void updateAndShowGrpInfo() {
         if(mGrp!=null){
             List<CustomGroupMemberInfo> memberInfos = mGrp.getMember_list();
             int memberCount = 0;
@@ -86,7 +90,7 @@ public class GroupMemberListActivity extends BaseActivity {
         
     }
 
-    private GroupMemeberListAdapter.OnItemClickListener<CustomGroupMemberInfo> mItemClickListener = new GroupMemeberListAdapter.OnItemClickListener<CustomGroupMemberInfo>() {
+    private OnItemClickListener<CustomGroupMemberInfo> mItemClickListener = new OnItemClickListener<CustomGroupMemberInfo>() {
         @Override
         public void onItemClick(View v, int pos) {
 
@@ -109,6 +113,9 @@ public class GroupMemberListActivity extends BaseActivity {
         @Override
         public void onSubTraction() {
 
+            Intent intent = new Intent(GroupMemberListActivity.this,GroupMemeberDeleteActivity.class);
+            intent.putExtra("grp",mGrp);
+            startActivityForResult(intent,10086);
         }
     };
 
@@ -144,5 +151,20 @@ public class GroupMemberListActivity extends BaseActivity {
         int count = itemCount;
         Log.i(TAG,"width = "+width+",itemWidth = "+itemWidth+", itemMarginWidth="+itemMarginWidth+" ,initData count = "+count);
         return count;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == 10086){
+            if(data!=null){
+                PttCustomGrp customGrp = (PttCustomGrp) data.getExtras().get("grp");
+                if(customGrp!=null){
+                    mGrp = customGrp;
+                    updateAndShowGrpInfo();
+                }
+
+            }
+        }
     }
 }
