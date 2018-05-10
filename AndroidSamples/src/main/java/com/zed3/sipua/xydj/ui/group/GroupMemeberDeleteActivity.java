@@ -51,7 +51,7 @@ public class GroupMemeberDeleteActivity extends BaseActivity {
     }
 
     @Override
-    public boolean isShoRightBtn() {
+    public boolean isShowRightBtn() {
         return true;
     }
 

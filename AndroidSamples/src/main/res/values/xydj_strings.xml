@@ -31,4 +31,9 @@
     <string name="xydj_exit_group_notify_creator">您确定要退出该群？您是该群的管理员，退出该群后，该群即解散。</string>
     <string name="xydj_exit_group_notify_member">您确定要退出该群？退出后您将不再接受该群的任何消息。</string>
     <string name="xydj_exit_group_notify_title">退出群组</string>
+    <string name="xydj_complete">完成</string>
+    <string name="xydj_group_info_modify_groupname">修改群名称</string>
+    <string name="xydj_group_info_modify_nickname">修改群昵称</string>
+    <string name="xydj_group_info_modify_hint_groupname">请输入新的群组名称</string>
+    <string name="xydj_group_info_modify_hint_nickname">请输入新的昵称</string>
 </resources>

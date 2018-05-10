@@ -33,6 +33,12 @@ public abstract class BaseActivity extends AppCompatActivity {
     public boolean isShowTitleLeftMenu(){
         return false;
     }
+    public boolean isShowTitleLeftCancel(){
+        return false;
+    }
+    public boolean isShowTitleRightOk(){
+        return false;
+    }
 
     public boolean isShowTitileRight(){
         return false;
@@ -40,7 +46,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public boolean isShowLeftBtn(){return false;}
 
-    public boolean isShoRightBtn(){return false;}
+    public boolean isShowRightBtn(){return false;}
 
     public void setTitleCenterText(int rid){
         if(!isShowTitle()){
@@ -73,6 +79,23 @@ public abstract class BaseActivity extends AppCompatActivity {
         Button tv = title.findViewById(R.id.title_btn_left);
         tv.setText(rid);
     }
+
+
+    public void setLeftCancelText(String text){
+        if(!isShowTitle()){
+            return ;
+        }
+        TextView tv = title.findViewById(R.id.title_left_cancel);
+        tv.setText(text);
+    }
+
+    public void setLeftCancelText(int rid){
+        if(!isShowTitle()){
+            return ;
+        }
+        TextView tv = title.findViewById(R.id.title_left_cancel);
+        tv.setText(rid);
+    }
     public void setRightBtnText(String text){
         if(!isShowTitle()){
             return ;
@@ -85,6 +108,21 @@ public abstract class BaseActivity extends AppCompatActivity {
             return ;
         }
         Button tv = title.findViewById(R.id.title_btn_right);
+        tv.setText(rid);
+    }
+
+    public void setRightOkText(String text){
+        if(!isShowTitle()){
+            return ;
+        }
+        TextView tv = title.findViewById(R.id.title_right_ok);
+        tv.setText(text);
+    }
+    public void setRightOkText(int rid){
+        if(!isShowTitle()){
+            return ;
+        }
+        TextView tv = title.findViewById(R.id.title_right_ok);
         tv.setText(rid);
     }
 
@@ -140,8 +178,14 @@ public abstract class BaseActivity extends AppCompatActivity {
             View center = title.findViewById(R.id.title_text);
             View left_btn =title.findViewById(R.id.title_btn_left);
             View right_btn= title.findViewById(R.id.title_btn_right);
+            View left_cancel = title.findViewById(R.id.title_left_cancel);
+            View right_ok = title.findViewById(R.id.title_right_ok);
             left_back.setVisibility(View.GONE);
             left_menu.setVisibility(View.GONE);
+            left_btn.setVisibility(View.GONE);
+            right_btn.setVisibility(View.GONE);
+            left_cancel.setVisibility(View.GONE);
+            right_ok.setVisibility(View.GONE);
             center.setVisibility(View.INVISIBLE);
 
             if(isShowTitleLeftBack()){
@@ -150,10 +194,14 @@ public abstract class BaseActivity extends AppCompatActivity {
                 left_menu.setVisibility(View.VISIBLE);
             }else if(isShowLeftBtn()){
                 left_btn.setVisibility(View.VISIBLE);
+            }else if(isShowTitleLeftCancel()){
+                left_cancel.setVisibility(View.VISIBLE);
             }
 
-            if(isShoRightBtn()){
+            if(isShowRightBtn()){
                 right_btn.setVisibility(View.VISIBLE);
+            }else if(isShowTitleRightOk()){
+                right_ok.setVisibility(View.VISIBLE);
             }
 
             if(isShowTitleCenter()){
@@ -177,7 +225,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
     protected  void onTitleLeftBtnClick(){}
     protected  void onTitleRightBtnClick(){}
-
+    protected  void onTitleLeftCancelClick(){}
+    protected  void onTitleRightOkClick(){}
     public void onTitleClick(View view){
         switch (view.getId()){
             case R.id.title_left_back:
@@ -191,6 +240,12 @@ public abstract class BaseActivity extends AppCompatActivity {
                 break;
             case R.id.title_btn_right:
                 onTitleRightBtnClick();
+                break;
+            case R.id.title_left_cancel:
+                onTitleLeftCancelClick();
+                break;
+            case R.id.title_right_ok:
+                onTitleRightOkClick();
                 break;
         }
     }

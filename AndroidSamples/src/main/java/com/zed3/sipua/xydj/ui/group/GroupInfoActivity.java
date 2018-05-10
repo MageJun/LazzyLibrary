@@ -151,7 +151,10 @@ public class GroupInfoActivity extends BaseActivity {
         switch(view.getId()){
             //群组名称
             case R.id.group_name_line:
-
+                Intent modifyGN = new Intent(this,GroupInfoModifyActivity.class);
+                modifyGN.putExtra("grp",mGrp);
+                modifyGN.putExtra("type",0);
+                startSpecifyActivity(modifyGN);
                 break;
             //群口令分享
             case R.id.group_pws_share_line:
@@ -167,7 +170,10 @@ public class GroupInfoActivity extends BaseActivity {
                 break;
             //我在本群的昵称
             case R.id.nick_name_line:
-
+                Intent modifyNN = new Intent(this,GroupInfoModifyActivity.class);
+                modifyNN.putExtra("grp",mGrp);
+                modifyNN.putExtra("type",1);
+                startSpecifyActivity(modifyNN);
                 break;
             //群成员
             case R.id.member_list_arraw:
