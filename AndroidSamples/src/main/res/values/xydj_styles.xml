@@ -32,4 +32,9 @@
         <item name="android:paddingBottom">@dimen/xydj_group_member_info_item_padding_rl</item>
         <item name="android:paddingTop">@dimen/xydj_group_member_info_item_padding_rl</item>
     </style>
+
+    <style name="XYDJPopupWindow">
+        <item name="android:windowEnterAnimation">@anim/xydj_popup_window_enter</item>
+        <item name="android:windowExitAnimation">@anim/xydj_popup_window_out</item>
+    </style>
 </resources>

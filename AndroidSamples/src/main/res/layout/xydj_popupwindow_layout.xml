@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/xydj_popupwindo_content_bg"
+    >
+
+    <TextView
+        android:id="@+id/popup_del"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/xydj_del"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:gravity="center"
+        android:padding="@dimen/xydj_group_member_info_padding_rl"
+        android:textSize="@dimen/xydj_list_item_textsize"
+         />
+    <View
+        android:id="@+id/line"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="@color/xydj_bg"
+        app:layout_constraintTop_toBottomOf="@id/popup_del"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+
+    <TextView
+        android:id="@+id/popup_cancel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/xydj_cancel"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="2dp"
+        android:gravity="center"
+        android:textSize="@dimen/xydj_list_item_textsize"
+        android:padding="@dimen/xydj_group_member_info_padding_rl"
+        />
+</android.support.constraint.ConstraintLayout>

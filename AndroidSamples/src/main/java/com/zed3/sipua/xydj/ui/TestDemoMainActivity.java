@@ -3,6 +3,7 @@ package com.zed3.sipua.xydj.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.lw.demo.adnroid.samples.R;
 import com.zed3.sipua.xydj.ui.BaseActivity;
@@ -32,6 +33,19 @@ public class TestDemoMainActivity extends BaseActivity {
                 PttCustomGrp tmpGrp = createTmpGrp("自建组1号",60);
                 groupInfoIntent.putExtra("grp",tmpGrp);
                 startSpecifyActivity(groupInfoIntent);
+                break;
+            case R.id.create_bottom_pop:
+                GroupManager.getIntance().showPopupWindow(this, findViewById(R.id.create_bottom_pop), new GroupManager.OnPopupWindowClickListener() {
+                    @Override
+                    public void onDelClickListener(View view) {
+                        Toast.makeText(TestDemoMainActivity.this,"删除", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onCancelClickListener(View view) {
+                        Toast.makeText(TestDemoMainActivity.this,"取消", Toast.LENGTH_SHORT).show();
+                    }
+                });
                 break;
         }
     }
