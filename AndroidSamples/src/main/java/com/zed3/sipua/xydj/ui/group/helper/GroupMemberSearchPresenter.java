@@ -31,21 +31,35 @@ public class GroupMemberSearchPresenter extends BasePresenter<GroupMemberSearchV
         this.mGrp = null;
     }
 
-    public void search(String key){
+    public void search(final String key){
         if(TextUtils.isEmpty(key)){
             return ;
         }
         this.mViewer.showProgress();
 
-        List<CustomGroupMemberInfo> results = searchMemebersByKey(key);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                List<CustomGroupMemberInfo> results = searchMemebersByKey(key);
 
-        this.mViewer.dismissProgress();
+                mViewer.dismissProgress();
 
-        this.mViewer.onSearchResult(results);
+                mViewer.onSearchResult(results);
+            }
+        }).start();
+
     }
 
     private List<CustomGroupMemberInfo> searchMemebersByKey(String key){
         List<CustomGroupMemberInfo> results = new ArrayList<CustomGroupMemberInfo>();
+        List<CustomGroupMemberInfo> memberInfos = mGrp.getMember_list();
+        for (int i = 0;i<memberInfos.size();i++){
+            CustomGroupMemberInfo info = memberInfos.get(i);
+            if(info.getMemberName().contains(key)||info.getMemberNum().contains(key)){
+                results.add(info);
+                continue;
+            }
+        }
         return results;
     }
 

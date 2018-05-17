@@ -1,16 +1,26 @@
 package com.zed3.sipua.xydj.ui.group;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.lw.demo.android.samples.R;
 import com.zed3.sipua.xydj.ui.BaseActivity;
+import com.zed3.sipua.xydj.ui.GridDividerDecoration;
+import com.zed3.sipua.xydj.ui.ItemDividerDecoration;
+import com.zed3.sipua.xydj.ui.group.adapter.GroupMemberSearchResultAdapter;
+import com.zed3.sipua.xydj.ui.group.adapter.OnItemClickListener;
 import com.zed3.sipua.xydj.ui.group.bean.CustomGroupMemberInfo;
 import com.zed3.sipua.xydj.ui.group.bean.PttCustomGrp;
 import com.zed3.sipua.xydj.ui.group.helper.GroupMemberSearchPresenter;
@@ -23,10 +33,12 @@ public class GroupMemberSearchActivity extends BaseActivity implements GroupMemb
 
     private PttCustomGrp mGrp;
     private EditText mEditText;
+    private TextView mTvNoResult;
     private RecyclerView mRecyclerView;
     private View mSearchResultLine;
     private List<CustomGroupMemberInfo> mResultList = new ArrayList<CustomGroupMemberInfo>();
     private GroupMemberSearchPresenter mPresenter;
+    private GroupMemberSearchResultAdapter mAdapter;
 
     private final static int MSG_SHOW_PROGRESS = 0;
     private final static int MSG_DISMISS_PROGRESS = 1;
@@ -43,9 +55,34 @@ public class GroupMemberSearchActivity extends BaseActivity implements GroupMemb
 
                     break;
                 case MSG_UPDATE_SEARCH_RESULTS:
-
+                    updateSearchResultShow();
+                    mAdapter.setData(mResultList);
                     break;
             }
+        }
+    };
+
+    private OnItemClickListener<CustomGroupMemberInfo> mItemClickListener = new OnItemClickListener<CustomGroupMemberInfo>() {
+        @Override
+        public void onItemClick(View v, int pos) {
+
+        }
+
+        @Override
+        public void onDataItemClick(View v, int pos, CustomGroupMemberInfo customGroupMemberInfo) {
+            Intent intent = new Intent(GroupMemberSearchActivity.this,GroupMemeberDetailActivity.class);
+            intent.putExtra("memberInfo",customGroupMemberInfo);
+            startActivity(intent);
+        }
+
+        @Override
+        public void onAddItemClick() {
+
+        }
+
+        @Override
+        public void onSubTraction() {
+
         }
     };
 
@@ -83,6 +120,16 @@ public class GroupMemberSearchActivity extends BaseActivity implements GroupMemb
         mPresenter = new GroupMemberSearchPresenter();
         mPresenter.attach(this);
         mPresenter.bindData(mGrp);
+        mAdapter = new GroupMemberSearchResultAdapter();
+        ItemDividerDecoration decoration = new ItemDividerDecoration(this, LinearLayoutManager.VERTICAL);
+        decoration.setOffset(2);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.addItemDecoration(decoration);
+        mAdapter.setOnItemClickListener(mItemClickListener);
+
     }
 
     private void initView() {
@@ -91,6 +138,24 @@ public class GroupMemberSearchActivity extends BaseActivity implements GroupMemb
         calcLeftDrawableSize();
         mSearchResultLine = findViewById(R.id.search_result_line);
         mRecyclerView = findViewById(R.id.search_result_listview);
+        mTvNoResult = findViewById(R.id.tv_no_result);
+        mEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(TextUtils.isEmpty(mEditText.getText().toString()))
+                    updateSearchResultShow();
+            }
+        });
     }
 
     private void updateSearchResultShow(){
@@ -99,6 +164,12 @@ public class GroupMemberSearchActivity extends BaseActivity implements GroupMemb
             mSearchResultLine.setVisibility(View.GONE);
         }else{
             mSearchResultLine.setVisibility(View.VISIBLE);
+        }
+
+        if(mResultList.size()==0){
+            mTvNoResult.setVisibility(View.VISIBLE);
+        }else{
+            mTvNoResult.setVisibility(View.GONE);
         }
     }
 
@@ -109,6 +180,14 @@ public class GroupMemberSearchActivity extends BaseActivity implements GroupMemb
             int ldH = getResources().getDimensionPixelSize(R.dimen.xydj_group_member_list_search_icon_wh);
             leftDrawable.setBounds(0,0,ldW,ldH);
             mEditText.setCompoundDrawables(leftDrawable,mEditText.getCompoundDrawables()[1],mEditText.getCompoundDrawables()[2],mEditText.getCompoundDrawables()[3]);
+        }
+    }
+
+    public void onClick(View view){
+        switch (view.getId()){
+            case R.id.btn_search:
+                mPresenter.search(mEditText.getText().toString());
+                break;
         }
     }
 

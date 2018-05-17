@@ -166,4 +166,15 @@ public class GroupMemberListActivity extends BaseActivity {
             }
         }
     }
+
+    public void onClick(View view){
+        switch (view.getId()){
+            case R.id.group_memeber_list_edit:
+                Intent searchIntent = new Intent(this, GroupMemberSearchActivity.class);
+                searchIntent.putExtra("grp",mGrp);
+                startSpecifyActivity(searchIntent);
+                break;
+        }
+    }
+
 }

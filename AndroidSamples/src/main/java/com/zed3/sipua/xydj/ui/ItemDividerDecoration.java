@@ -76,12 +76,9 @@ public class ItemDividerDecoration extends RecyclerView.ItemDecoration {
         }
 
         int childCount = parent.getChildCount();
-
+        Log.i(TAG,"onDraw childCount ="+childCount);
         for(int i = 0;i<childCount;i++){
             if(i ==0){
-                continue;
-            }
-            if(i==childCount-1){
                 continue;
             }
             View child = parent.getChildAt(i);
@@ -156,21 +153,23 @@ public class ItemDividerDecoration extends RecyclerView.ItemDecoration {
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         super.getItemOffsets(outRect, view, parent, state);
-
+        int pos = parent.getChildAdapterPosition(view);
+        int count = parent.getChildCount();
         switch (direction) {
             case LinearLayout.VERTICAL:
                 if(parent.getChildAdapterPosition(view)==0){
-                    return ;
+                    break ;
                 }
                 outRect.top = offset;
 
                 break;
             case LinearLayout.HORIZONTAL:
                 if(parent.getChildAdapterPosition(view)==0){
-                    return ;
+                    break ;
                 }
                 outRect.left = offset;
                 break;
         }
+        Log.i(TAG,"getItemOffsets pos = "+pos+",count = "+count+",out = "+outRect.toString());
     }
 }

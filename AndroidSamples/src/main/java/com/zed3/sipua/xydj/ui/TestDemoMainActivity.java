@@ -49,7 +49,7 @@ public class TestDemoMainActivity extends BaseActivity {
                 break;
             case R.id.member_search:
                 Intent searchIntent = new Intent(this, GroupMemberSearchActivity.class);
-                searchIntent.putExtra("grp",createTmpGrp("自建组1号",60));
+                searchIntent.putExtra("grp",createTmpGrp("自建组1号",1000));
                 startSpecifyActivity(searchIntent);
                 break;
         }

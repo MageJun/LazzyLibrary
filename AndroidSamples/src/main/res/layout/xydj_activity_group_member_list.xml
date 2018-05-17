@@ -23,6 +23,9 @@
         android:padding="5dp"
         android:drawableLeft="@drawable/search"
         android:hint="搜索"
+        android:clickable="true"
+        android:focusableInTouchMode="false"
+        android:onClick="onClick"
         android:drawablePadding="2dp"
         />
     <android.support.v7.widget.RecyclerView
