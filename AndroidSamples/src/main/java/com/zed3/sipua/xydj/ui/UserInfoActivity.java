@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.lw.demo.adnroid.samples.R;
+import com.lw.demo.android.samples.R;
 import com.zed3.sipua.xydj.ui.groupinviteinfo.GroupInviteInfoActivity;
 
 public class UserInfoActivity extends BaseActivity {

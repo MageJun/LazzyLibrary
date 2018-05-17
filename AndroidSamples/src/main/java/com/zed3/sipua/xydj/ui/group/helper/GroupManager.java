@@ -13,18 +13,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
-import com.lw.demo.adnroid.samples.R;
+import com.lw.demo.android.samples.R;
 import com.zed3.sipua.xydj.ui.helper.AnimUtil;
-
-import java.security.acl.Group;
 
 public class GroupManager {
 

@@ -5,9 +5,8 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.widget.EditText;
 
-import com.lw.demo.adnroid.samples.R;
+import com.lw.demo.android.samples.R;
 import com.zed3.sipua.xydj.ui.BaseActivity;
-import com.zed3.sipua.xydj.ui.group.bean.CustomGroupMemberInfo;
 import com.zed3.sipua.xydj.ui.group.bean.PttCustomGrp;
 
 public class GroupInfoModifyActivity extends BaseActivity {

@@ -1,24 +1,15 @@
 package com.zed3.sipua.xydj.ui.helper;
 
-import android.app.Activity;
-import android.content.ClipData;
-import android.content.ClipboardManager;
 import android.content.Context;
-import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.lw.demo.adnroid.samples.R;
-
-import org.w3c.dom.Text;
+import com.lw.demo.android.samples.R;
 
 public class MessageHelper {
     private static MessageHelper sInstance;

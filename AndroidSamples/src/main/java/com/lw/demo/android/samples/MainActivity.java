@@ -1,4 +1,4 @@
-package com.lw.demo.adnroid.samples;
+package com.lw.demo.android.samples;
 
 import android.app.Activity;
 import android.os.Bundle;

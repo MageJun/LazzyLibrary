@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.lw.android.commonui.customView.DragLayout;
-import com.lw.demo.adnroid.samples.R;
+import com.lw.demo.android.samples.R;
 import com.zed3.sipua.xydj.ui.groupinviteinfo.bean.GroupInviteReceiveDataMap;
 import com.zed3.sipua.xydj.ui.groupinviteinfo.bean.GroupInviteReceiveDataMap.GroupInviteReceiveData;
 import com.zed3.sipua.xydj.ui.groupinviteinfo.helper.OnItemClickListener;

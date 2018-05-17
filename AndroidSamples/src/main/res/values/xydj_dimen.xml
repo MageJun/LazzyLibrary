@@ -33,4 +33,5 @@
     <dimen name="xydj_group_member_delete_select_wh">22dp</dimen>
     <dimen name="xydj_group_member_delete_item_div">5dp</dimen>
     <dimen name="xydj_group_member_delete_select_arraw">30dp</dimen>
+    <dimen name="xydj_group_member_search_item_icon_wh">32dp</dimen>
 </resources>

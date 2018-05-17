@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.lw.demo.adnroid.samples">
+    package="com.lw.demo.android.samples">
 
     <application
         android:allowBackup="true"
@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/XYDJAppTheme">
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name="com.lw.demo.android.samples.MainActivity"></activity>
         <activity android:name="com.zed3.sipua.xydj.ui.UserInfoActivity"></activity>
         <activity
             android:name="com.zed3.sipua.xydj.ui.groupinviteinfo.GroupInviteInfoActivity"
@@ -33,6 +33,8 @@
         <activity android:name="com.zed3.sipua.xydj.ui.group.GroupMemeberDeleteActivity"
             android:windowSoftInputMode="adjustPan"/>
         <activity android:name="com.zed3.sipua.xydj.ui.group.GroupInfoModifyActivity"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name="com.zed3.sipua.xydj.ui.group.GroupMemberSearchActivity"
             android:windowSoftInputMode="adjustPan"/>
     </application>
 

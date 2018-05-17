@@ -4,7 +4,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.lw.demo.adnroid.samples.R;
+import com.lw.demo.android.samples.R;
 import com.zed3.sipua.xydj.ui.BaseActivity;
 import com.zed3.sipua.xydj.ui.group.bean.CustomGroupMemberInfo;
 

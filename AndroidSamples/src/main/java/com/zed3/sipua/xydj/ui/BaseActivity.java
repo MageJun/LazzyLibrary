@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.lw.demo.adnroid.samples.R;
+import com.lw.demo.android.samples.R;
 
 public abstract class BaseActivity extends AppCompatActivity {
 

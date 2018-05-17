@@ -10,9 +10,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
-import com.lw.demo.adnroid.samples.R;
+import com.lw.demo.android.samples.R;
 import com.zed3.sipua.xydj.ui.BaseActivity;
 import com.zed3.sipua.xydj.ui.GridDividerDecoration2;
 import com.zed3.sipua.xydj.ui.ItemDividerDecoration;
@@ -21,7 +20,6 @@ import com.zed3.sipua.xydj.ui.group.adapter.GroupDeleteSelectMemeberListAdapter;
 import com.zed3.sipua.xydj.ui.group.adapter.OnItemCheckedListener;
 import com.zed3.sipua.xydj.ui.group.bean.CustomGroupMemberInfo;
 import com.zed3.sipua.xydj.ui.group.bean.PttCustomGrp;
-import com.zed3.sipua.xydj.ui.group.helper.ScrollSpeedLinearLayoutManager;
 
 import java.util.ArrayList;
 import java.util.List;

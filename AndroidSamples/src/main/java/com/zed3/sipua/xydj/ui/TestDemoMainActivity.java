@@ -5,9 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.lw.demo.adnroid.samples.R;
-import com.zed3.sipua.xydj.ui.BaseActivity;
+import com.lw.demo.android.samples.R;
 import com.zed3.sipua.xydj.ui.group.GroupInfoActivity;
+import com.zed3.sipua.xydj.ui.group.GroupMemberSearchActivity;
 import com.zed3.sipua.xydj.ui.group.bean.CustomGroupMemberInfo;
 import com.zed3.sipua.xydj.ui.group.bean.PttCustomGrp;
 import com.zed3.sipua.xydj.ui.group.helper.GroupManager;
@@ -46,6 +46,11 @@ public class TestDemoMainActivity extends BaseActivity {
                         Toast.makeText(TestDemoMainActivity.this,"取消", Toast.LENGTH_SHORT).show();
                     }
                 });
+                break;
+            case R.id.member_search:
+                Intent searchIntent = new Intent(this, GroupMemberSearchActivity.class);
+                searchIntent.putExtra("grp",createTmpGrp("自建组1号",60));
+                startSpecifyActivity(searchIntent);
                 break;
         }
     }
