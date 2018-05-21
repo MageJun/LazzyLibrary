@@ -12,6 +12,7 @@
     <dimen name="xydj_ptt_icon_hw">120dp</dimen>
     <dimen name="xydj_idle_state_info_w">140dp</dimen>
     <dimen name="xydj_item_right_arrow">24dp</dimen>
+    <dimen name="xydj_item_right_arrow2">16dp</dimen>
     <dimen name="xydj_custom_dialog_width">300dp</dimen>
     <dimen name="xydj_custom_dialog_height">200dp</dimen>
     <dimen name="xydj_custom_dialog_btn_bg_stroke_width">1dp</dimen>

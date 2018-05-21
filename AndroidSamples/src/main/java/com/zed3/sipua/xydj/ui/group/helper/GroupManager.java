@@ -19,6 +19,7 @@ import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.lw.demo.android.samples.R;
+import com.zed3.sipua.xydj.ui.group.bean.CustomGroupMemberInfo;
 import com.zed3.sipua.xydj.ui.helper.AnimUtil;
 
 public class GroupManager {
@@ -178,6 +179,10 @@ public class GroupManager {
         lp.alpha = bgAlpha; //0.0-1.0
         context.getWindow().setAttributes(lp);
         context.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+    }
+
+    public boolean checkIsUserFriend(CustomGroupMemberInfo info){
+        return false;
     }
 
 }
