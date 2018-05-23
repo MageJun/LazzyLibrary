@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.lw.demo.android.samples.R;
+import com.lw.demo.android.samples.ViewPagerActivity;
 import com.zed3.sipua.xydj.ui.group.GroupInfoActivity;
 import com.zed3.sipua.xydj.ui.group.GroupMemberSearchActivity;
 import com.zed3.sipua.xydj.ui.group.bean.CustomGroupMemberInfo;
@@ -51,6 +52,10 @@ public class TestDemoMainActivity extends BaseActivity {
                 Intent searchIntent = new Intent(this, GroupMemberSearchActivity.class);
                 searchIntent.putExtra("grp",createTmpGrp("自建组1号",1000));
                 startSpecifyActivity(searchIntent);
+                break;
+            case R.id.view_pager:
+                Intent viewPagerIntent = new Intent(this, ViewPagerActivity.class);
+                startSpecifyActivity(viewPagerIntent);
                 break;
         }
     }
