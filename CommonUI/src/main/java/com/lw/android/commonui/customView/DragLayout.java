@@ -53,6 +53,8 @@ public class DragLayout extends FrameLayout {
 
     private SwipeStatusChangeListener swipeChangeListener;
 
+    private boolean isSwipeAvailable = false;
+
     private ViewDragHelper.Callback mCallBack = new ViewDragHelper.Callback() {
 
         /**
@@ -64,6 +66,9 @@ public class DragLayout extends FrameLayout {
         @Override
         public boolean tryCaptureView(View view, int i) {
             Log.i(TAG, "tryCaptureView view = " + view.getId() + ",pointerID = " + i);
+            if(!isSwipeAvailable()){
+                return false;
+            }
             return true;
         }
 
@@ -77,6 +82,9 @@ public class DragLayout extends FrameLayout {
         @Override
         public void onViewReleased(View releasedChild, float xvel, float yvel) {
             super.onViewReleased(releasedChild, xvel, yvel);
+            if(!isSwipeAvailable()){
+                return ;
+            }
             Log.i(TAG, "onViewReleased() releasedChild = " + releasedChild.getId() + ",xvel = " + xvel + ", yvel = " + yvel);
             if (xvel == 0 && mContentView.getLeft() < -menuWidth * 0.5f) {//水平不自由滑动
                 open();
@@ -97,6 +105,9 @@ public class DragLayout extends FrameLayout {
         @Override
         public int clampViewPositionHorizontal(View child, int left, int dx) {
             Log.i(TAG, "clampViewPositionHorizontal child = " + child.getId() + ",left = " + left + ",dx = " + dx);
+            if(!isSwipeAvailable()){
+                super.clampViewPositionHorizontal(child,left,dx);
+            }
             if (child == mContentView) {
                 if (left > 0) {
                     return 0;
@@ -116,8 +127,9 @@ public class DragLayout extends FrameLayout {
         @Override
         public void onViewPositionChanged(View changedView, int left, int top, int dx, int dy) {
             Log.i(TAG, "onViewPositionChanged changedView = " + changedView.getId() + ",left = " + left + ",top = " + top + ",dx = " + dx + ",dy = " + dy);
-//            super.onViewPositionChanged(changedView, left, top, dx, dy);
-
+            if(!isSwipeAvailable()){
+                super.onViewPositionChanged(changedView, left, top, dx, dy);
+            }
             if (changedView == mContentView) {
                 mMenuView.offsetLeftAndRight(dx);
             } else if (changedView == mMenuView) {
@@ -133,6 +145,9 @@ public class DragLayout extends FrameLayout {
 
         @Override
         public int getViewHorizontalDragRange(View child) {
+            if(!isSwipeAvailable()){
+                return super.getViewHorizontalDragRange(child);
+            }
             return 1;
         }
     };
@@ -157,15 +172,29 @@ public class DragLayout extends FrameLayout {
 
     }
 
+    public void setSwipeAvailable(boolean available){
+        this.isSwipeAvailable = available;
+    }
+
+    public boolean isSwipeAvailable(){
+        return this.isSwipeAvailable;
+    }
+
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
+        if(!isSwipeAvailable()){
+            return super.onInterceptTouchEvent(ev);
+        }
         return mDragHelper.shouldInterceptTouchEvent(ev);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
+        if(!isSwipeAvailable()){
+            return super.onTouchEvent(event);
+        }
         mDragHelper.processTouchEvent(event);
 
         return true;
@@ -176,7 +205,6 @@ public class DragLayout extends FrameLayout {
 
         Log.i(TAG, "onSizeChanged enter");
         super.onSizeChanged(w, h, oldw, oldh);
-
         contentWidth = mContentView.getMeasuredWidth();
         contentHeight = mContentView.getMeasuredHeight();
         menuWidth = mMenuView.getMeasuredWidth();
@@ -193,7 +221,6 @@ public class DragLayout extends FrameLayout {
     protected void onFinishInflate() {
         Log.i(TAG, "onFinishInflate enter");
         super.onFinishInflate();
-
         if (getChildCount() < 2) {
             throw new RuntimeException("child count may not be less than 2 !");
         }
@@ -274,6 +301,9 @@ public class DragLayout extends FrameLayout {
 
     //根据当前状态判断回调事件
     protected void dispatchSwipeEvent() {
+        if(!isSwipeAvailable()){
+            return ;
+        }
         Status preStatus = status;
         status = updateStatus();
 
