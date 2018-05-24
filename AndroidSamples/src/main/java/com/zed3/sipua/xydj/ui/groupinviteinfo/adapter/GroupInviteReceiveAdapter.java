@@ -70,6 +70,7 @@ public class GroupInviteReceiveAdapter extends RecyclerView.Adapter implements V
 
                 View dataView = LayoutInflater.from(parent.getContext()).inflate(R.layout.xydj_item_group_invite_data,parent,false);
                 InviteReceiveDataVH vh = new InviteReceiveDataVH(dataView);
+                vh.mLayout.setSwipeAvailable(true);
                 vh.mLayout.setSwipeChangeListener(new DragLayout.SwipeStatusChangeListener() {
                     @Override
                     public void onDraging(DragLayout dragLayout) {

@@ -21,6 +21,7 @@ import com.zed3.sipua.xydj.ui.groupinviteinfo.bean.GroupInviteReceiveDataMap.Gro
 import com.zed3.sipua.xydj.ui.groupinviteinfo.helper.GroupInvitePresenter;
 import com.zed3.sipua.xydj.ui.groupinviteinfo.helper.GroupInviteInfoViewer;
 import com.zed3.sipua.xydj.ui.groupinviteinfo.helper.OnItemClickListener;
+import com.zed3.sipua.xydj.ui.groupinviteinfo.helper.RecyclerViewOnItemTouchListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,6 +84,7 @@ public class TabGroupInviteInfoReceiveFragment extends Fragment implements Group
         mListView.setLayoutManager(mLayoutManager);
         mAdapter.setListener(this);
         mListView.setAdapter(mAdapter);
+        mListView.addOnItemTouchListener(new RecyclerViewOnItemTouchListener());
         ItemDividerDecoration divider = new ItemDividerDecoration(getActivity(), LinearLayout.VERTICAL);
         divider.setOffset(2);
         mListView.addItemDecoration(divider);

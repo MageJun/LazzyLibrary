@@ -1,6 +1,7 @@
 package com.zed3.sipua.xydj.ui;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -56,6 +57,24 @@ public class TestDemoMainActivity extends BaseActivity {
             case R.id.view_pager:
                 Intent viewPagerIntent = new Intent(this, ViewPagerActivity.class);
                 startSpecifyActivity(viewPagerIntent);
+                break;
+            case R.id.call_tel:
+                Intent telIntent = new Intent(Intent.ACTION_DIAL);
+                Uri uri = Uri.parse("tel:"+"10086");
+                telIntent.setData(uri);
+                telIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startSpecifyActivity(telIntent);
+                break;
+            case R.id.call_msg:
+                Intent msgIntent = new Intent(Intent.ACTION_SENDTO);
+                Uri uri2= Uri.parse("smsto:"+"10086121");
+                msgIntent.setData(uri2);
+                msgIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startSpecifyActivity(msgIntent);
+                break;
+            case R.id.user:
+                Intent userIntent = new Intent(this,UserInfoActivity.class);
+                startSpecifyActivity(userIntent);
                 break;
         }
     }
