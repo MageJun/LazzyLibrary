@@ -1,9 +1,11 @@
 package net.lucode.hackware.magicindicator.buildins.commonnavigator.titles;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.text.TextUtils;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.widget.TextView;
 
@@ -95,5 +97,9 @@ public class SimplePagerTitleView extends TextView implements IMeasurablePagerTi
 
     public void setNormalColor(int normalColor) {
         mNormalColor = normalColor;
+    }
+
+    public void setSize(float textSize){
+        setTextSize(TypedValue.COMPLEX_UNIT_PX,textSize);
     }
 }
