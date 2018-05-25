@@ -1,13 +1,36 @@
 package com.lw.demo.android.samples;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestBuilder;
+import com.bumptech.glide.RequestManager;
+import com.bumptech.glide.TransitionOptions;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
+
 import net.lucode.hackware.magicindicator.MagicIndicator;
+import net.lucode.hackware.magicindicator.ViewPagerHelper;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigatorSeparate;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.CommonPagerIndicator;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.CommonPagerIndicatorSeparate;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.ColorTransitionPagerTitleView;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.badge.ScaleTransitionPagerTitleView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +41,7 @@ public class ViewPagerActivity2 extends AppCompatActivity {
     private ViewPager mViewPager;
     private MagicIndicator mIndicator;
     private CommonPagerAdapter<Integer> mAdapter;
+    private List<Integer> mDataList =mDataList = new ArrayList<Integer>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,13 +58,21 @@ public class ViewPagerActivity2 extends AppCompatActivity {
         int page_margin = getResources().getDimensionPixelOffset(R.dimen.pager_margin);
         mViewPager.setPageMargin(page_margin/2);
         mViewPager.setOffscreenPageLimit(3);
-       List<Integer> data = new ArrayList<Integer>();
-       data.add(R.drawable.mm1);
-       data.add(R.drawable.mm2);
-       data.add(R.drawable.mm3);
-       data.add(R.drawable.mm4);
-       data.add(R.drawable.mm5);
-        mAdapter.setData(data);
+       mDataList.add(R.drawable.mm1);
+       mDataList.add(R.drawable.mm2);
+       mDataList.add(R.drawable.mm3);
+       mDataList.add(R.drawable.mm4);
+       mDataList.add(R.drawable.mm5);
+        mAdapter.setData(mDataList);
+
+        CommonNavigatorSeparate navigator = new CommonNavigatorSeparate(this);
+        navigator.setAdapter(mNavigatorAdapter);
+        navigator.setAdjustMode(true);
+        navigator.setIndicatorOnTop(true);
+        navigator.setTitleBackGroundColor(Color.parseColor("#2EA251"));
+        mIndicator.setNavigator(navigator);
+        ViewPagerHelper.bind(mIndicator,mViewPager);
+
         mViewPager.setPageTransformer(false, new ViewPager.PageTransformer() {
             @Override
             public void transformPage(@NonNull View page, float position) {
@@ -69,36 +101,6 @@ public class ViewPagerActivity2 extends AppCompatActivity {
                     page.setScaleX(0.6f+radio*0.4f);
                     page.setScaleY(0.6f+radio*0.4f);
                 }
-
-            //我们给不同状态的页面设置不同的效果
-
-            //通过position的值来分辨页面所处于的状态
-
-                /*int margin = getResources().getDimensionPixelOffset(R.dimen.pager_margin)/2;
-                margin/=width;
-                margin = 0;
-
-                if(position < - 1) { //滑出的页面
-
-                    page.setScrollX(( int) (width * 0.75*position - 1));
-
-                } else if(position <= 1) { //[-1,1]
-
-                    if(position < 0) { //[-1,0]
-
-                        page.setScrollX(( int) (width * 0.75* position)-margin);
-
-                    } else{ //[0,1]
-
-                        page.setScrollX(( int) (width * 0.75* position)+margin);
-
-                    }
-
-                } else{ //即将滑入的页面
-
-                    page.setScrollX(( int) (width * 0.75)+margin);
-
-                }*/
             }
         });
     }
@@ -107,6 +109,54 @@ public class ViewPagerActivity2 extends AppCompatActivity {
         mViewPager = findViewById(R.id.view_pager);
         mIndicator = findViewById(R.id.indicator);
     }
+
+    private CommonNavigatorAdapter mNavigatorAdapter = new CommonNavigatorAdapter() {
+        @Override
+        public int getCount() {
+            return mDataList.size();
+        }
+
+        @Override
+        public IPagerTitleView getTitleView(Context context, final int index) {
+//            SimplePagerTitleView titleView = new ColorTransitionPagerTitleView(context);
+            SimplePagerTitleView titleView = new ScaleTransitionPagerTitleView(context);
+            titleView.setText("Tab"+index);
+//            titleView.setBackgroundColor(Color.parseColor("#2EA251"));
+            titleView.setNormalColor(Color.parseColor("#FCFEFD"));
+            titleView.setSelectedColor(Color.parseColor("#ABF9C2"));
+            titleView.setSize(getResources().getDimensionPixelSize(R.dimen.indicator_text_size));
+            titleView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mViewPager.setCurrentItem(index);
+                }
+            });
+            return titleView;
+        }
+
+        @Override
+        public IPagerIndicator getIndicator(Context context) {
+            final CommonPagerIndicatorSeparate indicator = new CommonPagerIndicatorSeparate(context);
+            indicator.setIndicatorDrawable(getResources().getDrawable(R.drawable.sanjiao));
+            indicator.setMode(CommonPagerIndicator.MODE_EXACTLY);
+          /* RequestManager manager =  Glide.with(context);
+            RequestBuilder builder = manager.asBitmap();
+            builder.load(R.drawable.sanjiao);
+            builder.into(new SimpleTarget<Bitmap>() {
+                @Override
+                public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition transition) {
+                    indicator.setDrawableHeight(resource.getHeight());
+                    indicator.setDrawableWidth(resource.getWidth());
+                }
+            });*/
+
+
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.sanjiao);
+            indicator.setDrawableHeight(bitmap.getHeight());
+            indicator.setDrawableWidth(bitmap.getWidth());
+          return indicator;
+        }
+    };
 
 
 }
