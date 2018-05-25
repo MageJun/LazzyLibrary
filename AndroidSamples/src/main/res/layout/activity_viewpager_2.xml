@@ -2,7 +2,8 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:clipChildren="false">
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline5"
@@ -17,7 +18,11 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/guideline5"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintRight_toRightOf="parent"
+        android:clipChildren="false"
+        android:layout_marginRight="@dimen/pager_margin"
+        android:layout_marginLeft="@dimen/pager_margin"
+        />
 
     <net.lucode.hackware.magicindicator.MagicIndicator
         android:id="@+id/indicator"

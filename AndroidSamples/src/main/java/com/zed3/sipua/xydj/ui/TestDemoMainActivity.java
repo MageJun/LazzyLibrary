@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.lw.demo.android.samples.R;
 import com.lw.demo.android.samples.ViewPagerActivity;
+import com.lw.demo.android.samples.ViewPagerActivity2;
 import com.zed3.sipua.xydj.ui.group.GroupInfoActivity;
 import com.zed3.sipua.xydj.ui.group.GroupMemberSearchActivity;
 import com.zed3.sipua.xydj.ui.group.bean.CustomGroupMemberInfo;
@@ -55,7 +56,7 @@ public class TestDemoMainActivity extends BaseActivity {
                 startSpecifyActivity(searchIntent);
                 break;
             case R.id.view_pager:
-                Intent viewPagerIntent = new Intent(this, ViewPagerActivity.class);
+                Intent viewPagerIntent = new Intent(this, ViewPagerActivity2.class);
                 startSpecifyActivity(viewPagerIntent);
                 break;
             case R.id.call_tel:
