@@ -4,12 +4,16 @@ import android.animation.AnimatorSet;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.baidu.location.BDAbstractLocationListener;
@@ -24,12 +28,16 @@ import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.Circle;
 import com.baidu.mapapi.map.CircleOptions;
+import com.baidu.mapapi.map.InfoWindow;
 import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationData;
+import com.baidu.mapapi.map.Projection;
+import com.baidu.mapapi.map.Text;
+import com.baidu.mapapi.map.TextOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.lw.demo.android.samples.AppApplication;
 import com.lw.demo.android.samples.R;
@@ -37,6 +45,7 @@ import com.zed3.sipua.xydj.ui.helper.MessageHelper;
 
 public class MapViewActivity extends AppCompatActivity {
 
+    private static final String TAG = MapViewActivity.class.getSimpleName();
     private MapView mMapView;
     private BaiduMap mMap;
     private LocationClient mLocClient;
@@ -46,6 +55,8 @@ public class MapViewActivity extends AppCompatActivity {
     private MyLocationData locData;//当前位置信息
     private boolean isFirstLoc=true;
     private Marker mLocMarker;//用来替代“我的位置"的marker
+    private Text mTextOverlay;
+    private InfoWindow mTextInfoWindow;
     private BitmapDescriptor mLocMarkerIcon = BitmapDescriptorFactory.fromResource(R.drawable.marker_icon_start);//当前位置的Icon
     private static final int REQUEST_LOCATION = 0;
     private static final int START_ANIMATION = 1;
@@ -120,7 +131,7 @@ public class MapViewActivity extends AppCompatActivity {
     private BDAbstractLocationListener mListener = new BDAbstractLocationListener() {
         @Override
         public void onReceiveLocation(BDLocation bdLocation) {
-            Toast.makeText(AppApplication.sContext,"位置更新",1).show();
+            Toast.makeText(AppApplication.sContext,"位置更新",Toast.LENGTH_SHORT).show();
             // map view 销毁后不在处理新接收的位置
             if (bdLocation == null || mMapView == null) {
                 return;
@@ -194,6 +205,40 @@ public class MapViewActivity extends AppCompatActivity {
             }else{
                 c3.setCenter(ll);
             }
+            LatLng testll = ll;
+            Projection pj =  mMap.getProjection();
+            if(pj!=null) {
+                Point locPoint = pj.toScreenLocation(ll);
+                int locY = locPoint.y;
+                Log.i(TAG, "bef locPoint.y = " + locPoint.y);
+                int textY = locY - mLocMarkerIcon.getBitmap().getHeight() - 40;
+                locPoint.y = textY;
+                Log.i(TAG, "aft locPoint.y = " + locPoint.y);
+                testll = pj.fromScreenLocation(locPoint);
+            }
+
+
+            if(mTextOverlay ==null){
+                TextOptions options = new TextOptions();
+                options.position(testll);
+                options.bgColor(Color.WHITE);
+                options.text("正在向附近用户发送请求");
+                options.fontSize(35);
+                options.zIndex(100);
+                mTextOverlay = (Text) mMap.addOverlay(options);
+            }else{
+                mTextOverlay.setPosition(testll);
+            }
+
+                TextView mPopText = new TextView(mContext);
+                mPopText.setText("倒计时");
+                mPopText.setTextSize(TypedValue.COMPLEX_UNIT_SP,25);
+                mPopText.setBackgroundColor(Color.WHITE);
+                mMap.hideInfoWindow();
+                mMap.showInfoWindow(new InfoWindow(mPopText,testll,0));
+                mMap.showInfoWindow(mTextInfoWindow);
+
+
         }
     }
 
