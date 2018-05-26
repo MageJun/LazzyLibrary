@@ -9,6 +9,8 @@ import android.widget.Toast;
 import com.lw.demo.android.samples.R;
 import com.lw.demo.android.samples.ViewPagerActivity;
 import com.lw.demo.android.samples.ViewPagerActivity2;
+import com.map.view.MapViewActivity;
+import com.map.view.WaveCircleActivity;
 import com.zed3.sipua.xydj.ui.group.GroupInfoActivity;
 import com.zed3.sipua.xydj.ui.group.GroupMemberSearchActivity;
 import com.zed3.sipua.xydj.ui.group.bean.CustomGroupMemberInfo;
@@ -76,6 +78,14 @@ public class TestDemoMainActivity extends BaseActivity {
             case R.id.user:
                 Intent userIntent = new Intent(this,UserInfoActivity.class);
                 startSpecifyActivity(userIntent);
+                break;
+            case R.id.map:
+                Intent mapIntent = new Intent(this,MapViewActivity.class);
+                startSpecifyActivity(mapIntent);
+                break;
+            case R.id.wave_circle:
+                Intent waveIntent = new Intent(this,WaveCircleActivity.class);
+                startSpecifyActivity(waveIntent);
                 break;
         }
     }
