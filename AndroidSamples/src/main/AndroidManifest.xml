@@ -43,8 +43,8 @@
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="Gw9ofOwr6iwanRqMAFfLCsDdMGq3PIdn" />
-        <!--home key Gw9ofOwr6iwanRqMAFfLCsDdMGq3PIdn-->
-        <!--gongsi key PRKeV1yZ7yTG1CZOfhf0xoMhBK7LNRh1-->
+        <!-- home key Gw9ofOwr6iwanRqMAFfLCsDdMGq3PIdn -->
+        <!-- gongsi key PRKeV1yZ7yTG1CZOfhf0xoMhBK7LNRh1 -->
         <activity android:name=".MainActivity" />
         <activity android:name="com.zed3.sipua.xydj.ui.UserInfoActivity" />
         <activity
@@ -82,9 +82,10 @@
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
-            android:process=":remote"></service>
+            android:process=":remote" />
 
-        <activity android:name="com.map.view.WaveCircleActivity"></activity>
+        <activity android:name="com.map.view.WaveCircleActivity" />
+        <activity android:name=".SlidingUpPannelActivity"></activity>
     </application>
 
 </manifest>

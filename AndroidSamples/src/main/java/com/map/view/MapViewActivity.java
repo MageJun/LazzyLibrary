@@ -48,6 +48,7 @@ import com.baidu.mapapi.map.TextOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.lw.demo.android.samples.AppApplication;
 import com.lw.demo.android.samples.R;
+import com.lw.demo.android.samples.SlidingUpPannelLayoutCustom;
 import com.zed3.sipua.xydj.ui.helper.MessageHelper;
 
 import javax.microedition.khronos.opengles.GL10;
@@ -69,6 +70,7 @@ public class MapViewActivity extends AppCompatActivity {
     private InfoWindow mTextInfoWindow;
     private View mTilView;
     private BitmapDescriptor mLocMarkerIcon = BitmapDescriptorFactory.fromResource(R.drawable.marker_icon_start);//当前位置的Icon
+    private SlidingUpPannelLayoutCustom mSlidingLayout;
     private static final int REQUEST_LOCATION = 0;
     private static final int START_ANIMATION = 1;
     private static final int MSG_START_C1 = 0;
@@ -129,6 +131,9 @@ public class MapViewActivity extends AppCompatActivity {
     private void initView() {
          mMapView = findViewById(R.id.map_view);
          mCircleRadius = getResources().getDisplayMetrics().widthPixels/4;
+         mSlidingLayout = findViewById(R.id.sliding_layout);
+         mSlidingLayout.setOverlayed(true);
+         mSlidingLayout.setMainCanTouch(false);
         invisibleMapInfo();
     }
 
@@ -443,6 +448,9 @@ public class MapViewActivity extends AppCompatActivity {
         switch (view.getId()){
             case R.id.request_loc_icon:
                 mHandler.sendEmptyMessage(REQUEST_LOCATION);
+                break;
+            case R.id.btn_submit:
+
                 break;
         }
     }

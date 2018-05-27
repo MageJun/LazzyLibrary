@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.lw.demo.android.samples.R;
+import com.lw.demo.android.samples.SlidingUpPannelActivity;
 import com.lw.demo.android.samples.ViewPagerActivity;
 import com.lw.demo.android.samples.ViewPagerActivity2;
 import com.map.view.MapViewActivity;
@@ -86,6 +87,10 @@ public class TestDemoMainActivity extends BaseActivity {
             case R.id.wave_circle:
                 Intent waveIntent = new Intent(this,WaveCircleActivity.class);
                 startSpecifyActivity(waveIntent);
+                break;
+            case R.id.sliding_up:
+                Intent sldUpIntent = new Intent(this,SlidingUpPannelActivity.class);
+                startSpecifyActivity(sldUpIntent);
                 break;
         }
     }
