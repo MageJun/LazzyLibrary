@@ -16,8 +16,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ZoomControls;
 
 import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
@@ -127,6 +129,21 @@ public class MapViewActivity extends AppCompatActivity {
     private void initView() {
          mMapView = findViewById(R.id.map_view);
          mCircleRadius = getResources().getDisplayMetrics().widthPixels/4;
+        invisibleMapInfo();
+    }
+
+    private void invisibleMapInfo(){
+        //隐藏百度的LOGO
+        View child = mMapView.getChildAt(1);
+        if (child != null && (child instanceof ImageView || child instanceof ZoomControls)) {
+            child.setVisibility(View.INVISIBLE);
+        }
+
+        // 不显示地图上比例尺
+        mMapView.showScaleControl(false);
+
+        // 不显示地图缩放控件（按钮控制栏）
+        mMapView.showZoomControls(false);
     }
 
 
@@ -272,7 +289,7 @@ public class MapViewActivity extends AppCompatActivity {
             mMapView.removeView(mTilView);
             return false;
         }
-        if(mTilMarkerInfo!=null && mTilView!=null) {
+        if(mLocMarker!=null&&mTilMarkerInfo!=null && mTilView!=null) {
             ViewGroup.LayoutParams params = new MapViewLayoutParams.Builder()
                     .layoutMode(MapViewLayoutParams.ELayoutMode.mapMode)// 按照经纬度设置位置
                     .position(mLocMarker.getPosition())
@@ -420,5 +437,13 @@ public class MapViewActivity extends AppCompatActivity {
         });
 
         return mAlphaAnimation;
+    }
+
+    public void onClick(View view){
+        switch (view.getId()){
+            case R.id.request_loc_icon:
+                mHandler.sendEmptyMessage(REQUEST_LOCATION);
+                break;
+        }
     }
 }
