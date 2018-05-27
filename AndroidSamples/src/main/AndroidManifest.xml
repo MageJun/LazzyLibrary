@@ -42,8 +42,9 @@
         android:theme="@style/XYDJAppTheme">
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="PRKeV1yZ7yTG1CZOfhf0xoMhBK7LNRh1" />
-
+            android:value="Gw9ofOwr6iwanRqMAFfLCsDdMGq3PIdn" />
+        <!--home key Gw9ofOwr6iwanRqMAFfLCsDdMGq3PIdn-->
+        <!--gongsi key PRKeV1yZ7yTG1CZOfhf0xoMhBK7LNRh1-->
         <activity android:name=".MainActivity" />
         <activity android:name="com.zed3.sipua.xydj.ui.UserInfoActivity" />
         <activity

@@ -11,6 +11,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 import android.widget.TextView;
@@ -30,8 +33,10 @@ import com.baidu.mapapi.map.Circle;
 import com.baidu.mapapi.map.CircleOptions;
 import com.baidu.mapapi.map.InfoWindow;
 import com.baidu.mapapi.map.MapStatus;
+import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.MapViewLayoutParams;
 import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationData;
@@ -42,6 +47,8 @@ import com.baidu.mapapi.model.LatLng;
 import com.lw.demo.android.samples.AppApplication;
 import com.lw.demo.android.samples.R;
 import com.zed3.sipua.xydj.ui.helper.MessageHelper;
+
+import javax.microedition.khronos.opengles.GL10;
 
 public class MapViewActivity extends AppCompatActivity {
 
@@ -54,15 +61,19 @@ public class MapViewActivity extends AppCompatActivity {
     private int mCircleRadius = 200;//圆形覆盖物半径，默认200，实际取值屏幕宽度/4
     private MyLocationData locData;//当前位置信息
     private boolean isFirstLoc=true;
+    private boolean isFirstLoad = true;
     private Marker mLocMarker;//用来替代“我的位置"的marker
     private Text mTextOverlay;
     private InfoWindow mTextInfoWindow;
+    private View mTilView;
     private BitmapDescriptor mLocMarkerIcon = BitmapDescriptorFactory.fromResource(R.drawable.marker_icon_start);//当前位置的Icon
     private static final int REQUEST_LOCATION = 0;
     private static final int START_ANIMATION = 1;
     private static final int MSG_START_C1 = 0;
     private static final int MSG_START_C2 = 1;
     private static final int MSG_START_C3 = 2;
+    private static final int MSG_START_TIME = 3;
+    private int mCount = 0;
     private Context mContext;
     private Handler mHandler = new Handler(){
         @Override
@@ -83,12 +94,25 @@ public class MapViewActivity extends AppCompatActivity {
                         case MSG_START_C3:
                             scalecircle(c3);
                             break;
+                        case MSG_START_TIME:
+                            drawTitleMarkerInfo();
+                            mCount--;
+                            if(mCount<0){
+                                mCount = 0;
+                                return ;
+                            }
+                            Message message = Message.obtain();
+                            message.what = START_ANIMATION;
+                            message.arg1 = MSG_START_TIME;
+                            mHandler.sendMessageDelayed(message,1000);
+                            break;
                     }
                     break;
             }
 
         }
     };
+    private TextView mPopText,mTilMarkerInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,16 +132,20 @@ public class MapViewActivity extends AppCompatActivity {
 
     private void initData() {
         mMap = mMapView.getMap();
+        mMap.setOnMapLoadedCallback(new BaiduMap.OnMapLoadedCallback() {
+            @Override
+            public void onMapLoaded() {//地图加载完成后，开始定位
+                if(isFirstLoad){
+                    isFirstLoad = false;
+                    mHandler.sendEmptyMessageDelayed(REQUEST_LOCATION,1000);
+                }
+            }
+        });
     }
 
     private void initLocation() {
         // 开启定位图层
         mMap.setMyLocationEnabled(true);
-        mHandler.sendEmptyMessageDelayed(REQUEST_LOCATION,500);
-    }
-
-    private void requestLocation() {
-        // 定位初始化
         mLocClient = new LocationClient(this);
         mLocClient.registerLocationListener(mListener);
         LocationClientOption option = new LocationClientOption();
@@ -125,13 +153,22 @@ public class MapViewActivity extends AppCompatActivity {
         option.setCoorType("bd09ll"); // 设置坐标类型
         option.setScanSpan(5*60*1000);//定位间隔5分钟
         mLocClient.setLocOption(option);
-        mLocClient.start();
+    }
+
+    private void requestLocation() {
+        if(!mLocClient.isStarted()) {
+            // 定位初始化
+            mLocClient.start();
+        }
+        else{
+            mLocClient.requestLocation();
+        }
     }
 
     private BDAbstractLocationListener mListener = new BDAbstractLocationListener() {
         @Override
         public void onReceiveLocation(BDLocation bdLocation) {
-            Toast.makeText(AppApplication.sContext,"位置更新",Toast.LENGTH_SHORT).show();
+           Log.i(TAG,"位置更新");
             // map view 销毁后不在处理新接收的位置
             if (bdLocation == null || mMapView == null) {
                 return;
@@ -143,19 +180,24 @@ public class MapViewActivity extends AppCompatActivity {
                     .longitude(bdLocation.getLongitude()).build();
 
             addOverlay();
-
+//            mMap.setMyLocationData(locData);
             if(isFirstLoc){
                 isFirstLoc = false;
                 Message msg1 = Message.obtain();
                 msg1.what = START_ANIMATION;
                 Message msg2 = Message.obtain(msg1);
                 Message msg3 = Message.obtain(msg1);
+                Message msg4 = Message.obtain(msg1);
                 msg1.arg1 = MSG_START_C1;
                 mHandler.sendMessageDelayed(msg1,0);
                 msg2.arg1 = MSG_START_C2;
                 mHandler.sendMessageDelayed(msg2,800);
                 msg3.arg1 = MSG_START_C3;
                 mHandler.sendMessageDelayed(msg3,1600);
+                msg4.arg1 = MSG_START_TIME;
+                mCount = 45;
+                mHandler.sendMessage(msg4);
+
             }
         }
     };
@@ -163,20 +205,21 @@ public class MapViewActivity extends AppCompatActivity {
      * 添加覆盖物
      */
     private void addOverlay() {
+        Log.i(TAG,"addOverlay");
         if(locData!=null){
             LatLng ll = new LatLng(locData.latitude,locData.longitude);
             if(mLocMarker==null){
                 MarkerOptions options = new MarkerOptions();
-                options.position(ll).icon(mLocMarkerIcon).anchor(mLocMarkerIcon.getBitmap().getWidth()/2,0).zIndex(Integer.MAX_VALUE);
+                options.position(ll).icon(mLocMarkerIcon).anchor(/*mLocMarkerIcon.getBitmap().getWidth()/2*/0.5f,1.0f).zIndex(Integer.MAX_VALUE);
+                options.animateType(MarkerOptions.MarkerAnimateType.drop);
+                options.flat(false);
+                options.perspective(false);
                 mLocMarker = (Marker) mMap.addOverlay(options);
+                Log.i(TAG,"ax = "+mLocMarker.getAnchorX()+"ay = "+mLocMarker.getAnchorY());
             }else{
                 mLocMarker.setPosition(ll);
             }
-            if(isFirstLoc){
-                MapStatus.Builder builder = new MapStatus.Builder();
-                builder.target(ll).zoom(18.0f);
-                mMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
-            }
+
             if(c1==null){
                 co1 = new CircleOptions();
                 co1.radius(mCircleRadius);
@@ -205,41 +248,62 @@ public class MapViewActivity extends AppCompatActivity {
             }else{
                 c3.setCenter(ll);
             }
-            LatLng testll = ll;
-            Projection pj =  mMap.getProjection();
-            if(pj!=null) {
-                Point locPoint = pj.toScreenLocation(ll);
-                int locY = locPoint.y;
-                Log.i(TAG, "bef locPoint.y = " + locPoint.y);
-                int textY = locY - mLocMarkerIcon.getBitmap().getHeight() - 40;
-                locPoint.y = textY;
-                Log.i(TAG, "aft locPoint.y = " + locPoint.y);
-                testll = pj.fromScreenLocation(locPoint);
-            }
 
-
-            if(mTextOverlay ==null){
-                TextOptions options = new TextOptions();
-                options.position(testll);
-                options.bgColor(Color.WHITE);
-                options.text("正在向附近用户发送请求");
-                options.fontSize(35);
-                options.zIndex(100);
-                mTextOverlay = (Text) mMap.addOverlay(options);
-            }else{
-                mTextOverlay.setPosition(testll);
-            }
-
-                TextView mPopText = new TextView(mContext);
-                mPopText.setText("倒计时");
-                mPopText.setTextSize(TypedValue.COMPLEX_UNIT_SP,25);
-                mPopText.setBackgroundColor(Color.WHITE);
-                mMap.hideInfoWindow();
-                mMap.showInfoWindow(new InfoWindow(mPopText,testll,0));
-                mMap.showInfoWindow(mTextInfoWindow);
-
-
+            drawTitleMarkerInfo();
+            setMapCenter(mLocMarker.getPosition());
         }
+    }
+
+    private void drawTitleMarkerInfo(){
+        if(mTilView==null){
+            mTilView = LayoutInflater.from(this).inflate(R.layout.map_title_marker,null);
+            mTilMarkerInfo = mTilView.findViewById(R.id.til_marker_info);
+        }
+        updateInfoWindow();
+        mTilView.setOnClickListener(mInfoWindowClickListener);
+
+    }
+
+    private boolean updateInfoWindow(){
+        String  text = "时间：" + mCount;
+        if(mCount>0){
+            text = "时间："+mCount;
+        }else{
+            mMapView.removeView(mTilView);
+            return false;
+        }
+        if(mTilMarkerInfo!=null && mTilView!=null) {
+            ViewGroup.LayoutParams params = new MapViewLayoutParams.Builder()
+                    .layoutMode(MapViewLayoutParams.ELayoutMode.mapMode)// 按照经纬度设置位置
+                    .position(mLocMarker.getPosition())
+                    .width(MapViewLayoutParams.WRAP_CONTENT)
+                    .height(MapViewLayoutParams.WRAP_CONTENT)
+                    .yOffset(-mLocMarker.getIcon().getBitmap().getHeight())
+                    .build();
+            mTilMarkerInfo.setText(text);
+            //解决更新InfoWindow内容时，百度地图自动生成新的View，但之前的View没有移除，导致出现重影的问题
+            mMapView.removeView(mTilView);
+            mMapView.addView(mTilView, params);
+        }
+        return true;
+    }
+
+    private View.OnClickListener mInfoWindowClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Toast.makeText(mContext,"infoWindow click",Toast.LENGTH_SHORT).show();
+        }
+    };
+
+    private void setMapCenter(LatLng latLng) {
+        MapStatus.Builder builder = new MapStatus.Builder();
+        builder.target(latLng).zoom(19.0f);
+        Point scrrentPoint = new Point();
+        scrrentPoint.x = getResources().getDisplayMetrics().widthPixels / 2;
+        scrrentPoint.y = getResources().getDisplayMetrics().heightPixels / 2;
+//        builder.targetScreen(scrrentPoint);
+        mMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
+
     }
 
     private void clearOverlay(){
@@ -247,6 +311,7 @@ public class MapViewActivity extends AppCompatActivity {
         c1 = null;
         c2 = null;
         c3 = null;
+        mTilView = null;
         mLocMarker = null;
     }
 
@@ -282,6 +347,8 @@ public class MapViewActivity extends AppCompatActivity {
         set.setInterpolator(interpolator1);
         set.start();
     }
+
+
 
     @Override
     protected void onDestroy() {
