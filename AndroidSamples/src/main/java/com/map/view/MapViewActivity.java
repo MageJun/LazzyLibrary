@@ -10,7 +10,6 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,23 +34,17 @@ import com.baidu.mapapi.map.Circle;
 import com.baidu.mapapi.map.CircleOptions;
 import com.baidu.mapapi.map.InfoWindow;
 import com.baidu.mapapi.map.MapStatus;
-import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MapViewLayoutParams;
 import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationData;
-import com.baidu.mapapi.map.Projection;
 import com.baidu.mapapi.map.Text;
-import com.baidu.mapapi.map.TextOptions;
 import com.baidu.mapapi.model.LatLng;
-import com.lw.demo.android.samples.AppApplication;
 import com.lw.demo.android.samples.R;
 import com.lw.demo.android.samples.SlidingUpPannelLayoutCustom;
-import com.zed3.sipua.xydj.ui.helper.MessageHelper;
 
-import javax.microedition.khronos.opengles.GL10;
 
 public class MapViewActivity extends AppCompatActivity {
 
