@@ -485,6 +485,10 @@ public class MapViewActivity extends AppCompatActivity {
             case R.id.edt_addr:
                 startRequestActivity();
                 break;
+            case R.id.tv_contact:
+                Intent intent = new Intent(this,UserAddrListActivity.class);
+                startActivity(intent);
+                break;
         }
     }
 }

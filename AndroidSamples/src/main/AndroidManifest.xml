@@ -86,10 +86,13 @@
 
         <activity android:name="com.map.view.WaveCircleActivity" />
         <activity android:name=".SlidingUpPannelActivity" />
-        <activity android:name=".sharetran.ShareTranstraction"
-            android:theme="@style/ShareTranStyle"/>
-        <activity android:name=".sharetran.MapSearchActivity"
-            android:theme="@style/ShareTranStyle"></activity>
+        <activity
+            android:name=".sharetran.ShareTranstraction"
+            android:theme="@style/ShareTranStyle" />
+        <activity
+            android:name=".sharetran.MapSearchActivity"
+            android:theme="@style/ShareTranStyle" />
+        <activity android:name="com.map.view.UserAddrListActivity"></activity>
     </application>
 
 </manifest>

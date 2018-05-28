@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="15dp"
+    android:paddingLeft="15dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.Guideline
+        android:id="@+id/center_guide_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/right_guide_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="15dp"/>
+    <ImageView
+        android:id="@+id/icon_person"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/addr_info_icon_person"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/center_guide_line"
+        android:scaleType="fitXY"/>
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/center_guide_line"
+        app:layout_constraintLeft_toRightOf="@id/icon_person"
+        android:layout_marginLeft="10dp"
+        android:text="王小明"
+        android:textColor="@color/text_dark"
+        android:textSize="14sp"
+        />
+
+    <TextView
+        android:id="@+id/tv_tel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/tv_name"
+        app:layout_constraintBaseline_toBaselineOf="@id/tv_name"
+        android:layout_marginLeft="10dp"
+        android:text="187 9085 3533"
+        android:textColor="@color/text_dark"
+        android:textSize="14sp"
+        />
+
+    <ImageView
+        android:id="@+id/icon_addr"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/addr_info_icon_addr"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_addr"
+        android:scaleType="fitXY"/>
+    <TextView
+        android:id="@+id/tv_addr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/center_guide_line"
+        app:layout_constraintLeft_toRightOf="@id/icon_addr"
+        android:layout_marginLeft="10dp"
+        android:text="华容道"
+        android:textColor="@color/text_dark"
+        android:textSize="14sp"
+        />
+
+    <TextView
+        android:id="@+id/tv_addr_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv_addr"
+        app:layout_constraintLeft_toLeftOf="@id/tv_addr"
+        android:layout_marginTop="5dp"
+        android:text="海淀区中关村知识产权B座华容道"
+        android:textColor="@color/gray_6"
+        android:textSize="12sp"
+
+        />
+
+    <ImageView
+        android:id="@+id/checkImg"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/addr_list_icon_unselected"/>
+
+</android.support.constraint.ConstraintLayout>
