@@ -14,7 +14,7 @@ import com.lw.demo.android.samples.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShareTranstractionTargetActivity extends AppCompatActivity {
+public class MapSearchActivity extends AppCompatActivity {
 
     private RecyclerView mHistoryListView,mLocListView;
     private SearchResultAdapter mHistoryAdapter,mLocAdapter;

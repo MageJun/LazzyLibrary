@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.transition.ChangeBounds;
 import android.transition.TransitionSet;
 import android.view.View;
-import android.widget.TextView;
 
 import com.lw.demo.android.samples.R;
 
@@ -43,7 +42,7 @@ public class ShareTranstraction extends AppCompatActivity {
                 Pair titleEdt = new Pair(mTagView,"edt_title");
                 Pair title = new Pair(mTitle,"title");
                 mOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(this,title,titleEdt);
-                ActivityCompat.startActivity(this,new Intent(this,ShareTranstractionTargetActivity.class),mOptions.toBundle());
+                ActivityCompat.startActivity(this,new Intent(this,MapSearchActivity.class),mOptions.toBundle());
                 break;
         }
     }

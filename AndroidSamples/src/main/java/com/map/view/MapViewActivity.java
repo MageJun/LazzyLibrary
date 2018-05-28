@@ -51,7 +51,7 @@ import com.baidu.mapapi.map.Text;
 import com.baidu.mapapi.model.LatLng;
 import com.lw.demo.android.samples.R;
 import com.lw.demo.android.samples.SlidingUpPannelLayoutCustom;
-import com.lw.demo.android.samples.sharetran.ShareTranstractionTargetActivity;
+import com.lw.demo.android.samples.sharetran.MapSearchActivity;
 
 
 public class MapViewActivity extends AppCompatActivity {
@@ -152,7 +152,7 @@ public class MapViewActivity extends AppCompatActivity {
         Pair topPair = new Pair(topView,"top_line");
         Pair bottomPair = new Pair(bottomView,"bottom_line");
         ActivityOptionsCompat mOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(this,topPair,bottomPair);
-        ActivityCompat.startActivity(this,new Intent(this,ShareTranstractionTargetActivity.class),mOptions.toBundle());
+        ActivityCompat.startActivity(this,new Intent(this,MapSearchActivity.class),mOptions.toBundle());
     }
 
     private void initView() {
@@ -314,6 +314,9 @@ public class MapViewActivity extends AppCompatActivity {
     }
 
     private boolean updateInfoWindow(){
+        if(mMapView==null||mTilView==null){
+            return false;
+        }
         String  text = "时间：" + mCount;
         if(mCount>0){
             text = "时间："+mCount;

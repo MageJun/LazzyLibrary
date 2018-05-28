@@ -88,7 +88,7 @@
         <activity android:name=".SlidingUpPannelActivity" />
         <activity android:name=".sharetran.ShareTranstraction"
             android:theme="@style/ShareTranStyle"/>
-        <activity android:name=".sharetran.ShareTranstractionTargetActivity"
+        <activity android:name=".sharetran.MapSearchActivity"
             android:theme="@style/ShareTranStyle"></activity>
     </application>
 
