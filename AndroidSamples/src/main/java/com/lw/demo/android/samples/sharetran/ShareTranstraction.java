@@ -26,11 +26,10 @@ public class ShareTranstraction extends AppCompatActivity {
         mTagView = findViewById(R.id.edt_title);
         mTitle = findViewById(R.id.title_line);
 
-        TransitionSet mtransitionset=new TransitionSet();//制定过度动画set
-        mtransitionset.addTransition(new ChangeBounds());//改变表框大小
-//        mtransitionset.addTransition(new ChangeImageTransform());//图片移动，还可以是其他的，要什么效果自己添加
-        mtransitionset.setDuration(1000);
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP){
+            TransitionSet mtransitionset=new TransitionSet();//制定过度动画set
+            mtransitionset.addTransition(new ChangeBounds());//改变表框大小
+            mtransitionset.setDuration(1000);
             getWindow().setEnterTransition(mtransitionset);//注意，下面是必须的
             getWindow().setExitTransition(mtransitionset);
             getWindow().setSharedElementEnterTransition(mtransitionset);

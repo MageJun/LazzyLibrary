@@ -41,7 +41,7 @@
         android:background="@color/white"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        android:transitionName="title"
+        android:transitionName="top_line"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@id/top_guide_line">
@@ -113,7 +113,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="15dp"
         android:background="@color/white"
-        android:transitionName="edt_title"
+        android:transitionName="bottom_line"
         app:layout_constraintBottom_toBottomOf="@id/bottom_guide_line"
         app:layout_constraintLeft_toRightOf="@id/left_guide_line"
         app:layout_constraintRight_toRightOf="@id/right_guide_line"

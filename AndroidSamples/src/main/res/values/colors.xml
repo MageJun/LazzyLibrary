@@ -11,4 +11,5 @@
     <color name="gray_5">#999999</color>
     <color name="gray_6">#7B7B7B</color>
     <color name="text_dark">#333333</color>
+    <color name="transparent_bg">@android:color/transparent</color>
 </resources>

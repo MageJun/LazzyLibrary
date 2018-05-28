@@ -3,12 +3,19 @@ package com.map.view;
 import android.animation.AnimatorSet;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.transition.ChangeBounds;
+import android.transition.TransitionSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,6 +51,7 @@ import com.baidu.mapapi.map.Text;
 import com.baidu.mapapi.model.LatLng;
 import com.lw.demo.android.samples.R;
 import com.lw.demo.android.samples.SlidingUpPannelLayoutCustom;
+import com.lw.demo.android.samples.sharetran.ShareTranstractionTargetActivity;
 
 
 public class MapViewActivity extends AppCompatActivity {
@@ -119,6 +127,32 @@ public class MapViewActivity extends AppCompatActivity {
         initView();
         initData();
         initLocation();
+
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startRequestActivity();
+            }
+        },1000);
+
+    }
+
+    private void startRequestActivity() {
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP){
+            TransitionSet mtransitionset=new TransitionSet();//制定过度动画set
+            mtransitionset.addTransition(new ChangeBounds());//改变表框大小
+            mtransitionset.setDuration(1000);
+            getWindow().setEnterTransition(mtransitionset);//注意，下面是必须的
+            getWindow().setExitTransition(mtransitionset);
+            getWindow().setSharedElementEnterTransition(mtransitionset);
+            getWindow().setSharedElementExitTransition(mtransitionset);
+        }
+        View topView = findViewById(R.id.top_line);
+        View bottomView = findViewById(R.id.bottom_line);
+        Pair topPair = new Pair(topView,"top_line");
+        Pair bottomPair = new Pair(bottomView,"bottom_line");
+        ActivityOptionsCompat mOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(this,topPair,bottomPair);
+        ActivityCompat.startActivity(this,new Intent(this,ShareTranstractionTargetActivity.class),mOptions.toBundle());
     }
 
     private void initView() {
@@ -444,6 +478,9 @@ public class MapViewActivity extends AppCompatActivity {
                 break;
             case R.id.btn_submit:
 
+                break;
+            case R.id.edt_addr:
+                startRequestActivity();
                 break;
         }
     }

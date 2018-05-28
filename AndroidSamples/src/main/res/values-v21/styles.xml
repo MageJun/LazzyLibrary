@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="ShareTranStyle" parent="Theme.AppCompat.Light">
+    <style name="ShareTranStyle" parent="XYDJAppTheme">
         <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowBackground">@color/transparent_bg</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>
     </style>
 </resources>

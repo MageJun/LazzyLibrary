@@ -25,8 +25,8 @@ public class ShareTranstractionTargetActivity extends AppCompatActivity {
         setContentView(R.layout.map_show_where_start);
         View view = findViewById(R.id.content);
         View title = findViewById(R.id.title_view);
-        ViewCompat.setTransitionName(title,"title");
-        ViewCompat.setTransitionName(view,"edt_title");
+        ViewCompat.setTransitionName(title,"top_line");
+        ViewCompat.setTransitionName(view,"bottom_line");
 
         initView();
 

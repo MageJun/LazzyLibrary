@@ -5,6 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
+    <View
+        android:id="@+id/top_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:transitionName="top_line"
+        android:background="@android:color/transparent"/>
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -15,6 +22,12 @@
         <include layout="@layout/mapview_item_menu" />
 
     </FrameLayout>
-
+    <View
+        android:id="@+id/bottom_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:transitionName="bottom_line"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@android:color/transparent"/>
 
 </android.support.constraint.ConstraintLayout>

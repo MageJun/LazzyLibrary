@@ -68,6 +68,7 @@
         android:hint="当前位置"
         android:background="@null"
         android:textSize="14sp"
+        android:onClick="onClick"
         app:layout_constraintHorizontal_weight="7"
         app:layout_constraintHorizontal_chainStyle="spread"
       app:layout_constraintLeft_toLeftOf="@id/left_guide_line_2"
