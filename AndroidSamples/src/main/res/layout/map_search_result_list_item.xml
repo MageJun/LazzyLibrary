@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.Guideline
+        android:id="@+id/center_guide_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5"/>
+
+    <ImageView
+        android:id="@+id/icon_img"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/map_search_result_addr_icon"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/center_guide_line"
+        app:layout_constraintLeft_toRightOf="@id/icon_img"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="2dp"
+        android:text="华府道"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textColor="@color/text_dark"
+        android:textSize="15sp"
+        />
+    <TextView
+        android:id="@+id/tv_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/center_guide_line"
+        app:layout_constraintLeft_toLeftOf="@id/tv_title"
+        android:layout_marginTop="2dp"
+        android:text="中关村海淀南路25号华府道"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textColor="@color/gray_5"
+        android:textSize="13sp"
+        />
+
+</android.support.constraint.ConstraintLayout>

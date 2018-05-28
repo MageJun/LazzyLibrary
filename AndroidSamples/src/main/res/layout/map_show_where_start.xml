@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#80FFFFFF">
+
+
+    <android.support.constraint.Guideline
+        android:id="@+id/top_guide_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="10dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/bottom_guide_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="10dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/left_guide_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/right_guide_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="20dp" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/title_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:transitionName="title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/top_guide_line">
+
+        <TextView
+            android:id="@+id/city_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="城市"
+            android:textColor="@color/text_dark"
+            app:layout_constraintBaseline_toBaselineOf="@id/edt_addr"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintHorizontal_weight="2"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/line1" />
+
+        <View
+            android:id="@+id/line1"
+            android:layout_width="1dp"
+            android:layout_height="20dp"
+            android:background="@color/gray_6"
+            app:layout_constraintBottom_toBottomOf="@+id/edt_addr"
+            app:layout_constraintLeft_toRightOf="@id/city_tv"
+            app:layout_constraintRight_toLeftOf="@+id/edt_addr"
+            app:layout_constraintTop_toTopOf="@+id/edt_addr" />
+
+        <EditText
+            android:id="@+id/edt_addr"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="您在哪儿发货"
+            android:paddingBottom="10dp"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:textSize="12sp"
+            app:layout_constraintHorizontal_weight="6"
+            app:layout_constraintLeft_toRightOf="@id/line1"
+            app:layout_constraintRight_toLeftOf="@+id/line2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/line2"
+            android:layout_width="1dp"
+            android:layout_height="20dp"
+            android:background="@color/gray_6"
+            app:layout_constraintBottom_toBottomOf="@id/edt_addr"
+            app:layout_constraintLeft_toRightOf="@id/edt_addr"
+            app:layout_constraintRight_toLeftOf="@+id/cancel"
+            app:layout_constraintTop_toTopOf="@id/edt_addr" />
+
+        <TextView
+            android:id="@+id/cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="取消"
+            android:textSize="12sp"
+            app:layout_constraintBaseline_toBaselineOf="@id/edt_addr"
+            app:layout_constraintHorizontal_weight="2"
+            app:layout_constraintLeft_toRightOf="@id/line2"
+            app:layout_constraintRight_toRightOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/white"
+        android:transitionName="edt_title"
+        app:layout_constraintBottom_toBottomOf="@id/bottom_guide_line"
+        app:layout_constraintLeft_toRightOf="@id/left_guide_line"
+        app:layout_constraintRight_toRightOf="@id/right_guide_line"
+        app:layout_constraintTop_toBottomOf="@id/title_view">
+
+        <android.support.constraint.Guideline
+            android:id="@+id/left_guide_line_inner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="10dp" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/right_guide_line_inner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="10dp" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/left_guide_line_inner2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="30dp" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/right_guide_line_inner2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="30dp" />
+
+        <ImageView
+            android:id="@+id/icon_home_1"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/addr_where_icon_home"
+            app:layout_constraintBottom_toBottomOf="@id/line"
+            app:layout_constraintLeft_toLeftOf="@id/left_guide_line_inner"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="60dp"
+            android:background="@color/gray_5"
+            app:layout_constraintLeft_toLeftOf="@id/left_guide_line_inner"
+            app:layout_constraintRight_toRightOf="@id/right_guide_line_inner"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/line_center_hor"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="@color/gray_5"
+            app:layout_constraintBottom_toBottomOf="@id/line"
+            app:layout_constraintLeft_toLeftOf="@id/left_guide_line_inner"
+            app:layout_constraintRight_toRightOf="@id/right_guide_line_inner"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_name_home_1"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginLeft="15dp"
+            android:gravity="bottom"
+            android:text="家"
+            android:textColor="@color/text_dark"
+            android:textSize="15sp"
+            app:layout_constraintLeft_toRightOf="@id/icon_home_1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="未设置"
+            android:textColor="@color/gray_5"
+            android:textSize="13sp"
+            app:layout_constraintLeft_toLeftOf="@id/tv_name_home_1"
+            app:layout_constraintTop_toBottomOf="@id/tv_name_home_1" />
+
+
+        <ImageView
+            android:id="@+id/icon_company_1"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginLeft="30dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/addr_where_icon_company"
+            app:layout_constraintBottom_toBottomOf="@id/line"
+            app:layout_constraintLeft_toLeftOf="@id/line_center_hor"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_name_company_1"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginLeft="15dp"
+            android:gravity="bottom"
+            android:text="公司"
+            android:textColor="@color/text_dark"
+            android:textSize="15sp"
+            app:layout_constraintLeft_toRightOf="@id/icon_company_1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="未设置"
+            android:textColor="@color/gray_5"
+            android:textSize="13sp"
+            app:layout_constraintLeft_toLeftOf="@id/tv_name_company_1"
+            app:layout_constraintTop_toBottomOf="@id/tv_name_company_1" />
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/list_view_history"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@id/left_guide_line_inner2"
+            app:layout_constraintRight_toRightOf="@id/right_guide_line_inner2"
+            app:layout_constraintTop_toBottomOf="@id/line"
+            android:layout_marginBottom="10dp"
+            />
+
+        <!--<android.support.v7.widget.RecyclerView
+            android:id="@+id/list_view_loc"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="@id/left_guide_line_inner2"
+            app:layout_constraintRight_toRightOf="@id/right_guide_line_inner2"
+            app:layout_constraintTop_toBottomOf="@id/list_view_history"
+            />-->
+    </android.support.constraint.ConstraintLayout>
+
+
+</android.support.constraint.ConstraintLayout>

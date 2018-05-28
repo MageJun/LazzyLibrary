@@ -85,7 +85,11 @@
             android:process=":remote" />
 
         <activity android:name="com.map.view.WaveCircleActivity" />
-        <activity android:name=".SlidingUpPannelActivity"></activity>
+        <activity android:name=".SlidingUpPannelActivity" />
+        <activity android:name=".sharetran.ShareTranstraction"
+            android:theme="@style/ShareTranStyle"/>
+        <activity android:name=".sharetran.ShareTranstractionTargetActivity"
+            android:theme="@style/ShareTranStyle"></activity>
     </application>
 
 </manifest>

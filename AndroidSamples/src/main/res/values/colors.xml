@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
     <color name="trnck_gray_nor">#DCD9E7</color>
+    <color name="colorPrimary">#42BA66</color>
+    <color name="colorPrimaryDark">#42BA66</color>
+    <color name="colorAccent">#FE7100</color>
+    <color name="dark_theme">#2EA251</color>
+    <color name="white">#ffffff</color>
+    <color name="gray">#EDEDED</color>
+    <color name="gray_1">#F8F8F8</color>
+    <color name="gray_5">#999999</color>
+    <color name="gray_6">#7B7B7B</color>
+    <color name="text_dark">#333333</color>
 </resources>

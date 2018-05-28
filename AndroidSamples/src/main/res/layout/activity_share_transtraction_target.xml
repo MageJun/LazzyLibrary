@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.lw.demo.android.samples.sharetran.ShareTranstractionTargetActivity">
+
+    <EditText
+        android:id="@+id/edt_target_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:transitionName="edt_title"
+        android:hint="您在哪儿发货"
+        android:textSize="14sp"
+        android:gravity="center_vertical"
+        android:padding="5dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/xydj_custom_dialog_edt_bg"
+        android:layout_margin="20dp"
+        />
+
+</android.support.constraint.ConstraintLayout>

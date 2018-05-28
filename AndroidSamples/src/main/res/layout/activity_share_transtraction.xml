@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.lw.demo.android.samples.sharetran.ShareTranstraction"
+    android:focusableInTouchMode="true"
+    android:focusable="true">
+
+    <View
+        android:id="@+id/title_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/transparent"
+        android:transitionName="title"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+<EditText
+    android:id="@+id/edt_title"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:transitionName="edt_title"
+    app:layout_constraintBottom_toBottomOf="parent"
+    android:layout_marginBottom="20dp"
+    android:background="@drawable/xydj_custom_dialog_edt_bg"
+    android:layout_margin="20dp"
+    android:onClick="onClick"
+    />
+</android.support.constraint.ConstraintLayout>

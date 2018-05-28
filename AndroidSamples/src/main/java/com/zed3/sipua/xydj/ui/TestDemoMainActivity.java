@@ -10,6 +10,7 @@ import com.lw.demo.android.samples.R;
 import com.lw.demo.android.samples.SlidingUpPannelActivity;
 import com.lw.demo.android.samples.ViewPagerActivity;
 import com.lw.demo.android.samples.ViewPagerActivity2;
+import com.lw.demo.android.samples.sharetran.ShareTranstraction;
 import com.map.view.MapViewActivity;
 import com.map.view.WaveCircleActivity;
 import com.zed3.sipua.xydj.ui.group.GroupInfoActivity;
@@ -91,6 +92,10 @@ public class TestDemoMainActivity extends BaseActivity {
             case R.id.sliding_up:
                 Intent sldUpIntent = new Intent(this,SlidingUpPannelActivity.class);
                 startSpecifyActivity(sldUpIntent);
+                break;
+            case R.id.share_transaction:
+                Intent stIntent = new Intent(this,ShareTranstraction.class);
+                startSpecifyActivity(stIntent);
                 break;
         }
     }
