@@ -1,6 +1,9 @@
 package com.zed3.sipua.xydj.ui.bean;
 
-public class FrindInfo {
+import com.zed3.sipua.xydj.ui.ItemDividerDecoration;
+import com.zed3.sipua.xydj.ui.friend.helper.GroupItemDecoration;
+
+public class FrindInfo implements GroupItemDecoration.ItemDecorationData {
 
     private String name;
     private String staus;
@@ -8,6 +11,10 @@ public class FrindInfo {
     private String number;
 
     private String headImgUrl;
+
+    private String spellName;//拼音名字
+
+    private String mTag;
 
     public String getName() {
         return name;
@@ -41,13 +48,32 @@ public class FrindInfo {
         this.headImgUrl = headImgUrl;
     }
 
+    public void setTag(String mTag) {
+        this.mTag = mTag;
+    }
+
+    public String getSpellName() {
+        return spellName;
+    }
+
+    public void setSpellName(String spellName) {
+        this.spellName = spellName;
+    }
+
     @Override
     public String toString() {
         return "FrindInfo{" +
                 "name='" + name + '\'' +
-                ", number='" + number + '\'' +
                 ", staus='" + staus + '\'' +
+                ", number='" + number + '\'' +
                 ", headImgUrl='" + headImgUrl + '\'' +
+                ", spellName='" + spellName + '\'' +
+                ", mTag='" + mTag + '\'' +
                 '}';
+    }
+
+    @Override
+    public String getTag() {
+        return mTag;
     }
 }

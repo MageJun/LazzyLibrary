@@ -14,7 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:background="@color/commonui_color_item2">
+            >
             <TextView
                 android:id="@+id/del"
                 android:layout_width="wrap_content"
@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:orientation="horizontal"
-            android:background="@color/commonui_color_bg">
+           >
             <TextView
                 android:id="@+id/content"
                 android:layout_width="match_parent"

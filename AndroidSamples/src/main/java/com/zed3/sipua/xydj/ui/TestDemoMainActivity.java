@@ -13,6 +13,7 @@ import com.lw.demo.android.samples.ViewPagerActivity2;
 import com.lw.demo.android.samples.sharetran.ShareTranstraction;
 import com.map.view.MapViewActivity;
 import com.map.view.WaveCircleActivity;
+import com.zed3.sipua.xydj.ui.friend.FriendListActivity;
 import com.zed3.sipua.xydj.ui.group.GroupInfoActivity;
 import com.zed3.sipua.xydj.ui.group.GroupMemberSearchActivity;
 import com.zed3.sipua.xydj.ui.group.bean.CustomGroupMemberInfo;
@@ -96,6 +97,11 @@ public class TestDemoMainActivity extends BaseActivity {
             case R.id.share_transaction:
                 Intent stIntent = new Intent(this,ShareTranstraction.class);
                 startSpecifyActivity(stIntent);
+                break;
+
+            case R.id.friends_list:
+                Intent frIntent = new Intent(this,FriendListActivity.class);
+                startSpecifyActivity(frIntent);
                 break;
         }
     }
