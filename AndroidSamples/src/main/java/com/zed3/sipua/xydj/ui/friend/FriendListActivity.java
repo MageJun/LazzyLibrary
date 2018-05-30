@@ -10,9 +10,7 @@ import com.lw.demo.android.samples.R;
 import com.zed3.sipua.xydj.ui.adapter.FriendsListAdapter;
 import com.zed3.sipua.xydj.ui.bean.FrindInfo;
 import com.zed3.sipua.xydj.ui.friend.helper.GroupItemDecoration;
-import com.zed3.sipua.xydj.ui.friend.helper.LetterTextView;
-import com.zed3.sipua.xydj.ui.friend.helper.SideBar;
-import com.zed3.sipua.xydj.ui.friend.helper.SideBar2;
+import com.zed3.sipua.xydj.ui.friend.helper.LetterSideBar;
 import com.zed3.sipua.xydj.ui.helper.SpellHelperUtils;
 
 import java.util.ArrayList;
@@ -24,7 +22,74 @@ public class FriendListActivity extends AppCompatActivity {
 
     private RecyclerView mListView;
     private FriendsListAdapter mAdapter;
-    private SideBar2 mSideBar;
+    private LetterSideBar mSideBar;
+    private List<FrindInfo> mData ;
+    private LetterSideBar.OnIndexSelectChanged mChangedListener = new LetterSideBar.OnIndexSelectChanged() {
+        @Override
+        public void onSelectChanged(int lastIndex, int curIndex,String letter) {
+            if(mData!=null&&mData.size()>curIndex){
+                int pos = findCurPos(letter);
+                if(pos!=-1){
+//                    smoothMoveToPosition(mListView,pos);
+                    mListView.scrollToPosition(pos);
+                    LinearLayoutManager mLayoutManager =
+                            (LinearLayoutManager) mListView.getLayoutManager();
+                    mLayoutManager.scrollToPositionWithOffset(pos, 0);
+                }
+            }
+        }
+    };
+
+    private int findCurPos(String letter) {
+        for (int i = 0;i<mData.size();i++){
+            if(mData.get(i).getSpellName().toUpperCase().startsWith(letter)){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    //目标项是否在最后一个可见项之后
+    private boolean mShouldScroll;
+    //记录目标项位置
+    private int mToPosition;
+    /**
+     * 滑动到指定位置
+     */
+    private void smoothMoveToPosition(final RecyclerView mRecyclerView, final int position) {
+        // 第一个可见位置
+        int firstItem = mRecyclerView.getChildLayoutPosition(mRecyclerView.getChildAt(0));
+        // 最后一个可见位置
+        int lastItem = mRecyclerView.getChildLayoutPosition(mRecyclerView.getChildAt(mRecyclerView.getChildCount() - 1));
+        if (position < firstItem) {
+            // 第一种可能:跳转位置在第一个可见位置之前
+            mRecyclerView.smoothScrollToPosition(position);
+        } else if (position <= lastItem) {
+            // 第二种可能:跳转位置在第一个可见位置之后
+            int movePosition = position - firstItem;
+            if (movePosition >= 0 && movePosition < mRecyclerView.getChildCount()) {
+                int top = mRecyclerView.getChildAt(movePosition).getTop();
+                mRecyclerView.smoothScrollBy(0, top);
+            }
+        } else {
+            // 第三种可能:跳转位置在最后可见项之后
+            RecyclerView.OnScrollListener mScrollListener = new RecyclerView.OnScrollListener() {
+                @Override
+                public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                    super.onScrollStateChanged(recyclerView, newState);
+                    if (mShouldScroll&&RecyclerView.SCROLL_STATE_IDLE==newState) {
+                        mShouldScroll = false;
+                        mRecyclerView.removeOnScrollListener(this);
+                        smoothMoveToPosition(mRecyclerView, mToPosition);
+                    }
+                }
+            };
+            mRecyclerView.addOnScrollListener(mScrollListener);
+            mRecyclerView.smoothScrollToPosition(position);
+            mToPosition = position;
+            mShouldScroll = true;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +114,12 @@ public class FriendListActivity extends AppCompatActivity {
         mListView.setAdapter(mAdapter);
         mListView.setLayoutManager(lm);
         mListView.addItemDecoration(decoration);
-        List<FrindInfo> infos = createDecData(20);
+        mListView.addOnScrollListener(mScrollListener);
+        mData = createDecData(20);
+        mSideBar.setSelectChangedListener(mChangedListener);
+
         //默认升序
-        Collections.sort(infos, new Comparator<FrindInfo>() {
+        Collections.sort(mData, new Comparator<FrindInfo>() {
             @Override
             public int compare(FrindInfo o1, FrindInfo o2) {
                 //#放到最开始的位置
@@ -69,8 +137,8 @@ public class FriendListActivity extends AppCompatActivity {
                     return o1.getSpellName().compareTo(o2.getSpellName());
             }
         });
-        decoration.setData(infos);
-        mAdapter.addData(infos);
+        decoration.setData(mData);
+        mAdapter.addData(mData);
 
     }
 
@@ -105,4 +173,27 @@ public class FriendListActivity extends AppCompatActivity {
         datas.addAll(infos);
         return datas;
     }
+
+    private RecyclerView.OnScrollListener mScrollListener = new RecyclerView.OnScrollListener() {
+        @Override
+        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            super.onScrollStateChanged(recyclerView, newState);
+            if(RecyclerView.SCROLL_STATE_IDLE == newState){
+                RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
+                //判断是当前layoutManager是否为LinearLayoutManager
+                // 只有LinearLayoutManager才有查找第一个和最后一个可见view位置的方法
+                if (layoutManager instanceof LinearLayoutManager) {
+                    LinearLayoutManager linearManager = (LinearLayoutManager) layoutManager;
+                    //获取最后一个可见view的位置
+                    int lastItemPosition = linearManager.findLastVisibleItemPosition();
+                    //获取第一个可见view的位置
+                    int firstItemPosition = linearManager.findFirstVisibleItemPosition();
+                    FrindInfo info = mData.get(firstItemPosition);
+                    if(mSideBar!=null){
+                        mSideBar.setCurrentLetter(info.getTag());
+                    }
+                }
+            }
+        }
+    };
 }

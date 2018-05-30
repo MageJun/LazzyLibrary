@@ -7,21 +7,22 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 
-public class SideBar2 extends View {
-    public SideBar2(Context context) {
+public class LetterSideBar extends View {
+    public LetterSideBar(Context context) {
         super(context);
     }
 
-    public SideBar2(Context context, @Nullable AttributeSet attrs) {
+    public LetterSideBar(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public SideBar2(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public LetterSideBar(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
@@ -42,6 +43,11 @@ public class SideBar2 extends View {
     private boolean isIndexChanged =false;
     private float letterSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP,12,getResources().getDisplayMetrics());
     private float centerSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP,25,getResources().getDisplayMetrics());
+    private OnIndexSelectChanged mSelectListener;
+
+    public void setSelectChangedListener(OnIndexSelectChanged listener){
+        this.mSelectListener = listener;
+    }
 
     private Handler mHandler = new Handler();
 
@@ -77,7 +83,7 @@ public class SideBar2 extends View {
             int textH = rect.height();
             int textW = rect.width();
             int startX=leftX+(maxTouchAvabileBond-textW)/2;
-            startY+=(itemH-textH)/2;
+            startY+=(itemH+textH)/2;
             canvas.drawText(text,startX,startY,mPaint);
             mPaint.reset();
         }
@@ -97,9 +103,12 @@ public class SideBar2 extends View {
             case MotionEvent.ACTION_MOVE:
                 float y = event.getRawY();
                 //计算当前在第几个index
-                int index = (int) (y/(getMeasuredHeight()/letters.length));
+                int index = (int) (y/(getMeasuredHeight()/letters.length))-1;
                 if(index>=0&&index<letters.length){
                     if(currentIndex!=index){
+                        if(mSelectListener!=null){
+                            mSelectListener.onSelectChanged(currentIndex,index,letters[index]);
+                        }
                         currentIndex = index;
                         isIndexChanged = true;
                     }else{
@@ -120,13 +129,9 @@ public class SideBar2 extends View {
         Paint paint = new Paint();
         paint.setAntiAlias(true);
         paint.setColor(Color.WHITE);
-        canvas.drawCircle(getMeasuredWidth()/2,getMeasuredHeight()/2,80,paint);
-        paint.setColor(Color.GREEN);
-        paint.setStrokeWidth(10);
-        canvas.drawLine(0,getMeasuredHeight()/2,getMeasuredWidth(),getMeasuredHeight()/2,paint);
-        canvas.drawLine(getMeasuredWidth()/2,0,getMeasuredWidth()/2,getMeasuredHeight(),paint);
+        canvas.drawCircle(getMeasuredWidth()/2,getMeasuredHeight()/2,100,paint);
         paint.reset();
-        paint.setColor(Color.BLACK);
+        paint.setColor(Color.parseColor(COLOR_SELECT));
         paint.setTextSize(centerSize);
         String text = letters[currentIndex];
         Rect rect = new Rect();
@@ -135,11 +140,26 @@ public class SideBar2 extends View {
         int textW = rect.width();
         int startX = (getMeasuredWidth()-textW)/2;
         int startY = (getMeasuredHeight()+textH)/2;
-        //测试发现，drawText指定的位置，是以左下角开始的
+        //测试发现，drawText指定的位置，是以基线为准的，基线并不是文字的水平中心线，而是文字底部开始的线，所以（x,y）对应的是左下角开始的
         canvas.drawText(text,startX,startY,paint);
         mHandler.postDelayed(mClearCircleRunnable,1000);
     }
 
+    public interface OnIndexSelectChanged{
+        void onSelectChanged(int lastIndex,int curIndex,String letter);
+    }
 
+    public void setCurrentLetter(String letter){
+        if(!TextUtils.isEmpty(letter)){
+            for (int i=0;i<letters.length;i++){
+                if(letters[i].equalsIgnoreCase(letter)){
+                    if(currentIndex!=i){
+                        currentIndex = i;
+                        invalidate();
+                    }
+                }
+            }
+        }
+    }
 
 }

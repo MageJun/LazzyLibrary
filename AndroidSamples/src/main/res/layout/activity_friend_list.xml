@@ -10,7 +10,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
-        <com.zed3.sipua.xydj.ui.friend.helper.SideBar2
+        <com.zed3.sipua.xydj.ui.friend.helper.LetterSideBar
             android:id="@+id/sidebar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
