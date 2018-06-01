@@ -1,4 +1,4 @@
-package com.zed3.sipua.xydj.ui.friend.helper;
+package com.common.widget.sidebar;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -68,6 +68,7 @@ public class LetterSideBar extends View {
         int startY = 0;
         int leftX = getMeasuredWidth()-maxTouchAvabileBond;
         for (int i = 0;i<letters.length;i++){
+            mPaint.reset();
             mPaint.setTextSize(letterSize);
             mPaint.setAntiAlias(true);
             mPaint.setFakeBoldText(true);
@@ -85,7 +86,7 @@ public class LetterSideBar extends View {
             int startX=leftX+(maxTouchAvabileBond-textW)/2;
             startY+=(itemH+textH)/2;
             canvas.drawText(text,startX,startY,mPaint);
-            mPaint.reset();
+//            mPaint.reset();
         }
         if(isIndexChanged){
             draCenterCircle(canvas);
