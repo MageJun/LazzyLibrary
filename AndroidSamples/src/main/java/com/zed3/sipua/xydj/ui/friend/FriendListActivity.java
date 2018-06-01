@@ -14,7 +14,7 @@ import com.lw.demo.android.samples.R;
 import com.zed3.sipua.xydj.ui.friend.adapter.FriendListItemView;
 import com.zed3.sipua.xydj.ui.friend.bean.FrindInfo;
 import com.zed3.sipua.xydj.ui.friend.helper.GroupItemDecoration;
-import com.zed3.sipua.xydj.ui.friend.helper.LetterSideBar;
+import com.common.widget.sidebar.LetterSideBar;
 import com.zed3.sipua.xydj.ui.groupinviteinfo.helper.OnItemLongClickListener;
 import com.zed3.sipua.xydj.ui.helper.SpellHelperUtils;
 
