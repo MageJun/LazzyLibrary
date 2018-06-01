@@ -40,7 +40,14 @@ public class CitySearchActivity extends AppCompatActivity {
 
         ItemDividerDecoration decoration = new ItemDividerDecoration(this, LinearLayout.VERTICAL);
         decoration.setOffset(2);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        //手动设置RecyclerView的LayouParams属性，默认都是WRAP_CONTENT,这样在嵌套RecyclerView时宽度会显示不完整
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this){
+            @Override
+            public RecyclerView.LayoutParams generateDefaultLayoutParams() {
+                RecyclerView.LayoutParams params = new RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT, RecyclerView.LayoutParams.WRAP_CONTENT);
+                return params;
+            }
+        };
         listView.addItemDecoration(decoration);
         listView.setLayoutManager(linearLayoutManager);
         CitySearchListAdapter adapter = new CitySearchListAdapter();
