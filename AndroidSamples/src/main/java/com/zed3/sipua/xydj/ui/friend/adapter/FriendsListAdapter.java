@@ -1,15 +1,17 @@
-package com.zed3.sipua.xydj.ui.adapter;
+package com.zed3.sipua.xydj.ui.friend.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lw.android.commonui.customView.DragLayout;
 import com.lw.demo.android.samples.R;
-import com.zed3.sipua.xydj.ui.bean.FrindInfo;
+import com.zed3.sipua.xydj.ui.friend.bean.FrindInfo;
+import com.zed3.sipua.xydj.ui.groupinviteinfo.helper.OnItemLongClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,44 +22,24 @@ public class FriendsListAdapter extends RecyclerView.Adapter<FriendsListAdapter.
     private List<FrindInfo> mData = new ArrayList<FrindInfo>();
     private RecyclerViewOnItemClickListener mListener;
     private List<DragLayout> mOpenLayout = new ArrayList<DragLayout>();
+    private OnItemLongClickListener mOnItemLongClickListener;
 
     @Override
     public FriendsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Log.i(TAG,"onCreateViewHolder");
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_draglayout,parent,false);
-//        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.xydj_friend_list_item,parent,false);
         FriendsViewHolder vh = new FriendsViewHolder(view);
-        vh.mDel.setOnClickListener(this);
-        vh.mDragLayout.setSwipeChangeListener(new DragLayout.SwipeStatusChangeListener() {
+        vh.itemView.setOnClickListener(this);
+        vh.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public void onDraging(DragLayout dragLayout) {
-                Log.i(TAG,"onCreateViewHolder  onDraging");
-            }
-
-            @Override
-            public void onOpen(DragLayout dragLayout) {
-                Log.i(TAG,"onCreateViewHolder  onOpen");
-                mOpenLayout.add(dragLayout);
-            }
-
-            @Override
-            public void onClose(DragLayout dragLayout) {
-                Log.i(TAG,"onCreateViewHolder  onClose");
-                mOpenLayout.remove(dragLayout);
-            }
-
-            @Override
-            public void onStartOpen(DragLayout dragLayout) {
-                Log.i(TAG,"onCreateViewHolder  onStartOpen");
-                for (int i =0;i<mOpenLayout.size();i++){
-                    mOpenLayout.get(i).close();
+            public boolean onLongClick(View v) {
+                if(mOnItemLongClickListener!=null){
+                    int pos = (int) v.getTag();
+                    FrindInfo info = mData.get(pos);
+                    mOnItemLongClickListener.onItemLongClick(v,info,pos);
+                    return true;
                 }
-                mOpenLayout.clear();
-            }
-
-            @Override
-            public void onStartClose(DragLayout dragLayout) {
-                Log.i(TAG,"onCreateViewHolder  onStartClose");
+                return false;
             }
         });
         return vh;
@@ -65,6 +47,9 @@ public class FriendsListAdapter extends RecyclerView.Adapter<FriendsListAdapter.
 
     public void setListener(RecyclerViewOnItemClickListener listener){
         this.mListener = listener;
+    }
+    public void setOnItemLongClickListener(OnItemLongClickListener listener){
+        this.mOnItemLongClickListener = listener;
     }
 
     public void addData(List<FrindInfo> data){
@@ -89,8 +74,8 @@ public class FriendsListAdapter extends RecyclerView.Adapter<FriendsListAdapter.
     @Override
     public void onBindViewHolder(FriendsViewHolder holder, int position) {
             Log.i(TAG,"onBindViewHolder");
-            holder.mContent.setText(mData.get(position).getName());
-            holder.mDel.setTag(position);
+            holder.mName.setText(mData.get(position).getName());
+            holder.itemView.setTag(position);
     }
 
     @Override
@@ -99,15 +84,13 @@ public class FriendsListAdapter extends RecyclerView.Adapter<FriendsListAdapter.
     }
 
     public static class FriendsViewHolder extends RecyclerView.ViewHolder{
-        TextView mContent;
-        View mDel;
-        DragLayout mDragLayout;
+        TextView mName;
+        ImageView mHeadIcon;
 
         public FriendsViewHolder(View itemView) {
             super(itemView);
-            mContent = itemView.findViewById(R.id.content);
-            mDel = itemView.findViewById(R.id.del);
-            mDragLayout = itemView.findViewById(R.id.drag_layout);
+            mName = itemView.findViewById(R.id.tv_name);
+            mHeadIcon = itemView.findViewById(R.id.img_icon);
         }
     }
 

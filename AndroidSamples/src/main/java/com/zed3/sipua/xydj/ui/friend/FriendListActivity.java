@@ -1,27 +1,34 @@
 package com.zed3.sipua.xydj.ui.friend;
 
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import com.common.widget.recyclerview.adapter.BaseRecycleViewAdapter;
 import com.lw.demo.android.samples.R;
-import com.zed3.sipua.xydj.ui.adapter.FriendsListAdapter;
-import com.zed3.sipua.xydj.ui.bean.FrindInfo;
+import com.zed3.sipua.xydj.ui.friend.adapter.FriendListItemView;
+import com.zed3.sipua.xydj.ui.friend.bean.FrindInfo;
 import com.zed3.sipua.xydj.ui.friend.helper.GroupItemDecoration;
 import com.zed3.sipua.xydj.ui.friend.helper.LetterSideBar;
+import com.zed3.sipua.xydj.ui.groupinviteinfo.helper.OnItemLongClickListener;
 import com.zed3.sipua.xydj.ui.helper.SpellHelperUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Random;
 
-public class FriendListActivity extends AppCompatActivity {
+public class FriendListActivity extends AppCompatActivity implements OnItemLongClickListener{
 
     private RecyclerView mListView;
-    private FriendsListAdapter mAdapter;
+    private EditText mEditText;
+    private BaseRecycleViewAdapter mAdapter;
     private LetterSideBar mSideBar;
     private List<FrindInfo> mData ;
     private LetterSideBar.OnIndexSelectChanged mChangedListener = new LetterSideBar.OnIndexSelectChanged() {
@@ -54,7 +61,7 @@ public class FriendListActivity extends AppCompatActivity {
     //记录目标项位置
     private int mToPosition;
     /**
-     * 滑动到指定位置
+     * 滑动到指定位置,带滑动效果
      */
     private void smoothMoveToPosition(final RecyclerView mRecyclerView, final int position) {
         // 第一个可见位置
@@ -103,32 +110,51 @@ public class FriendListActivity extends AppCompatActivity {
     private void initView() {
         mListView = findViewById(R.id.listView);
         mSideBar = findViewById(R.id.sidebar);
+        mEditText = findViewById(R.id.search_edt);
+        calcLeftDrawableSize();
     }
 
     private void initData(){
-        mAdapter = new FriendsListAdapter();
         LinearLayoutManager lm = new LinearLayoutManager(this);
         GroupItemDecoration decoration = new GroupItemDecoration(this,LinearLayout.VERTICAL);
         decoration.setOffset(4);
-        decoration.setColor(getResources().getColor(R.color.xydj_bg));
+        decoration.setTitleTextSize(14);
+        decoration.setTitleHight(30);
+        decoration.setTitleTextColor(R.color.xydj_group_member_detail_text_color);
+        decoration.setTitleBgColor(R.color.xydj_gray_2);
+        decoration.setColor(getResources().getColor(R.color.xydj_gray_2));
+//        decoration.setStickTitle(true);
         mListView.setAdapter(mAdapter);
         mListView.setLayoutManager(lm);
         mListView.addItemDecoration(decoration);
         mListView.addOnScrollListener(mScrollListener);
-        mData = createDecData(20);
+        mData = createDecData(2);
+        mAdapter = new BaseRecycleViewAdapter<FrindInfo>() {
+            @Override
+            public void onCreateMulitTypeItemView() {
+                FriendListItemView itemView = new FriendListItemView();
+                addItemView(itemView);
+            }
+        };
+        mListView.setAdapter(mAdapter);
         mSideBar.setSelectChangedListener(mChangedListener);
 
         //默认升序
         Collections.sort(mData, new Comparator<FrindInfo>() {
             @Override
             public int compare(FrindInfo o1, FrindInfo o2) {
-                //#放到最开始的位置
+                //#放到最后的位置
                 //其它非字母字符，放到后面
                 // 获取ascii值,65～90为26个大写英文字母，97～122号为26个小写英文字母，其余为一些标点符号、运算符号
-                int lhs_ascii = o1.getSpellName().toUpperCase().charAt(0);
-                int rhs_ascii = o2.getSpellName().toUpperCase().charAt(0);
-                if("#".equals(o1.getSpellName().substring(0,1))){
-                    return -1;
+                int lhs_ascii = o1.getTag().charAt(0);
+                int rhs_ascii = o2.getTag().charAt(0);
+                if("#".equalsIgnoreCase(o1.getTag())){
+                    if("#".equalsIgnoreCase(o2.getTag())){
+                        return o1.getSpellName().compareTo(o2.getSpellName());
+                    }else{
+                        return 1;
+                    }
+//                    return 1;
                 }else if (lhs_ascii < 65 || lhs_ascii > 90)
                     return 1;
                 else if (rhs_ascii < 65 || rhs_ascii > 90)
@@ -138,8 +164,17 @@ public class FriendListActivity extends AppCompatActivity {
             }
         });
         decoration.setData(mData);
-        mAdapter.addData(mData);
+        mAdapter.setData(mData);
+    }
 
+    private void calcLeftDrawableSize() {
+        Drawable leftDrawable = mEditText.getCompoundDrawables()[0];
+        if(leftDrawable!=null){
+            int ldW = getResources().getDimensionPixelSize(R.dimen.xydj_group_member_list_search_icon_wh);
+            int ldH = getResources().getDimensionPixelSize(R.dimen.xydj_group_member_list_search_icon_wh);
+            leftDrawable.setBounds(0,0,ldW,ldH);
+            mEditText.setCompoundDrawables(leftDrawable,mEditText.getCompoundDrawables()[1],mEditText.getCompoundDrawables()[2],mEditText.getCompoundDrawables()[3]);
+        }
     }
 
     public final String[] NAMES = new String[] { "A","aa","a","aaa","aaaaaa","aba","宋江", "卢俊义", "吴用",
@@ -153,16 +188,29 @@ public class FriendListActivity extends AppCompatActivity {
             "陶宗旺", "宋清", "乐和", "龚旺", "丁得孙", "穆春", "曹正", "宋万", "杜迁", "薛永", "施恩",
             "周通", "李忠", "杜兴", "汤隆", "邹渊", "邹润", "朱富", "朱贵", "蔡福", "蔡庆", "李立",
             "李云", "焦挺", "石勇", "孙新", "顾大嫂", "张青", "孙二娘", " 王定六", "郁保四", "白胜",
-            "时迁", "段景柱","#123","?1233d"};
+            "时迁", "段景柱","#123","?1233d","x1233d","?1233d","x1233d","1233d","2233d","31233d","41233d","51233d"
+            ,"71233d","&1233d","71233d","^1233d","81233d","91233d","@1233d","$1233d","%1233d","!1233d"
+            ,"~1233d","91233d",")1233d","(1233d","df1233d","{1233d","]1233d"};
     private List<FrindInfo> createDecData(int count){
         List<FrindInfo> infos = new ArrayList<>();
+        Random random = new Random();
         for (int i = 0;i<NAMES.length;i++){
             FrindInfo info = new FrindInfo();
             String name = NAMES[i].trim();
+            String tag = "#" ;
             String spellName = SpellHelperUtils.converterToSpell(name);
+            if(SpellHelperUtils.checkFirstCharIsLetter(spellName)){
+                tag = spellName.toUpperCase().substring(0,1);
+            }
+            int num = random.nextInt(5);
+            if(num%2==0){
+                info.setStatus("3");
+            }else{
+                info.setStatus("0");
+            }
             info.setSpellName(spellName);
             info.setName(name);
-            info.setTag(spellName.toUpperCase().substring(0,1));
+            info.setTag(tag);
             infos.add(info);
         }
         return infos;
@@ -196,4 +244,9 @@ public class FriendListActivity extends AppCompatActivity {
             }
         }
     };
+
+    @Override
+    public void onItemLongClick(View v, Object o, int pos) {
+
+    }
 }

@@ -4,12 +4,16 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Point;
 import android.graphics.Rect;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.LinearLayout;
 
 import com.zed3.sipua.xydj.ui.ItemDividerDecoration;
@@ -146,6 +150,10 @@ public class GroupItemDecoration extends ItemDividerDecoration {
               if(!TextUtils.isEmpty(tag)){
                   View child =parent.findViewHolderForAdapterPosition(pos).itemView;
                   mPaint.setColor(COLOR_TITLE_BG);
+                  int pLeft = parent.getLeft();
+                  int pTop = parent.getTop();
+                  int pRight = parent.getRight();
+                  int pBottom = parent.getBottom();
                   Rect bgRect = new Rect(parent.getLeft(), parent.getTop(), parent.getRight(), parent.getTop()+mTitleHeight);
                   c.drawRect(bgRect, mPaint);
                   mPaint.setColor(COLOR_TITLE_FONT);

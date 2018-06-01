@@ -1,5 +1,7 @@
 package com.zed3.sipua.xydj.ui.helper;
 
+import android.text.TextUtils;
+
 import net.sourceforge.pinyin4j.PinyinHelper;
 import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
 import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
@@ -333,5 +335,15 @@ public class SpellHelperUtils {
 			}
 		}
 		return pinyinName;
+	}
+
+	public static boolean checkFirstCharIsLetter(String str){
+		if(!TextUtils.isEmpty(str)){
+			int char_asscia = str.toUpperCase().charAt(0);
+			if(char_asscia>=65&&char_asscia<=90){
+				return true;
+			}
+		}
+		return false;
 	}
 }

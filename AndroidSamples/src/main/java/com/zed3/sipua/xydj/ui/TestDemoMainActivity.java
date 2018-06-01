@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.city.helper.ChinaCityHelper;
 import com.lw.demo.android.samples.R;
 import com.lw.demo.android.samples.SlidingUpPannelActivity;
 import com.lw.demo.android.samples.ViewPagerActivity;
@@ -102,6 +103,9 @@ public class TestDemoMainActivity extends BaseActivity {
             case R.id.friends_list:
                 Intent frIntent = new Intent(this,FriendListActivity.class);
                 startSpecifyActivity(frIntent);
+                break;
+            case R.id.city_list:
+                ChinaCityHelper.getInstance(this);
                 break;
         }
     }

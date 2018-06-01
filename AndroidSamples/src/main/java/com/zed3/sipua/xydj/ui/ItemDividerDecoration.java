@@ -15,7 +15,7 @@ public class ItemDividerDecoration extends RecyclerView.ItemDecoration {
 
 
     private static final String TAG = ItemDividerDecoration.class.getSimpleName();
-    private Context mContext;
+    protected Context mContext;
 
     /**
      *

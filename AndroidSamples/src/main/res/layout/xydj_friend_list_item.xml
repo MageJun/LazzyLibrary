@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/xydj_color_white"
+    android:padding="10dp"
+    android:clipChildren="false"
+    >
+<ImageView
+    android:id="@+id/img_icon"
+    android:layout_width="@dimen/xydj_group_member_item_icon_wh"
+    android:layout_height="0dp"
+    app:layout_constraintDimensionRatio="1:1"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent"
+    android:scaleType="fitXY"
+    android:src="@drawable/person_icon"
+    />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/img_icon"
+        android:layout_marginLeft="10dp"
+        android:text="黎明"/>
+
+
+    <View
+        android:id="@+id/stauts_view"
+        android:layout_width="@dimen/xydj_group_member_item_status_wh"
+        android:layout_height="@dimen/xydj_group_member_item_status_wh"
+        android:background="@drawable/xydj_group_member_status_online"
+        android:visibility="visible"
+        app:layout_constraintCircle="@id/head_icon_img"
+        app:layout_constraintCircleAngle="315"
+        app:layout_constraintCircleRadius="@dimen/xydj_group_member_delete_select_del_icon_pos"
+        />
+
+
+</android.support.constraint.ConstraintLayout>

@@ -15,9 +15,9 @@ public class LetterTextView extends View {
 	private static Context mContext;
 
 	// ×ÖÄ¸Êý×é
-	private static final String[] letters = { "#","A", "B", "C", "D", "E", "F",
+	private static final String[] letters = { "A", "B", "C", "D", "E", "F",
 			"G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S",
-			"T", "U", "V", "W", "X", "Y", "Z" };
+			"T", "U", "V", "W", "X", "Y", "Z","#" };
 	private static final String COLOR_NORMAL = "#666666";
 	private static final String COLOR_SELECT = "#6699FF";
 	private static final String COLOR_ONTOUCH = "#40000000";
