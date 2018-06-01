@@ -27,9 +27,9 @@ public class LetterSideBar extends View {
     }
 
     // 字母数组
-    private static final String[] letters = { "#","A", "B", "C", "D", "E", "F",
+    private static final String[] letters = { "A", "B", "C", "D", "E", "F",
             "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S",
-            "T", "U", "V", "W", "X", "Y", "Z" };
+            "T", "U", "V", "W", "X", "Y", "Z","#" };
     private static final String COLOR_NORMAL = "#6E6D6E";
     private static final String COLOR_SELECT = "#FEA329";
     private static final String COLOR_ONTOUCH = "#40000000";
@@ -101,9 +101,9 @@ public class LetterSideBar extends View {
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
             case MotionEvent.ACTION_MOVE:
-                float y = event.getRawY();
+                float y = event.getY();
                 //计算当前在第几个index
-                int index = (int) (y/(getMeasuredHeight()/letters.length))-1;
+                int index = (int) (y/(getMeasuredHeight()/letters.length));
                 if(index>=0&&index<letters.length){
                     if(currentIndex!=index){
                         if(mSelectListener!=null){
