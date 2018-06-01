@@ -43,7 +43,7 @@ public class UserAddrListAdapter extends RecyclerView.Adapter {
             vh.mTVDetail.setText(data.getAddrDetail());
             vh.mTVName.setText(data.getName());
             vh.mTVTel.setText(data.getTel());
-            if(data.isChecked()){
+            if(position == selectPos){
                 vh.mCheckImg.setImageResource(R.drawable.addr_list_icon_selected);
             }else{
                 vh.mCheckImg.setImageResource(R.drawable.addr_list_icon_unselected);
