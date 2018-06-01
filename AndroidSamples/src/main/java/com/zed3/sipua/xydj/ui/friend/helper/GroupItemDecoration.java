@@ -5,7 +5,9 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -21,10 +23,12 @@ public class GroupItemDecoration extends ItemDividerDecoration {
     private Paint mPaint;
     private Rect mBounds;//用于存放测量文字Rect
 
-    private int mTitleHeight;//title的高
-    private static int COLOR_TITLE_BG = Color.parseColor("#FFDFDFDF");
-    private static int COLOR_TITLE_FONT = Color.parseColor("#FF000000");
-    private static int mTitleFontSize;//title字体大小
+    private int mTitleHeight=30;//title的高
+    private  int COLOR_TITLE_BG = Color.parseColor("#FFDFDFDF");
+    private  int COLOR_TITLE_FONT = Color.parseColor("#FF000000");
+    private  float mTitleFontSize = 16;//title字体大小
+    private boolean isStickTitle =false;//是否是粘性头部
+
 
     /**
      * @param context
@@ -34,6 +38,26 @@ public class GroupItemDecoration extends ItemDividerDecoration {
         super(context, direction);
         init(context);
     }
+
+    public void setTitleTextColor(int color){
+        COLOR_TITLE_FONT = mContext.getResources().getColor(color);
+    }
+
+    public void setTitleBgColor(int color){
+        COLOR_TITLE_BG = mContext.getResources().getColor(color);
+    }
+
+    public void setTitleTextSize(int size){
+        mTitleFontSize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, size, mContext.getResources().getDisplayMetrics());
+    }
+
+    public void setTitleHight(int size){
+        mTitleHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, size, mContext.getResources().getDisplayMetrics());
+    }
+
+    public void setStickTitle(boolean isStickTitle){this.isStickTitle = isStickTitle;}
+
+
     private void init(Context context){
         mPaint = new Paint();
         mBounds = new Rect();
@@ -101,6 +125,34 @@ public class GroupItemDecoration extends ItemDividerDecoration {
                         //none
                     }
                 }
+            }
+        }
+    }
+
+    @Override
+    public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state) {
+        if(!isStickTitle){
+            super.onDrawOver(c,parent,state);
+        }else{
+
+            final int left = parent.getPaddingLeft();
+            final int right = parent.getWidth() - parent.getPaddingRight();
+            final int top = parent.getPaddingTop();
+            final int childCount = parent.getChildCount();
+            LinearLayoutManager lm = (LinearLayoutManager) parent.getLayoutManager();
+            if(lm!=null){
+              int pos =   lm.findFirstVisibleItemPosition();
+              String tag = mDatas.get(pos).getTag();
+              if(!TextUtils.isEmpty(tag)){
+                  View child =parent.findViewHolderForAdapterPosition(pos).itemView;
+                  mPaint.setColor(COLOR_TITLE_BG);
+                  Rect bgRect = new Rect(parent.getLeft(), parent.getTop(), parent.getRight(), parent.getTop()+mTitleHeight);
+                  c.drawRect(bgRect, mPaint);
+                  mPaint.setColor(COLOR_TITLE_FONT);
+
+                  mPaint.getTextBounds(tag, 0, tag.length(), mBounds);
+                  c.drawText(tag, child.getLeft()+child.getPaddingLeft(), bgRect.top + (mTitleHeight / 2 + mBounds.height() / 2), mPaint);
+              }
             }
         }
     }
