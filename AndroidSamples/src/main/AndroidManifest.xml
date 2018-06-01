@@ -93,7 +93,8 @@
             android:name=".sharetran.MapSearchActivity"
             android:theme="@style/ShareTranStyle" />
         <activity android:name="com.map.view.UserAddrListActivity" />
-        <activity android:name="com.zed3.sipua.xydj.ui.friend.FriendListActivity"></activity>
+        <activity android:name="com.zed3.sipua.xydj.ui.friend.FriendListActivity" />
+        <activity android:name="com.city.view.CitySearchActivity"></activity>
     </application>
 
 </manifest>
