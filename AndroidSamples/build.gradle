@@ -44,6 +44,6 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.7'
     implementation 'org.greenrobot:eventbus:3.0.0'
     implementation 'com.sothree.slidinguppanel:library:3.4.0'
-    implementation 'com.github.MageJun:LazzyLibrary:master-SNAPSHOT'
+    //implementation 'com.github.MageJun:LazzyLibrary:master-SNAPSHOT'
     //    compile 'com.yanzhenjie:recyclerview-swipe:1.1.4'
 }
