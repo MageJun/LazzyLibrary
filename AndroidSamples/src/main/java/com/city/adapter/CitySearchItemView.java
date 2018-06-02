@@ -8,12 +8,13 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.city.bean.CityData;
 import com.common.widget.recyclerview.adapter.BaseItemView;
 import com.common.widget.recyclerview.adapter.BaseViewHolder;
 import com.common.widget.recyclerview.adapter.ItemViewManager;
 import com.lw.demo.android.samples.R;
 
-public class CitySearchItemView extends BaseItemView<CityListDataBean> {
+public class CitySearchItemView extends BaseItemView<CityData> {
     @Override
     public View getItemView(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.city_search_item,parent,false);
@@ -21,7 +22,7 @@ public class CitySearchItemView extends BaseItemView<CityListDataBean> {
     }
 
     @Override
-    public void onBindVH(@NonNull BaseViewHolder holder, int position, CityListDataBean data) {
+    public void onBindVH(@NonNull BaseViewHolder holder, int position, CityData data) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -36,8 +37,8 @@ public class CitySearchItemView extends BaseItemView<CityListDataBean> {
     }
 
     @Override
-    public boolean isForViewType(CityListDataBean cityListDataBean, int position) {
-        if(cityListDataBean.getmType() == CityListDataBean.CityDataType.SEARCH){
+    public boolean isForViewType(CityData cityData, int position) {
+        if(cityData.getmType() == CityData.CityDataType.SEARCH){
             return true;
         }
         return false;

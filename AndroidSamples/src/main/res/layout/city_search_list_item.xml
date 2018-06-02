@@ -1,13 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    >
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/list_view2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="none"
-        android:overScrollMode="never"/>
+    <android.support.constraint.Guideline
+        android:id="@+id/left_guide_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/right_guide_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="20dp" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/local_city_line"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@id/left_guide_line"
+        app:layout_constraintRight_toRightOf="@id/right_guide_line">
+
+        <TextView
+            android:id="@+id/current_local"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="当前城市"
+            android:textColor="@color/text_dark"
+            android:textSize="12sp"
+            />
+        <TextView
+            android:id="@+id/tv_locatl_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="北京"
+            app:layout_constraintLeft_toLeftOf="@id/current_local"
+            app:layout_constraintTop_toBottomOf="@id/current_local"
+            android:layout_marginTop="10dp"
+            style="@style/CityListTextStyle"
+            />
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/search_his_line"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintTop_toBottomOf="@id/local_city_line"
+        app:layout_constraintLeft_toLeftOf="@id/left_guide_line"
+        app:layout_constraintRight_toRightOf="@id/right_guide_line"
+        >
+        <android.support.constraint.Guideline
+            android:id="@+id/left_guide_lineinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="10dp" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/right_guide_lineinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="10dp" />
+        <TextView
+            android:id="@+id/search_his"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="最近访问的城市"
+            android:textColor="@color/text_dark"
+            android:textSize="12sp"
+            />
+
+        <TextView
+            android:id="@+id/his_tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="北京"
+            style="@style/CityListTextStyle"
+            app:layout_constraintTop_toBottomOf="@id/search_his"
+            android:layout_marginTop="10dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            />
+        <TextView
+            android:id="@+id/his_tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintVertical_chainStyle="spread"
+            android:text="北京"
+            android:layout_marginLeft="20dp"
+            style="@style/CityListTextStyle"
+            app:layout_constraintLeft_toRightOf="@id/his_tv1"
+            app:layout_constraintBaseline_toBaselineOf="@id/his_tv1"
+            />
+        <TextView
+            android:id="@+id/his_tv3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintVertical_chainStyle="spread"
+            android:text="北京"
+            android:layout_marginLeft="20dp"
+            style="@style/CityListTextStyle"
+            app:layout_constraintLeft_toRightOf="@id/his_tv2"
+            app:layout_constraintBaseline_toBaselineOf="@id/his_tv1"
+            />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/list_view2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:overScrollMode="never"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/search_his"
+            app:layout_constraintLeft_toLeftOf="@id/left_guide_lineinner"
+            app:layout_constraintRight_toRightOf="@id/right_guide_lineinner"
+            android:scrollbars="none"
+            android:visibility="gone"/>
+    </android.support.constraint.ConstraintLayout>
+
+
+
 
 </android.support.constraint.ConstraintLayout>

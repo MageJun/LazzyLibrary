@@ -1,8 +1,9 @@
 package com.city.adapter;
 
+import com.city.bean.CityData;
 import com.common.widget.recyclerview.adapter.BaseRecycleViewAdapter;
 
-public class CitySearchListAdapter extends BaseRecycleViewAdapter<CityListDataBean> {
+public class CitySearchListAdapter extends BaseRecycleViewAdapter<CityData> {
     @Override
     public void onCreateMulitTypeItemView() {
         CitySearchItemView sItemView = new CitySearchItemView();
@@ -10,7 +11,7 @@ public class CitySearchListAdapter extends BaseRecycleViewAdapter<CityListDataBe
         CityAllDataItemView tItemView = new CityAllDataItemView();
 
         addItemView(sItemView);
-//        addItemView(hItemView);
+        addItemView(hItemView);
         addItemView(tItemView);
     }
 }

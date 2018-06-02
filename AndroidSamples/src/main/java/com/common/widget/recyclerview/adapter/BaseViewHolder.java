@@ -62,6 +62,14 @@ public class BaseViewHolder extends RecyclerView.ViewHolder{
         return view;
    }
 
+   public View setViewVisible(int viewId,int visible){
+       View view = getView(viewId);
+       if(view!=null){
+           view.setVisibility(visible);
+       }
+       return view;
+   }
+
     public View setBackGroupDrawable(int viewId, int resId){
 
         View view = getView(viewId);

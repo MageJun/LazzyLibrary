@@ -7,28 +7,27 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.LinearLayout;
 
-import com.city.adapter.CityListDataBean;
+import com.city.bean.CityData;
 import com.city.adapter.CitySearchListAdapter;
 import com.city.bean.Province;
 import com.city.helper.ChinaCityHelper;
 import com.common.widget.sidebar.LetterSideBar;
 import com.lw.demo.android.samples.R;
-import com.zed3.sipua.xydj.ui.ItemDividerDecoration;
 import com.zed3.sipua.xydj.ui.friend.helper.GroupItemDecoration;
-import com.zed3.sipua.xydj.ui.helper.SpellHelperUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Random;
 
 public class CitySearchActivity extends AppCompatActivity {
 
-    private List<CityListDataBean> totalCityDatas;
+    private List<CityData> totalCityDatas;
     private LetterSideBar mSideBar;
     private RecyclerView mListView;
     private GroupItemDecoration mDecoration;
-    private List<CityListDataBean> mDatas;
+    private List<CityData> mDatas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,20 +62,34 @@ public class CitySearchActivity extends AppCompatActivity {
     }
     private void initData(){
         CitySearchListAdapter mAdapter = new CitySearchListAdapter();
-        List<CityListDataBean> totalCitys = getTotalCityDatas();
-        CityListDataBean searchBean = new CityListDataBean();
-        searchBean.setmType(CityListDataBean.CityDataType.SEARCH);
+        List<CityData> totalCitys = getTotalCityDatas();
+        CityData searchBean = new CityData();
+        searchBean.setmType(CityData.CityDataType.SEARCH);
+        CityData hisBean = getHisCityDatas(3);
+
+
 
         mDatas = new ArrayList<>();
         mDatas.add(searchBean);
         mDatas.addAll(totalCitys);
-        Collections.sort(mDatas,new Comparator<CityListDataBean>() {
+//        mDatas.add(totalCitys.get(0));
+        mDatas.add(hisBean);
+        Collections.sort(mDatas,new Comparator<CityData>() {
             @Override
-            public int compare(CityListDataBean o1, CityListDataBean o2) {
-                if(o1.getmType()== CityListDataBean.CityDataType.SEARCH){
+            public int compare(CityData o1, CityData o2) {
+                Log.i("CompareTrace","o1 = "+o1.getmType()+",o2 = "+o2.getmType());
+                if(o1.getmType()== CityData.CityDataType.SEARCH){
                     return -1;
-                }else if(o1.getmType() == CityListDataBean.CityDataType.HISCITY){
-                    return -1;
+                }else if(o1.getmType() == CityData.CityDataType.HISCITY){
+                    if(o2.getmType()== CityData.CityDataType.TOTALCITY)
+                         return -1;
+                    else{
+                        return 1;
+                    }
+                }else if(o2.getmType() == CityData.CityDataType.SEARCH){
+                    return 1;
+                }else if(o2.getmType() == CityData.CityDataType.HISCITY){
+                    return 1;
                 }else{
                     return 0;
                 }
@@ -128,19 +141,32 @@ public class CitySearchActivity extends AppCompatActivity {
         return -1;
     }
 
-    public List<CityListDataBean> getTotalCityDatas() {
-        List<CityListDataBean> datas = new ArrayList<>();
+    private CityData getHisCityDatas(int count){
+        CityData data = new CityData();
+        data.setmType(CityData.CityDataType.HISCITY);
+        List<Province.City> mCitys = ChinaCityHelper.getInstance(this).getAllCitys();
+        Random random = new Random();
+        for (int i = 0;i<count;i++){
+            int index = random.nextInt(mCitys.size()-6);
+            data.addCity(mCitys.get(index));
+        }
+        Log.i("CityTrace", "mCitys = " + data.getmCitys().size());
+        return data;
+    }
+
+    private List<CityData> getTotalCityDatas() {
+        List<CityData> datas = new ArrayList<>();
         List<Province.City> mCitys = ChinaCityHelper.getInstance(this).getAllCitys();
         Log.i("CityTrace", "mCitys = " + mCitys.size());
         for (Province.City city :
                 mCitys) {
-            CityListDataBean bean = new CityListDataBean();
+            CityData bean = new CityData();
             bean.addCity(city);
-            bean.setmType(CityListDataBean.CityDataType.TOTALCITY);
+            bean.setmType(CityData.CityDataType.TOTALCITY);
             datas.add(bean);
         }
 
-        Log.i("CityTrace", "Total CityListDataBean = " + datas.size());
+        Log.i("CityTrace", "Total CityData = " + datas.size());
         return datas;
     }
 }
