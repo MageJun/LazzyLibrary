@@ -37,7 +37,7 @@
         android:layout_height="@dimen/xydj_group_member_item_status_wh"
         android:background="@drawable/xydj_group_member_status_online"
         android:visibility="visible"
-        app:layout_constraintCircle="@id/head_icon_img"
+        app:layout_constraintCircle="@id/img_icon"
         app:layout_constraintCircleAngle="315"
         app:layout_constraintCircleRadius="@dimen/xydj_group_member_delete_select_del_icon_pos"
         />
