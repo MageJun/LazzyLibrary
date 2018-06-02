@@ -91,6 +91,11 @@ public class GroupItemDecoration extends ItemDividerDecoration {
         int position = ((RecyclerView.LayoutParams) view.getLayoutParams()).getViewLayoutPosition();
         //我记得Rv的item position在重置时可能为-1.保险点判断一下吧
         if (position > -1) {
+            String tag = mDatas.get(position).getTag();
+            if(TextUtils.isEmpty(tag)){
+                super.getItemOffsets(outRect, view, parent, state);
+                return ;
+            }
             if (position == 0) {//等于0肯定要有title的
                 outRect.set(0, mTitleHeight, 0, 0);
             } else {//其他的通过判断
@@ -98,6 +103,7 @@ public class GroupItemDecoration extends ItemDividerDecoration {
                     outRect.set(0, mTitleHeight, 0, 0);//不为空 且跟前一个tag不一样了，说明是新的分类，也要title
                 } else {
                     super.getItemOffsets(outRect, view, parent, state);
+                    return ;
                 }
             }
         }else{
@@ -118,6 +124,10 @@ public class GroupItemDecoration extends ItemDividerDecoration {
                     .getLayoutParams();
             int position = params.getViewLayoutPosition();
             if (position > -1) {
+                String tag = mDatas.get(position).getTag();
+                if(TextUtils.isEmpty(tag)){
+                    continue;
+                }
                 if (position == 0) {//等于0肯定要有title的
                     drawTitleArea(c, left, right, child, params, position);
 
@@ -138,7 +148,6 @@ public class GroupItemDecoration extends ItemDividerDecoration {
         if(!isStickTitle){
             super.onDrawOver(c,parent,state);
         }else{
-
             final int left = parent.getPaddingLeft();
             final int right = parent.getWidth() - parent.getPaddingRight();
             final int top = parent.getPaddingTop();
@@ -149,12 +158,26 @@ public class GroupItemDecoration extends ItemDividerDecoration {
               String tag = mDatas.get(pos).getTag();
               if(!TextUtils.isEmpty(tag)){
                   View child =parent.findViewHolderForAdapterPosition(pos).itemView;
+                  //添加实现粘性TItle滚动切换效果的实现
+                  boolean isReady2Change =false;
+                  if(pos<mDatas.size()-1){
+                      if(!tag.equals(mDatas.get(pos+1).getTag())){
+                          if(child.getBottom()<=mTitleHeight){
+                              isReady2Change = true;
+                          }
+                      }
+                  }
                   mPaint.setColor(COLOR_TITLE_BG);
                   int pLeft = parent.getLeft();
                   int pTop = parent.getTop();
                   int pRight = parent.getRight();
                   int pBottom = parent.getBottom();
-                  Rect bgRect = new Rect(parent.getLeft(), parent.getTop(), parent.getRight(), parent.getTop()+mTitleHeight);
+                  Rect bgRect = null;
+                  if(!isReady2Change){
+                      bgRect = new Rect(parent.getLeft(), parent.getTop(), parent.getRight(), parent.getTop()+mTitleHeight);
+                  }else{
+                      bgRect = new Rect(parent.getLeft(),child.getBottom()-mTitleHeight, parent.getRight(), child.getBottom());
+                  }
                   c.drawRect(bgRect, mPaint);
                   mPaint.setColor(COLOR_TITLE_FONT);
 

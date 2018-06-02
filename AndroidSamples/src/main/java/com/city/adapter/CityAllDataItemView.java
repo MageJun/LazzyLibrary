@@ -1,5 +1,6 @@
 package com.city.adapter;
 
+import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -34,7 +35,7 @@ public class CityAllDataItemView extends BaseItemView<CityListDataBean> {
     private LinearLayoutManager mLM;
 
     public  CityAllDataItemView(){
-        mAdapter = new BaseRecycleViewAdapter() {
+      /*  mAdapter = new BaseRecycleViewAdapter() {
             @Override
             public void onCreateMulitTypeItemView() {
                 InnerItemView itemView = new InnerItemView();
@@ -51,18 +52,21 @@ public class CityAllDataItemView extends BaseItemView<CityListDataBean> {
         mDecoration.setColor(AppApplication.sContext.getResources().getColor(R.color.xydj_gray_2));
         mDecoration.setStickTitle(true);
         mLM = new LinearLayoutManager(AppApplication.sContext);
-        mDecoration.setOffset(5);
+        mDecoration.setOffset(5);*/
     }
 
     @Override
     public View getItemView(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.city_search_list_item,null);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.city_total_data_item,parent,false);
         return view;
     }
 
     @Override
     public void onBindVH(@NonNull BaseViewHolder holder, int position, CityListDataBean data) {
-        RecyclerView listView = holder.getView(R.id.list_view2);
+        List<Province.City> citys = data.getmCitys();
+        Province.City city = citys.get(0);
+        holder.setText(R.id.city_name,city.getName());
+       /* RecyclerView listView = holder.getView(R.id.list_view2);
         listView.setLayoutManager(mLM);
         listView.setAdapter(mAdapter);
         listView.addItemDecoration(mDecoration);
@@ -93,7 +97,7 @@ public class CityAllDataItemView extends BaseItemView<CityListDataBean> {
             }
         });
         mAdapter.setData(data.getmCitys());
-        mDecoration.setData(data.getmCitys());
+        mDecoration.setData(data.getmCitys());*/
     }
 
     @Override

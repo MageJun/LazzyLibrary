@@ -1,11 +1,22 @@
 package com.city.adapter;
 
 import com.city.bean.Province;
+import com.zed3.sipua.xydj.ui.friend.helper.GroupItemDecoration;
+import com.zed3.sipua.xydj.ui.helper.SpellHelperUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CityListDataBean {
+public class CityListDataBean implements GroupItemDecoration.ItemDecorationData{
+
+    @Override
+    public String getTag() {
+        if(mCitys!=null&&mCitys.size()>0){
+            if(mCitys.get(0)!=null)
+                return mCitys.get(0).getTag();
+        }
+        return null;
+    }
 
     /**
      *城市数据类型
@@ -35,6 +46,9 @@ public class CityListDataBean {
 
     public void setmCitys(List<Province.City> mCitys) {
         this.mCitys = mCitys;
+    }
+    public void addCity(Province.City city){
+        mCitys.add(city);
     }
 
     @Override

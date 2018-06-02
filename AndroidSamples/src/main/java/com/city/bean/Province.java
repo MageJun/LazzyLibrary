@@ -1,5 +1,7 @@
 package com.city.bean;
 
+import android.text.TextUtils;
+
 import com.zed3.sipua.xydj.ui.friend.helper.GroupItemDecoration;
 import com.zed3.sipua.xydj.ui.helper.SpellHelperUtils;
 
@@ -109,7 +111,14 @@ public class Province {
 
         @Override
         public String getTag() {
-            return SpellHelperUtils.getFirstLetter(name).toUpperCase();
+            if(!TextUtils.isEmpty(spellName)&&spellName.length()>0){
+                if(SpellHelperUtils.checkFirstCharIsLetter(spellName)){
+                    return  spellName.substring(0,1).toUpperCase();
+                }else{
+                    return "#";
+                }
+            }
+            return null;
         }
 
         public static class Area {

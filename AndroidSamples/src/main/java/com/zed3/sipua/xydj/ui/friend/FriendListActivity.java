@@ -37,7 +37,6 @@ public class FriendListActivity extends AppCompatActivity implements OnItemLongC
             if(mData!=null&&mData.size()>curIndex){
                 int pos = findCurPos(letter);
                 if(pos!=-1){
-//                    smoothMoveToPosition(mListView,pos);
                     mListView.scrollToPosition(pos);
                     LinearLayoutManager mLayoutManager =
                             (LinearLayoutManager) mListView.getLayoutManager();
@@ -123,7 +122,7 @@ public class FriendListActivity extends AppCompatActivity implements OnItemLongC
         decoration.setTitleTextColor(R.color.xydj_group_member_detail_text_color);
         decoration.setTitleBgColor(R.color.xydj_gray_2);
         decoration.setColor(getResources().getColor(R.color.xydj_gray_2));
-//        decoration.setStickTitle(true);
+        decoration.setStickTitle(true);
         mListView.setAdapter(mAdapter);
         mListView.setLayoutManager(lm);
         mListView.addItemDecoration(decoration);
