@@ -1,1 +1,1 @@
-include ':RecycleViewDemo', ':CommonUI', ':ZedDemo', ':AndroidSamples',':magicindicator'
+include ':RecycleViewDemo', ':CommonUI', ':ZedDemo', ':AndroidSamples',':magicindicator', ':common_lib'
