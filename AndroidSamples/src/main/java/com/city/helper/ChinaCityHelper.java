@@ -38,6 +38,7 @@ public class ChinaCityHelper {
 
     private List<Province> mProvinceList;
     private List<Province.City> mCityList;
+    private List<String> mCityNameLetters = new ArrayList<>();
 
     private Context mContext;
     private void loadData(){
@@ -121,7 +122,21 @@ public class ChinaCityHelper {
                     mCityList) {
                 String spellName = SpellHelperUtils.converterToSpell(city.getName());
                 city.setSpellName(spellName);
+                if(!mCityNameLetters.contains(city.getTag())){
+                    mCityNameLetters.add(city.getTag());
+                }
             }
+
+            Collections.sort(mCityNameLetters, new Comparator<String>() {
+                @Override
+                public int compare(String o1, String o2) {
+                    if("#".equals(o1)){
+                        return 1;
+                    }else{
+                        return o1.compareTo(o2);
+                    }
+                }
+            });
 
             Collections.sort(mCityList, new Comparator<Province.City>() {
                 @Override
@@ -174,6 +189,8 @@ public class ChinaCityHelper {
     public synchronized List<Province.City> getAllCitys(){
         return mCityList;
     }
+
+    public synchronized List<String> getAllCityLetters(){return mCityNameLetters;}
 
 
 }

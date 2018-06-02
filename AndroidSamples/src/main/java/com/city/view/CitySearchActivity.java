@@ -7,11 +7,11 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.LinearLayout;
 
+import com.android.common.lib.widget.sidebar.LetterSideBarAutoAdapt;
 import com.city.bean.CityData;
 import com.city.adapter.CitySearchListAdapter;
 import com.city.bean.Province;
 import com.city.helper.ChinaCityHelper;
-import com.common.widget.sidebar.LetterSideBar;
 import com.lw.demo.android.samples.R;
 import com.common.widget.recyclerview.decoration.GroupItemDecoration;
 
@@ -24,7 +24,7 @@ import java.util.Random;
 public class CitySearchActivity extends AppCompatActivity {
 
     private List<CityData> totalCityDatas;
-    private LetterSideBar mSideBar;
+    private LetterSideBarAutoAdapt mSideBar;
     private RecyclerView mListView;
     private GroupItemDecoration mDecoration;
     private List<CityData> mDatas;
@@ -61,6 +61,7 @@ public class CitySearchActivity extends AppCompatActivity {
         mListView.setLayoutManager(linearLayoutManager);
     }
     private void initData(){
+        mSideBar.setLetters(ChinaCityHelper.getInstance(this).getAllCityLetters());
         CitySearchListAdapter mAdapter = new CitySearchListAdapter();
         List<CityData> totalCitys = getTotalCityDatas();
         CityData searchBean = new CityData();
@@ -103,7 +104,7 @@ public class CitySearchActivity extends AppCompatActivity {
         mListView.addOnScrollListener(mScrollListener);
     }
 
-    private LetterSideBar.OnIndexSelectChanged mChangedListener = new LetterSideBar.OnIndexSelectChanged() {
+    private LetterSideBarAutoAdapt.OnIndexSelectChanged mChangedListener = new LetterSideBarAutoAdapt.OnIndexSelectChanged() {
         @Override
         public void onSelectChanged(int lastIndex, int curIndex,String letter) {
             if(mDatas!=null&&mDatas.size()>curIndex){
