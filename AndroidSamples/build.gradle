@@ -26,29 +26,24 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:27.0.2'
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     compile 'com.android.support:recyclerview-v7:27.0.2'
-//    testImplementation 'junit:junit:4.12'
+    //    testImplementation 'junit:junit:4.12'
     implementation 'com.android.support:design:27.1.1'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-
     compile project(':CommonUI')
     compile project(':magicindicator')
-
     implementation 'com.j256.ormlite:ormlite-android:5.1'
     implementation 'com.shizhefei:ViewPagerIndicator:1.1.6'
-
     //glid是图片加载框架，添加Glid库的依赖,Glid编译版本是27+，支持库的版本也必须是27+,否则会运行时异常
     compile 'com.github.bumptech.glide:glide:4.6.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
     implementation 'com.google.code.gson:gson:2.7'
     implementation 'org.greenrobot:eventbus:3.0.0'
     implementation 'com.sothree.slidinguppanel:library:3.4.0'
-
-//    compile 'com.yanzhenjie:recyclerview-swipe:1.1.4'
-
+    implementation 'com.github.MageJun:LazzyLibrary:master-SNAPSHOT'
+    //    compile 'com.yanzhenjie:recyclerview-swipe:1.1.4'
 }
