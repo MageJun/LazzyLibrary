@@ -8,7 +8,7 @@ import android.util.Log;
 import com.city.bean.Province;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.zed3.sipua.xydj.ui.helper.SpellHelperUtils;
+import com.common.utils.SpellHelperUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;

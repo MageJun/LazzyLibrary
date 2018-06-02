@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 import com.lw.demo.android.samples.R;
 import com.zed3.sipua.xydj.ui.group.bean.CustomGroupMemberInfo;
-import com.zed3.sipua.xydj.ui.helper.AnimUtil;
+import com.common.utils.AnimUtil;
 
 public class GroupManager {
 

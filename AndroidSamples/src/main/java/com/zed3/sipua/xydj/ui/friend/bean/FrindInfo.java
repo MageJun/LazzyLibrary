@@ -1,6 +1,6 @@
 package com.zed3.sipua.xydj.ui.friend.bean;
 
-import com.zed3.sipua.xydj.ui.friend.helper.GroupItemDecoration;
+import com.common.widget.recyclerview.decoration.GroupItemDecoration;
 
 public class FrindInfo implements GroupItemDecoration.ItemDecorationData {
 

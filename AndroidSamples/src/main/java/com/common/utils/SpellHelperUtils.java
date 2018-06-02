@@ -1,4 +1,4 @@
-package com.zed3.sipua.xydj.ui.helper;
+package com.common.utils;
 
 import android.text.TextUtils;
 

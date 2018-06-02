@@ -11,12 +11,12 @@ import android.widget.TextView;
 
 import com.lw.demo.android.samples.R;
 import com.zed3.sipua.xydj.ui.BaseActivity;
-import com.zed3.sipua.xydj.ui.ItemDividerDecoration;
+import com.common.widget.recyclerview.decoration.ItemDividerDecoration;
 import com.zed3.sipua.xydj.ui.group.adapter.GroupMemeberListAdapter;
 import com.zed3.sipua.xydj.ui.group.bean.CustomGroupMemberInfo;
 import com.zed3.sipua.xydj.ui.group.bean.PttCustomGrp;
 import com.zed3.sipua.xydj.ui.group.adapter.OnItemClickListener;
-import com.zed3.sipua.xydj.ui.helper.MessageHelper;
+import com.common.utils.MessageHelper;
 
 import java.util.List;
 

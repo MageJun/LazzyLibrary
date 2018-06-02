@@ -2,8 +2,8 @@ package com.city.bean;
 
 import android.text.TextUtils;
 
-import com.zed3.sipua.xydj.ui.friend.helper.GroupItemDecoration;
-import com.zed3.sipua.xydj.ui.helper.SpellHelperUtils;
+import com.common.widget.recyclerview.decoration.GroupItemDecoration;
+import com.common.utils.SpellHelperUtils;
 
 import java.util.List;
 

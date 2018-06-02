@@ -1,4 +1,4 @@
-package com.zed3.sipua.xydj.ui.group.helper;
+package com.common.utils;
 
 import android.app.Activity;
 import android.os.Build;
@@ -9,12 +9,13 @@ import android.view.WindowManager;
 import android.widget.PopupWindow;
 
 import com.lw.demo.android.samples.R;
+import com.zed3.sipua.xydj.ui.group.helper.AnimUtil;
 
 public class PopupWindowHelper {
 
 
     private PopupWindow mPopupWindow;
-    private AnimUtil animUtil;
+    private com.zed3.sipua.xydj.ui.group.helper.AnimUtil animUtil;
     private float bgAlpha = 1f;
     private boolean bright = false;
     private OnPopupWindowClickListener mPopupWindowListener;
@@ -81,7 +82,7 @@ public class PopupWindowHelper {
     }
 
     private void toggleBright(final Activity context,final boolean isBright) {
-        AnimUtil animUtil= new AnimUtil();
+        com.zed3.sipua.xydj.ui.group.helper.AnimUtil animUtil= new com.zed3.sipua.xydj.ui.group.helper.AnimUtil();
         //三个参数分别为： 起始值 结束值 时长  那么整个动画回调过来的值就是从0.5f--1f的
         if(isBright)
             animUtil.setValueAnimator(0.5f, 1f, 350);

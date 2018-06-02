@@ -14,7 +14,7 @@ import android.widget.LinearLayout;
 import com.lw.demo.android.samples.R;
 import com.zed3.sipua.xydj.ui.BaseActivity;
 import com.zed3.sipua.xydj.ui.GridDividerDecoration2;
-import com.zed3.sipua.xydj.ui.ItemDividerDecoration;
+import com.common.widget.recyclerview.decoration.ItemDividerDecoration;
 import com.zed3.sipua.xydj.ui.group.adapter.GroupDeleteMemeberListAdapter;
 import com.zed3.sipua.xydj.ui.group.adapter.GroupDeleteSelectMemeberListAdapter;
 import com.zed3.sipua.xydj.ui.group.adapter.OnItemCheckedListener;

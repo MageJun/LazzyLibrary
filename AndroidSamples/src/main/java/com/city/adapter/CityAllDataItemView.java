@@ -13,7 +13,7 @@ import com.common.widget.recyclerview.adapter.BaseRecycleViewAdapter;
 import com.common.widget.recyclerview.adapter.BaseViewHolder;
 import com.common.widget.recyclerview.adapter.ItemViewManager;
 import com.lw.demo.android.samples.R;
-import com.zed3.sipua.xydj.ui.friend.helper.GroupItemDecoration;
+import com.common.widget.recyclerview.decoration.GroupItemDecoration;
 
 import java.util.List;
 

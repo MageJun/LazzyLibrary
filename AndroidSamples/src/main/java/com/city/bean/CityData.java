@@ -1,6 +1,6 @@
 package com.city.bean;
 
-import com.zed3.sipua.xydj.ui.friend.helper.GroupItemDecoration;
+import com.common.widget.recyclerview.decoration.GroupItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;

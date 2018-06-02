@@ -12,7 +12,7 @@ import android.widget.EditText;
 
 import com.lw.demo.android.samples.R;
 import com.zed3.sipua.xydj.ui.BaseActivity;
-import com.zed3.sipua.xydj.ui.GridDividerDecoration;
+import com.common.widget.recyclerview.decoration.GridDividerDecoration;
 import com.zed3.sipua.xydj.ui.group.adapter.GroupMemeberListAdapter;
 import com.zed3.sipua.xydj.ui.group.adapter.OnItemClickListener;
 import com.zed3.sipua.xydj.ui.group.bean.CustomGroupMemberInfo;

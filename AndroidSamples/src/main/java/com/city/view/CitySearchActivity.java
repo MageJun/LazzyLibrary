@@ -13,7 +13,7 @@ import com.city.bean.Province;
 import com.city.helper.ChinaCityHelper;
 import com.common.widget.sidebar.LetterSideBar;
 import com.lw.demo.android.samples.R;
-import com.zed3.sipua.xydj.ui.friend.helper.GroupItemDecoration;
+import com.common.widget.recyclerview.decoration.GroupItemDecoration;
 
 import java.util.ArrayList;
 import java.util.Collections;

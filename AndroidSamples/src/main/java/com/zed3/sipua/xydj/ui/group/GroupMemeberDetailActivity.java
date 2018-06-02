@@ -7,14 +7,13 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lw.demo.android.samples.R;
 import com.zed3.sipua.xydj.ui.BaseActivity;
-import com.zed3.sipua.xydj.ui.ItemDividerDecoration;
+import com.common.widget.recyclerview.decoration.ItemDividerDecoration;
 import com.zed3.sipua.xydj.ui.group.adapter.FriendShareGroupListAdapter;
 import com.zed3.sipua.xydj.ui.group.bean.CustomGroupMemberInfo;
 import com.zed3.sipua.xydj.ui.group.bean.PttCustomGrp;

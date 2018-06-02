@@ -5,6 +5,8 @@ import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.common.widget.recyclerview.decoration.ItemDividerDecoration;
+
 public class GridDividerDecoration2 extends ItemDividerDecoration {
     /**
      * @param context

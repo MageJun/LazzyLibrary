@@ -8,8 +8,7 @@ import android.support.v7.widget.SimpleItemAnimator;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.common.widget.recyclerview.adapter.BaseRecycleViewAdapter;
-import com.zed3.sipua.xydj.ui.ItemDividerDecoration;
+import com.common.widget.recyclerview.decoration.ItemDividerDecoration;
 import com.zed3.sipua.xydj.ui.friend.adapter.FriendsListAdapter;
 import com.zed3.sipua.xydj.ui.friend.bean.FrindInfo;
 

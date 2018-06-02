@@ -1,7 +1,6 @@
 package com.zed3.sipua.xydj.ui.group;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,8 +16,7 @@ import android.widget.TextView;
 
 import com.lw.demo.android.samples.R;
 import com.zed3.sipua.xydj.ui.BaseActivity;
-import com.zed3.sipua.xydj.ui.GridDividerDecoration;
-import com.zed3.sipua.xydj.ui.ItemDividerDecoration;
+import com.common.widget.recyclerview.decoration.ItemDividerDecoration;
 import com.zed3.sipua.xydj.ui.group.adapter.GroupMemberSearchResultAdapter;
 import com.zed3.sipua.xydj.ui.group.adapter.OnItemClickListener;
 import com.zed3.sipua.xydj.ui.group.bean.CustomGroupMemberInfo;

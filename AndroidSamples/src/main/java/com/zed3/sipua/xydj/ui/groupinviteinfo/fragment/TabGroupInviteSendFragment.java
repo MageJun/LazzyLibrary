@@ -7,16 +7,14 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.lw.demo.android.samples.R;
-import com.zed3.sipua.xydj.ui.ItemDividerDecoration;
-import com.zed3.sipua.xydj.ui.group.helper.PopupWindowHelper;
+import com.common.widget.recyclerview.decoration.ItemDividerDecoration;
+import com.common.utils.PopupWindowHelper;
 import com.zed3.sipua.xydj.ui.groupinviteinfo.adapter.GroupInviteSendAdapter;
-import com.zed3.sipua.xydj.ui.groupinviteinfo.bean.GroupInviteReceiveDataMap;
 import com.zed3.sipua.xydj.ui.groupinviteinfo.bean.GroupInviteSendDataMap;
 import com.zed3.sipua.xydj.ui.groupinviteinfo.helper.OnItemLongClickListener;
 import com.zed3.sipua.xydj.ui.groupinviteinfo.helper.RecyclerViewOnItemTouchListener;
