@@ -5,16 +5,15 @@ import android.content.res.AssetManager;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.city.bean.ProvinceBean;
+import com.city.bean.Province;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
-import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ChinaCityHelper {
@@ -30,7 +29,7 @@ public class ChinaCityHelper {
 
     private static ChinaCityHelper sInstance;
 
-    private List<ProvinceBean> mProvinceList;
+    private List<Province> mProvinceList;
 
     private Context mContext;
     private void loadData(){
@@ -39,8 +38,8 @@ public class ChinaCityHelper {
             String json = getJson(CHINA_CITY_NAME);
             if(!TextUtils.isEmpty(json)){
                 Gson gson = new Gson();
-                Type jsonType = new TypeToken<List<ProvinceBean>>(){}.getType();
-                List<ProvinceBean> results = gson.fromJson(json,jsonType);
+                Type jsonType = new TypeToken<List<Province>>(){}.getType();
+                List<Province> results = gson.fromJson(json,jsonType);
                 Log.i(TAG,"json parser results = "+results);
                 mProvinceList = results;
             }
@@ -78,8 +77,19 @@ public class ChinaCityHelper {
     }
 
 
-    public List<ProvinceBean> getAllCitys(){
+    public List<Province> getAllProvinces(){
         return mProvinceList;
+    }
+
+    public List<Province.City> getAllCitys(){
+        List<Province.City> citys = new ArrayList<>();
+        if(mProvinceList!=null){
+            for (Province province :
+                    mProvinceList) {
+                citys.addAll(province.getCityList());
+            }
+        }
+        return citys;
     }
 
 

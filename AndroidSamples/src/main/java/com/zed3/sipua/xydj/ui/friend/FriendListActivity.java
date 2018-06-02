@@ -101,7 +101,7 @@ public class FriendListActivity extends AppCompatActivity implements OnItemLongC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_friend_list);
+        setContentView(R.layout.xydj_activity_friend_list);
 
         initView();
         initData();
