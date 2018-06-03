@@ -12,9 +12,14 @@ import android.view.ViewGroup;
  * @param <T>
  */
 public abstract class BaseItemView<T> implements IItemView<T> {
+
     public BaseItemView(){
 
     }
+
+    protected OnItemClickListener<T> mItemClickListener;
+
+
     public abstract View getItemView(ViewGroup parent, int viewType);
 
     public abstract void onBindVH(@NonNull BaseViewHolder holder, int position, T data);
@@ -38,5 +43,10 @@ public abstract class BaseItemView<T> implements IItemView<T> {
     @Override
     public boolean isForViewType(T t, int position) {
         return true;
+    }
+
+    @Override
+    public void setItemClickListener(OnItemClickListener<T> listener){
+        this.mItemClickListener = listener;
     }
 }

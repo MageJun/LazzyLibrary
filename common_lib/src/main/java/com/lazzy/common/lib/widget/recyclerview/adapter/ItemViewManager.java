@@ -17,6 +17,7 @@ public class ItemViewManager<T> {
     private SparseArray<IItemView> mItemViews;
     private DefaultItemView mDefaultItemView;
     private static int ITEM_VIEW_TYPE = 1;
+    private OnItemClickListener<T> mItemClickListener;
 
     public ItemViewManager(){
         mItemViews = new SparseArray<>();
@@ -33,8 +34,16 @@ public class ItemViewManager<T> {
         return mItemViews.get(viewType,mDefaultItemView);
     }
 
+
     public int getItemTypeCount(){
         return mItemViews.size()==0?1:mItemViews.size();
+    }
+
+    public void setItemClickListener(OnItemClickListener<T> listener){
+        mItemClickListener = listener;
+        for (int i = 0;i<mItemViews.size();i++){
+            mItemViews.get(i).setItemClickListener(listener);
+        }
     }
 
     public int getViewType(T t,int pos){
@@ -66,16 +75,25 @@ public class ItemViewManager<T> {
         }
 
         @Override
-        public void onBindVH(@NonNull BaseViewHolder holder, int position, String data) {
+        public void onBindVH(@NonNull BaseViewHolder holder, final int position, final String data) {
             if(!TextUtils.isEmpty(data)){
                 holder.setText(android.R.id.text1,data);
             }
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(mItemClickListener!=null){
+                        mItemClickListener.onItemClick(v,position,null,data);
+                    }
+                }
+            });
         }
 
         @Override
         public int getItemViewType() {
             return obtainItemType();
         }
+
     }
 
 }

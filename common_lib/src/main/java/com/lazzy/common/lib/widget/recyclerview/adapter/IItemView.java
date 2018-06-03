@@ -49,4 +49,10 @@ public interface IItemView<T> {
      * @return
      */
     public boolean isForViewType(T t, int position);
+
+    /**
+     * 添加item的点击和长按事件监听
+     * @param listener
+     */
+    public void setItemClickListener(OnItemClickListener<T> listener);
 }
