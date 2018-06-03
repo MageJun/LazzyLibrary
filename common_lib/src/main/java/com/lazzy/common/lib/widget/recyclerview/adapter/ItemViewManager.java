@@ -42,7 +42,9 @@ public class ItemViewManager<T> {
     public void setItemClickListener(OnItemClickListener<T> listener){
         mItemClickListener = listener;
         for (int i = 0;i<mItemViews.size();i++){
-            mItemViews.get(i).setItemClickListener(listener);
+            IItemView itemView = mItemViews.get(mItemViews.keyAt(i));
+            if(itemView!=null)
+                 itemView.setItemClickListener(listener);
         }
     }
 

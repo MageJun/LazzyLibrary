@@ -7,9 +7,9 @@ import android.view.ViewGroup;
 
 import com.city.bean.CityData;
 import com.city.bean.Province;
-import com.common.widget.recyclerview.adapter.BaseItemView;
-import com.common.widget.recyclerview.adapter.BaseViewHolder;
-import com.common.widget.recyclerview.adapter.ItemViewManager;
+import com.lazzy.common.lib.widget.recyclerview.adapter.BaseItemView;
+import com.lazzy.common.lib.widget.recyclerview.adapter.BaseViewHolder;
+import com.lazzy.common.lib.widget.recyclerview.adapter.ItemViewManager;
 import com.lw.demo.android.samples.R;
 
 import java.util.List;

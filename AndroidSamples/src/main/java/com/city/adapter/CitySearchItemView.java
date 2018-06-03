@@ -9,9 +9,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.city.bean.CityData;
-import com.common.widget.recyclerview.adapter.BaseItemView;
-import com.common.widget.recyclerview.adapter.BaseViewHolder;
-import com.common.widget.recyclerview.adapter.ItemViewManager;
+import com.lazzy.common.lib.widget.recyclerview.adapter.BaseItemView;
+import com.lazzy.common.lib.widget.recyclerview.adapter.BaseViewHolder;
+import com.lazzy.common.lib.widget.recyclerview.adapter.ItemViewManager;
 import com.lw.demo.android.samples.R;
 
 public class CitySearchItemView extends BaseItemView<CityData> {

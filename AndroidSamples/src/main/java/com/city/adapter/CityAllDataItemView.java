@@ -8,12 +8,12 @@ import android.view.ViewGroup;
 
 import com.city.bean.CityData;
 import com.city.bean.Province;
-import com.common.widget.recyclerview.adapter.BaseItemView;
-import com.common.widget.recyclerview.adapter.BaseRecycleViewAdapter;
-import com.common.widget.recyclerview.adapter.BaseViewHolder;
-import com.common.widget.recyclerview.adapter.ItemViewManager;
+import com.lazzy.common.lib.widget.recyclerview.adapter.BaseItemView;
+import com.lazzy.common.lib.widget.recyclerview.adapter.BaseRecycleViewAdapter;
+import com.lazzy.common.lib.widget.recyclerview.adapter.BaseViewHolder;
+import com.lazzy.common.lib.widget.recyclerview.adapter.ItemViewManager;
+import com.lazzy.common.lib.widget.recyclerview.decoration.GroupItemDecoration;
 import com.lw.demo.android.samples.R;
-import com.common.widget.recyclerview.decoration.GroupItemDecoration;
 
 import java.util.List;
 
@@ -33,10 +33,18 @@ public class CityAllDataItemView extends BaseItemView<CityData> {
     }
 
     @Override
-    public void onBindVH(@NonNull BaseViewHolder holder, int position, CityData data) {
+    public void onBindVH(@NonNull BaseViewHolder holder, final int position, CityData data) {
         List<Province.City> citys = data.getmCitys();
         Province.City city = citys.get(0);
         holder.setText(R.id.city_name,city.getName());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mItemClickListener!=null){
+                    mItemClickListener.onItemClick(v,position,null,null);
+                }
+            }
+        });
     }
 
     @Override

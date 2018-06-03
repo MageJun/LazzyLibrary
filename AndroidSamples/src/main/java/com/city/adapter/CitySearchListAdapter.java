@@ -1,7 +1,7 @@
 package com.city.adapter;
 
 import com.city.bean.CityData;
-import com.common.widget.recyclerview.adapter.BaseRecycleViewAdapter;
+import com.lazzy.common.lib.widget.recyclerview.adapter.BaseRecycleViewAdapter;
 
 public class CitySearchListAdapter extends BaseRecycleViewAdapter<CityData> {
     @Override

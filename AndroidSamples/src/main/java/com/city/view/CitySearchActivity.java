@@ -5,8 +5,11 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import com.lazzy.common.lib.widget.recyclerview.adapter.OnItemClickListener;
 import com.lazzy.common.lib.widget.sidebar.LetterSideBarAutoAdapt;
 import com.city.bean.CityData;
 import com.city.adapter.CitySearchListAdapter;
@@ -99,6 +102,17 @@ public class CitySearchActivity extends AppCompatActivity {
         CitySearchListAdapter adapter = new CitySearchListAdapter();
         mListView.setAdapter(adapter);
         adapter.setData(mDatas);
+        adapter.setItemClickListener(new OnItemClickListener<CityData>() {
+            @Override
+            public void onItemClick(View view, int pos, CityData data, Object obj) {
+                Toast.makeText(CitySearchActivity.this,"pos = "+pos, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onItemLongClick(View view, int pos, CityData data, Object obj) {
+
+            }
+        });
         mDecoration.setData(mDatas);
         mSideBar.setSelectChangedListener(mChangedListener);
         mListView.addOnScrollListener(mScrollListener);
