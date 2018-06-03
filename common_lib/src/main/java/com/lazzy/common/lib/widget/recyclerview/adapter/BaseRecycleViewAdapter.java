@@ -38,6 +38,10 @@ public abstract class BaseRecycleViewAdapter<T> extends RecyclerView.Adapter {
         notifyDataSetChanged();
     }
 
+    public void setItemClickListener(OnItemClickListener<T> listener){
+        mItemViewManager.setItemClickListener(listener);
+    }
+
     @NonNull
     @Override
    final public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
