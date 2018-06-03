@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.LinearLayout;
 
-import com.android.common.lib.widget.sidebar.LetterSideBarAutoAdapt;
+import com.lazzy.common.lib.widget.sidebar.LetterSideBarAutoAdapt;
 import com.city.bean.CityData;
 import com.city.adapter.CitySearchListAdapter;
 import com.city.bean.Province;

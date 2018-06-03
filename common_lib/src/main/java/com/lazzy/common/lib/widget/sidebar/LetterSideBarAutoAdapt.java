@@ -1,4 +1,4 @@
-package com.android.common.lib.widget.sidebar;
+package com.lazzy.common.lib.widget.sidebar;
 
 import android.content.Context;
 import android.graphics.Canvas;

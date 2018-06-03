@@ -1,4 +1,4 @@
-package com.android.common.lib.utils;
+package com.lazzy.common.lib.utils;
 
 import android.animation.Animator;
 import android.animation.ValueAnimator;

@@ -1,4 +1,4 @@
-package com.android.common.lib.widget.recyclerview.decoration;
+package com.lazzy.common.lib.widget.recyclerview.decoration;
 
 import android.content.Context;
 import android.graphics.Canvas;

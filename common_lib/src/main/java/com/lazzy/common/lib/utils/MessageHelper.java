@@ -1,4 +1,4 @@
-package com.android.common.lib.utils;
+package com.lazzy.common.lib.utils;
 
 import android.content.Context;
 import android.support.v7.app.AlertDialog;
@@ -9,7 +9,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.android.common.lib.R;
+import com.lazzy.common.lib.R;
 
 public class MessageHelper {
     private static MessageHelper sInstance;

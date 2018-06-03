@@ -1,4 +1,4 @@
-package com.android.common.lib.utils;
+package com.lazzy.common.lib.utils;
 
 import android.app.Activity;
 import android.os.Build;
@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.PopupWindow;
 
-import com.android.common.lib.R;
+import com.lazzy.common.lib.R;
 
 public class PopupWindowHelper {
 

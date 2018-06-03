@@ -1,4 +1,4 @@
-package com.android.common.lib.widget.recyclerview.adapter;
+package com.lazzy.common.lib.widget.recyclerview.adapter;
 
 
 import android.support.annotation.NonNull;

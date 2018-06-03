@@ -1,4 +1,4 @@
-package com.android.common.lib.utils;
+package com.lazzy.common.lib.utils;
 
 import android.content.Context;
 import android.graphics.PointF;
