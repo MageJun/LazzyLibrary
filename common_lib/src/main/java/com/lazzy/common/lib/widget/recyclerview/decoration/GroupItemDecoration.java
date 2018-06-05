@@ -8,6 +8,7 @@ import android.graphics.Rect;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -162,15 +163,15 @@ public class GroupItemDecoration extends ItemDividerDecoration {
                       }
                   }
                   mPaint.setColor(COLOR_TITLE_BG);
-                  int pLeft = parent.getLeft();
-                  int pTop = parent.getTop();
-                  int pRight = parent.getRight();
-                  int pBottom = parent.getBottom();
+                  int pLeft = parent.getPaddingLeft();
+                  int pTop = parent.getPaddingTop();
+                  int pRight = parent.getMeasuredWidth()-parent.getPaddingRight();
+                  int pBottom = parent.getMeasuredHeight()-parent.getPaddingBottom();
                   Rect bgRect = null;
                   if(!isReady2Change){
-                      bgRect = new Rect(parent.getLeft(), parent.getTop(), parent.getRight(), parent.getTop()+mTitleHeight);
+                      bgRect = new Rect(pLeft, pTop, pRight, parent.getTop()+mTitleHeight);
                   }else{
-                      bgRect = new Rect(parent.getLeft(),child.getBottom()-mTitleHeight, parent.getRight(), child.getBottom());
+                      bgRect = new Rect(pLeft,child.getBottom()-mTitleHeight, pRight, child.getBottom());
                   }
                   c.drawRect(bgRect, mPaint);
                   mPaint.setColor(COLOR_TITLE_FONT);
@@ -194,10 +195,11 @@ public class GroupItemDecoration extends ItemDividerDecoration {
      */
     private void drawTitleArea(Canvas c, int left, int right, View child, RecyclerView.LayoutParams params, int position) {//最先调用，绘制在最下层
         mPaint.setColor(COLOR_TITLE_BG);
-        c.drawRect(left, child.getTop() - params.topMargin - mTitleHeight, right, child.getTop() - params.topMargin, mPaint);
+        Rect rect = new Rect(left, child.getTop() - params.topMargin - mTitleHeight, right, child.getTop() - params.topMargin);
+        c.drawRect(rect, mPaint);
         mPaint.setColor(COLOR_TITLE_FONT);
 
         mPaint.getTextBounds(mDatas.get(position).getTag(), 0, mDatas.get(position).getTag().length(), mBounds);
-        c.drawText(mDatas.get(position).getTag(), child.getPaddingLeft(), child.getTop() - params.topMargin - (mTitleHeight / 2 - mBounds.height() / 2), mPaint);
+        c.drawText(mDatas.get(position).getTag(),rect.left+ child.getPaddingLeft(), child.getTop() - params.topMargin - (mTitleHeight / 2 - mBounds.height() / 2), mPaint);
     }
 }
