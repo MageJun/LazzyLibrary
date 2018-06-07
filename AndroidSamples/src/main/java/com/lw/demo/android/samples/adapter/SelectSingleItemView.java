@@ -16,7 +16,7 @@ public class SelectSingleItemView extends SingleSelectItemView<SingleSelectListA
         if(checked){
             holder.setImgResource(R.id.select_icon,R.drawable.single_selected);
         }else{
-            holder.setImgResource(R.id.select_icon,R.drawable.single_un_selected);
+            holder.setImgResource(R.id.select_icon,R.drawable.single_unselected);
         }
 
 
