@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.city.helper.ChinaCityHelper;
 import com.city.view.CitySearchActivity;
 import com.lw.demo.android.samples.R;
+import com.lw.demo.android.samples.SingleSelectListActivity;
 import com.lw.demo.android.samples.SlidingUpPannelActivity;
 import com.lw.demo.android.samples.ViewPagerActivity;
 import com.lw.demo.android.samples.ViewPagerActivity2;
@@ -109,6 +110,10 @@ public class TestDemoMainActivity extends BaseActivity {
                 ChinaCityHelper.getInstance(this);
                 Intent cityIntent = new Intent(this, CitySearchActivity.class);
                 startSpecifyActivity(cityIntent);
+                break;
+            case R.id.single_list:
+                Intent singleIntent = new Intent(this, SingleSelectListActivity.class);
+                startSpecifyActivity(singleIntent);
                 break;
         }
     }
