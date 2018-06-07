@@ -13,12 +13,14 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.lazzy.common.lib.widget.recyclerview.helper.ILetterData;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class GroupItemDecoration extends ItemDividerDecoration {
 
-    List<? extends ItemDecorationData> mDatas = new ArrayList<>();
+    List<? extends ILetterData> mDatas = new ArrayList<>();
     private Paint mPaint;
     private Rect mBounds;//用于存放测量文字Rect
 
@@ -27,6 +29,7 @@ public class GroupItemDecoration extends ItemDividerDecoration {
     private  int COLOR_TITLE_FONT = Color.parseColor("#FF000000");
     private  float mTitleFontSize = 16;//title字体大小
     private boolean isStickTitle =false;//是否是粘性头部
+    private boolean isFullWidthTitleBg = false;//是否不计算width padding，显示title
 
 
     /**
@@ -56,6 +59,8 @@ public class GroupItemDecoration extends ItemDividerDecoration {
 
     public void setStickTitle(boolean isStickTitle){this.isStickTitle = isStickTitle;}
 
+    public void setFullWidthTitleBg(boolean isFull){this.isFullWidthTitleBg = isFull;}
+
 
     private void init(Context context){
         mPaint = new Paint();
@@ -76,17 +81,12 @@ public class GroupItemDecoration extends ItemDividerDecoration {
         return true;
     }
 
-    public interface ItemDecorationData{
-        String getTag();
-    }
-
-
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         int position = ((RecyclerView.LayoutParams) view.getLayoutParams()).getViewLayoutPosition();
         //我记得Rv的item position在重置时可能为-1.保险点判断一下吧
         if (position > -1) {
-            String tag = mDatas.get(position).getTag();
+            String tag = mDatas.get(position).getLetter();
             if(TextUtils.isEmpty(tag)){
                 super.getItemOffsets(outRect, view, parent, state);
                 return ;
@@ -94,7 +94,7 @@ public class GroupItemDecoration extends ItemDividerDecoration {
             if (position == 0) {//等于0肯定要有title的
                 outRect.set(0, mTitleHeight, 0, 0);
             } else {//其他的通过判断
-                if (null != mDatas.get(position).getTag() && !mDatas.get(position).getTag().equals(mDatas.get(position - 1).getTag())) {
+                if (null != mDatas.get(position).getLetter() && !mDatas.get(position).getLetter().equals(mDatas.get(position - 1).getLetter())) {
                     outRect.set(0, mTitleHeight, 0, 0);//不为空 且跟前一个tag不一样了，说明是新的分类，也要title
                 } else {
                     super.getItemOffsets(outRect, view, parent, state);
@@ -110,8 +110,8 @@ public class GroupItemDecoration extends ItemDividerDecoration {
     public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
         super.onDraw(c, parent, state);
 
-        final int left = parent.getPaddingLeft();
-        final int right = parent.getWidth() - parent.getPaddingRight();
+        final int left = isFullWidthTitleBg?0: parent.getPaddingLeft();
+        final int right =isFullWidthTitleBg?parent.getWidth(): parent.getWidth() - parent.getPaddingRight();
         final int childCount = parent.getChildCount();
         for (int i = 0;i<childCount;i++){
             final View child = parent.getChildAt(i);
@@ -119,7 +119,7 @@ public class GroupItemDecoration extends ItemDividerDecoration {
                     .getLayoutParams();
             int position = params.getViewLayoutPosition();
             if (position > -1) {
-                String tag = mDatas.get(position).getTag();
+                String tag = mDatas.get(position).getLetter();
                 if(TextUtils.isEmpty(tag)){
                     continue;
                 }
@@ -127,7 +127,7 @@ public class GroupItemDecoration extends ItemDividerDecoration {
                     drawTitleArea(c, left, right, child, params, position);
 
                 } else {//其他的通过判断
-                    if (null != mDatas.get(position).getTag() && !mDatas.get(position).getTag().equals(mDatas.get(position - 1).getTag())) {
+                    if (null != mDatas.get(position).getLetter() && !mDatas.get(position).getLetter().equals(mDatas.get(position - 1).getLetter())) {
                         //不为空 且跟前一个tag不一样了，说明是新的分类，也要title
                         drawTitleArea(c, left, right, child, params, position);
                     } else {
@@ -143,35 +143,37 @@ public class GroupItemDecoration extends ItemDividerDecoration {
         if(!isStickTitle){
             super.onDrawOver(c,parent,state);
         }else{
-            final int left = parent.getPaddingLeft();
-            final int right = parent.getWidth() - parent.getPaddingRight();
-            final int top = parent.getPaddingTop();
-            final int childCount = parent.getChildCount();
             LinearLayoutManager lm = (LinearLayoutManager) parent.getLayoutManager();
             if(lm!=null){
               int pos =   lm.findFirstVisibleItemPosition();
-              String tag = mDatas.get(pos).getTag();
+              if(pos<0||pos>mDatas.size()){
+                  super.onDrawOver(c,parent,state);
+                  return ;
+              }
+              String tag = mDatas.get(pos).getLetter();
               if(!TextUtils.isEmpty(tag)){
                   View child =parent.findViewHolderForAdapterPosition(pos).itemView;
                   //添加实现粘性TItle滚动切换效果的实现
                   boolean isReady2Change =false;
                   if(pos<mDatas.size()-1){
-                      if(!tag.equals(mDatas.get(pos+1).getTag())){
+                      if(!tag.equals(mDatas.get(pos+1).getLetter())){
                           if(child.getBottom()<=mTitleHeight){
                               isReady2Change = true;
                           }
                       }
                   }
                   mPaint.setColor(COLOR_TITLE_BG);
-                  int pLeft = parent.getPaddingLeft();
+                  int pLeft =isFullWidthTitleBg?0: parent.getPaddingLeft();
                   int pTop = parent.getPaddingTop();
-                  int pRight = parent.getMeasuredWidth()-parent.getPaddingRight();
-                  int pBottom = parent.getMeasuredHeight()-parent.getPaddingBottom();
+                  int pRight =isFullWidthTitleBg?0: parent.getPaddingRight();
+                  int pBottom = parent.getPaddingBottom();
+
+                  mPaint.setColor(COLOR_TITLE_BG);
                   Rect bgRect = null;
                   if(!isReady2Change){
-                      bgRect = new Rect(pLeft, pTop, pRight, parent.getTop()+mTitleHeight);
+                      bgRect = new Rect(pLeft, pTop, parent.getMeasuredWidth()-pRight, pTop+mTitleHeight);
                   }else{
-                      bgRect = new Rect(pLeft,child.getBottom()-mTitleHeight, pRight, child.getBottom());
+                      bgRect = new Rect(pLeft,child.getBottom()-mTitleHeight,parent.getMeasuredWidth()-pRight, child.getBottom());
                   }
                   c.drawRect(bgRect, mPaint);
                   mPaint.setColor(COLOR_TITLE_FONT);
@@ -199,7 +201,7 @@ public class GroupItemDecoration extends ItemDividerDecoration {
         c.drawRect(rect, mPaint);
         mPaint.setColor(COLOR_TITLE_FONT);
 
-        mPaint.getTextBounds(mDatas.get(position).getTag(), 0, mDatas.get(position).getTag().length(), mBounds);
-        c.drawText(mDatas.get(position).getTag(),rect.left+ child.getPaddingLeft(), child.getTop() - params.topMargin - (mTitleHeight / 2 - mBounds.height() / 2), mPaint);
+        mPaint.getTextBounds(mDatas.get(position).getLetter(), 0, mDatas.get(position).getLetter().length(), mBounds);
+        c.drawText(mDatas.get(position).getLetter(),child.getLeft()+ child.getPaddingLeft(), child.getTop() - params.topMargin - (mTitleHeight / 2 - mBounds.height() / 2), mPaint);
     }
 }

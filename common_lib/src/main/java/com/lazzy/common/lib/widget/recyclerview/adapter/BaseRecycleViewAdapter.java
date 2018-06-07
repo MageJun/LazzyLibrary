@@ -13,8 +13,8 @@ import java.util.List;
  * @param <T>
  */
 public abstract class BaseRecycleViewAdapter<T> extends RecyclerView.Adapter {
-    private List<T> mDatas = new ArrayList<>();//所有的数据
-    private ItemViewManager<T> mItemViewManager;
+    protected List<T> mDatas = new ArrayList<>();//所有的数据
+    protected ItemViewManager<T> mItemViewManager;
 
     public abstract void onCreateMulitTypeItemView();
 
@@ -44,12 +44,12 @@ public abstract class BaseRecycleViewAdapter<T> extends RecyclerView.Adapter {
 
     @NonNull
     @Override
-   final public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
          return mItemViewManager.getItemView(viewType).onCreateViewHolder(parent,viewType);
     }
 
     @Override
-   final public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         int viewType = getItemViewType(position);
         IItemView itemView = mItemViewManager.getItemView(viewType);
         if (itemView != null) {
