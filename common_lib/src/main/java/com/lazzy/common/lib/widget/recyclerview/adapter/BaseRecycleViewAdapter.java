@@ -42,6 +42,14 @@ public abstract class BaseRecycleViewAdapter<T> extends RecyclerView.Adapter {
         mItemViewManager.setItemClickListener(listener);
     }
 
+    public void updateItemData(T data){
+        int pos = mDatas.indexOf(data);
+        if(pos!=-1){
+            mDatas.set(pos,data);
+            notifyItemChanged(pos);
+        }
+    }
+
     public void insertData(T data){
         int size = mDatas.size();
         mDatas.add(data);
