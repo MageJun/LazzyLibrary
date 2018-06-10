@@ -42,6 +42,22 @@ public abstract class BaseRecycleViewAdapter<T> extends RecyclerView.Adapter {
         mItemViewManager.setItemClickListener(listener);
     }
 
+    public void insertData(T data){
+        int size = mDatas.size();
+        mDatas.add(data);
+        notifyItemChanged(size);
+    }
+
+    public void removeData(T data){
+        int pos = mDatas.indexOf(data);
+        if(pos!=-1){
+            mDatas.remove(data);
+            notifyItemRemoved(pos);
+            if(pos!=mDatas.size())
+                notifyItemRangeChanged(pos,mDatas.size()-pos);
+        }
+    }
+
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
