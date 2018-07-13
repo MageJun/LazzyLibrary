@@ -2,8 +2,7 @@ package com.android.kotlindemo.view
 
 interface IViewer {
 
-    fun showProgress();
-
-    fun hideProgress();
-    fun initView()
+    open fun showProgress();
+    open fun hideProgress();
+    open  fun dataLoadComplete(any: Any?)
 }
