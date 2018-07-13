@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Samples</string>
     <string name="title_activity_group_invite_info">GroupInviteInfoActivity</string>
+    <string name="time_picker_title">共 %1$s 天</string>
 </resources>

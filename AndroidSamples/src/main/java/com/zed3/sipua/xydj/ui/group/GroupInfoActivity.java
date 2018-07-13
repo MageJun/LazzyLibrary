@@ -3,6 +3,7 @@ package com.zed3.sipua.xydj.ui.group;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -59,8 +60,9 @@ public class GroupInfoActivity extends BaseActivity {
         int itemMarginWidth = getResources().getDimensionPixelOffset(R.dimen.xydj_group_member_item_margin);
         ItemDividerDecoration decoration = new ItemDividerDecoration(this,LinearLayoutManager.HORIZONTAL);
         decoration.setOffset(itemMarginWidth);
-        mRecyclerView.addItemDecoration(decoration);
-        mRecyclerView.setLayoutManager(layoutManager);
+//        mRecyclerView.addItemDecoration(decoration);
+        GridLayoutManager glm = new GridLayoutManager(this,6);
+        mRecyclerView.setLayoutManager(glm);
         mRecyclerView.setAdapter(memeberListAdapter);
         memeberListAdapter.setOnItemClickListener(mItemClickListener);
         if(mGrp!=null){
@@ -143,7 +145,8 @@ public class GroupInfoActivity extends BaseActivity {
         int itemCount = (width+itemMarginWidth)/(itemWidth+itemMarginWidth);
         int count = itemCount-2;//根据屏幕宽度，计算可以显示的Item的个数，预留加号和减号的位置
         Log.i(TAG,"width = "+width+",itemWidth = "+itemWidth+", itemMarginWidth="+itemMarginWidth+" ,initData count = "+count);
-        return count;
+//        return count;
+        return 5;
     }
 
     public void onClick(View view){
