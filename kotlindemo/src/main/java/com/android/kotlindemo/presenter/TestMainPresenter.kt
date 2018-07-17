@@ -1,6 +1,6 @@
 package com.android.kotlindemo.presenter
 
-import com.android.kotlindemo.view.MainActivity
+import com.android.kotlindemo.view.activity.MainActivity
 import com.android.kotlindemo.view.IViewer
 
 class TestMainPresenter : TestBasePresenter() {

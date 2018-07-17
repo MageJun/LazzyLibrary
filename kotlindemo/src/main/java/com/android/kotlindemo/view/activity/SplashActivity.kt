@@ -1,4 +1,4 @@
-package com.android.kotlindemo
+package com.android.kotlindemo.view.activity
 
 import android.Manifest
 import android.content.Intent
@@ -6,8 +6,8 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
+import com.android.kotlindemo.R
 import com.android.kotlindemo.model.service.NewsThemeListManager
-import com.android.kotlindemo.view.MainActivity
 import com.lazzy.common.lib.utils.PermissionHelper
 import kotlinx.android.synthetic.main.activity_splash.*
 
@@ -66,6 +66,8 @@ class SplashActivity : AppCompatActivity() {
                 NewsThemeListManager.getInstance()?.getNewsThemeList()
 
                 startActivity(intent)
+
+                finish()
             }
 
         })

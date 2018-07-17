@@ -5,6 +5,7 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 import android.util.Log;
 
+import com.helper.SqliteHelper;
 import com.zed3.sipua.xydj.ui.dao.GroupInviteDao;
 import com.zed3.sipua.xydj.ui.dao.domain.GroupInvite;
 
@@ -57,5 +58,10 @@ public class ExampleInstrumentedTest {
         int raws = dao.delete(results.get(0));
         Log.i(TAG,"d_id = "+raws);
 
+    }
+
+    @Test
+    public void sqliteHelperTest(){
+        String sql = SqliteHelper.getOffsetDayStart(6,false);
     }
 }

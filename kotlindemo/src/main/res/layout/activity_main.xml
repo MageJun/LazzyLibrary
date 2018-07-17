@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:openDrawer="start"
-    tools:context=".view.MainActivity">
+    tools:context=".view.activity.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,11 +22,10 @@
             app:titleTextAppearance="@style/ToolBarTitle"
             app:contentInsetStartWithNavigation="0dp"
             />
-        <TextView
+        <FrameLayout
+            android:id="@+id/content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Hello World!"
-            android:gravity="center"
             android:background="@color/xydj_color_white"
              />
     </LinearLayout>
@@ -36,6 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        app:menu="@menu/news_theme_list_menu"
         app:headerLayout="@layout/naviagtion_header_layout"
         />
 

@@ -1,15 +1,14 @@
-package com.android.kotlindemo.view
+package com.android.kotlindemo.view.activity
 
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
-import android.view.Window
 import android.view.WindowManager
+import com.android.kotlindemo.view.IViewer
 
-open  abstract class BaseActivity: AppCompatActivity(),IViewer {
+open  abstract class BaseActivity: AppCompatActivity(), IViewer {
 
     internal abstract  fun onActivityCreate(savedInstanceState: Bundle?)
     internal abstract fun onActivityDestory()
@@ -23,6 +22,9 @@ open  abstract class BaseActivity: AppCompatActivity(),IViewer {
 
     override fun dataLoadComplete(any: Any?) {
 
+    }
+
+    override fun moreDataLoadComplete(any: Any?) {
     }
 
 

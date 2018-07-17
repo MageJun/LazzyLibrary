@@ -23,5 +23,29 @@
             android:textSize="20sp"/>
     </android.support.constraint.ConstraintLayout>
 
+    <LinearLayout
+        android:id="@+id/homeline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:gravity="center_vertical">
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/home"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/colorAccent"
+            android:text="@string/home"
+            android:layout_marginLeft="15dp"/>
+    </LinearLayout>
+
+
 
 </LinearLayout>

@@ -1,4 +1,4 @@
-package com.android.kotlindemo.view
+package com.android.kotlindemo.view.activity
 
 import android.os.Bundle
 import android.support.design.widget.Snackbar

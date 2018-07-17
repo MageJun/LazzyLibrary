@@ -1,11 +1,13 @@
-package com.android.kotlindemo.view
+package com.android.kotlindemo.view.activity
 
 import android.os.Bundle
+import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.ActionBarDrawerToggle
-import android.view.MenuItem
 import com.android.kotlindemo.R
 import com.android.kotlindemo.model.service.NewsThemeListManager
 import com.android.kotlindemo.presenter.MainActivityPresenter
+import com.android.kotlindemo.view.fragment.HomeFragment
+import com.android.kotlindemo.view.fragment.TestHomeFragment
 import com.lazzy.common.lib.utils.ViewHelper
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.naviagtion_header_layout.*
@@ -13,6 +15,8 @@ import kotlinx.android.synthetic.main.naviagtion_header_layout.*
 class MainActivity : BaseActivity() {
 
     private var mPresenter: MainActivityPresenter?=null
+    private var mHomeFragment:HomeFragment?=null
+
     override  fun onActivityCreate(savedInstanceState: Bundle?) {
         setContentView(R.layout.activity_main)
     }
@@ -26,15 +30,29 @@ class MainActivity : BaseActivity() {
         drawerlayout.addDrawerListener(toggle)
         toggle.syncState()
 
+        navigationview?.itemIconTintList=null
+        navigationview?.itemTextColor=null
+
         var statusBar = ViewHelper.getStatusBar();
         navigation_statusbar?.layoutParams?.height = statusBar
         invisibleScrollbar()
 
         updateThemeListShow();
+
+        initFragment()
+    }
+
+    private fun initFragment() {
+        if(mHomeFragment==null){
+            mHomeFragment = HomeFragment()
+        }
+        var transaction = supportFragmentManager?.beginTransaction()
+        transaction?.add(R.id.content,mHomeFragment/*TestHomeFragment()*/)
+        transaction?.commit()
+
     }
 
     override fun onActivityDestory() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         mPresenter?.unbindView()
     }
 
@@ -56,10 +74,10 @@ class MainActivity : BaseActivity() {
         var themeList = newsThemeBean.others
         var size = themeList!!.size;
         var  menu = navigationview.getMenu()
-        menu.clear()
-        for (i in 0..size){
+        menu.removeGroup(R.id.news_theme_list)
+        for (i in 0..(size-1)){
             var title = themeList.get(i).name
-            menu.add(i,i,i,title)
+            menu.add(R.id.news_theme_list,i,i,title)
         }
     }
 

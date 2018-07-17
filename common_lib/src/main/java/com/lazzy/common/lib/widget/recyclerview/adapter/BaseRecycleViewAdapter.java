@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 
@@ -54,6 +55,11 @@ public abstract class BaseRecycleViewAdapter<T> extends RecyclerView.Adapter {
         int size = mDatas.size();
         mDatas.add(data);
         notifyItemChanged(size);
+    }
+    public void insertData(Collection<T> data){
+        int size = mDatas.size();
+        mDatas.addAll(data);
+        notifyItemChanged(size,data.size()-1);
     }
 
     public void removeData(T data){
