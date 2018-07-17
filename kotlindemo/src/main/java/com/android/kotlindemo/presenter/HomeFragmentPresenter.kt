@@ -7,8 +7,7 @@ import org.greenrobot.eventbus.ThreadMode
 
 class HomeFragmentPresenter:IBasePresenter() {
 
-    override fun loadData() {
-        super.loadData()
+    override fun loadData(vararg argument:Any?) {
         NewsManager.getInstance().getHomeNews()
     }
 

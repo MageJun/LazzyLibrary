@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import com.android.kotlindemo.event.NewsEvent;
 import com.android.kotlindemo.model.bean.net.HomeNewsBean;
 import com.android.kotlindemo.model.bean.net.INewsBean;
+import com.android.kotlindemo.model.bean.net.NewsContentBean;
 import com.android.kotlindemo.utils.ZhiHuRiBaoAPI;
 import com.android.kotlindemo.utils.net.MyCallBack;
 import com.android.kotlindemo.utils.net.XUtil;
@@ -39,6 +40,9 @@ public class NewsManager {
         return sInstance;
     }
 
+    /**
+     * 获取首页最新新闻
+     */
     public void getHomeNews(){
         Map<String,String> params = new HashMap<>();
         XUtil.Get(ZhiHuRiBaoAPI.Companion.getNEWS_LATEST_URL(),params,new MyCallBack<String>(){
@@ -55,6 +59,10 @@ public class NewsManager {
         });
     }
 
+    /**
+     * 获取首页置顶日期前一天的新闻
+     * @param date
+     */
     public void getBerforeNews(String date){
         if(TextUtils.isEmpty(date)){
             return;
@@ -71,6 +79,27 @@ public class NewsManager {
                     Gson gson = new Gson();
                     HomeNewsBean bean = gson.fromJson(result,HomeNewsBean.class);
                     dispatchEvent(null,bean,null, NewsEvent.EventType.MORE_NEWS);
+                }
+            }
+        });
+    }
+
+    public void getNewsContent(String newsId){
+        if(TextUtils.isEmpty(newsId)){
+            return;
+        }
+        String url = String.format(ZhiHuRiBaoAPI.Companion.getNEWS_BODY_URL(),newsId);
+        L.i("url = "+url);
+        Map<String,String> params = new HashMap<>();
+        XUtil.Get(url,params,new MyCallBack<String>(){
+
+            @Override
+            public void onSuccess(String result) {
+                super.onSuccess(result);
+                if(!TextUtils.isEmpty(result)){
+                    Gson gson = new Gson();
+                    NewsContentBean bean = gson.fromJson(result,NewsContentBean.class);
+                    dispatchEvent(null,bean,null, NewsEvent.EventType.NEWS_CONTENT);
                 }
             }
         });

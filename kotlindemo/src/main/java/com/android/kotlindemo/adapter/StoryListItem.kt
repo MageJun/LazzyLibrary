@@ -26,6 +26,13 @@ class StoryListItem : BaseItemView<StoryBean>() {
             ViewHelper.setImgview(img, imags[0])
         }
         holder.setText(R.id.title, data.title)
+        holder?.itemView?.setOnClickListener(object :View.OnClickListener{
+            override fun onClick(v: View?) {
+                mItemClickListener?.onItemClick(v,position,data,null)
+
+            }
+
+        });
     }
 
     override fun getItemViewType(): Int {

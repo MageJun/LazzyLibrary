@@ -16,7 +16,7 @@ open abstract class IBasePresenter {
         EventBus.getDefault().unregister(this)
     }
 
-    open fun loadData(){
+    open fun loadData(vararg argument:Any?){
 
     }
 

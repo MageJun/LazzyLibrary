@@ -1,5 +1,6 @@
 package com.android.kotlindemo.view.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.view.PagerAdapter
 import android.support.v4.view.ViewPager
@@ -19,10 +20,12 @@ import com.android.kotlindemo.model.bean.net.HomeNewsBean
 import com.android.kotlindemo.model.bean.net.StoryBean
 import com.android.kotlindemo.presenter.HomeFragmentPresenter
 import com.android.kotlindemo.view.IViewer
+import com.android.kotlindemo.view.activity.NewsContentActivity
 import com.lazzy.common.lib.utils.L
 import com.lazzy.common.lib.utils.ResourceHelper
 import com.lazzy.common.lib.utils.ViewHelper
 import com.lazzy.common.lib.widget.recyclerview.adapter.BaseRecycleViewAdapter
+import com.lazzy.common.lib.widget.recyclerview.adapter.OnItemClickListener
 import com.lazzy.common.lib.widget.recyclerview.decoration.ItemDividerDecoration
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -118,6 +121,18 @@ class HomeFragment: BaseFragment(),IViewer {
             override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
             }
+        })
+
+        mListAdapter?.setItemClickListener(object :OnItemClickListener<StoryBean>{
+            override fun onItemClick(view: View?, pos: Int, data: StoryBean?, obj: Any?) {
+                var intent = Intent(activity,NewsContentActivity::class.java)
+                intent.putExtra("news_id",data?.id)
+                activity?.startActivity(intent)
+            }
+
+            override fun onItemLongClick(view: View?, pos: Int, data: StoryBean?, obj: Any?) {
+            }
+
         })
 
     }

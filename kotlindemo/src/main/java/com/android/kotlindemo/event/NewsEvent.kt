@@ -9,6 +9,7 @@ class NewsEvent: BaseEvent<INewsBean>() {
         UNKNOW,
         HOME_NEWS,
         OTEHR_NEWS,
-        MORE_NEWS
+        MORE_NEWS,
+        NEWS_CONTENT
     }
 }

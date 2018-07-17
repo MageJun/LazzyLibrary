@@ -26,6 +26,12 @@ class TopStoryListItem : BaseItemView<StoryBean>() {
             val img = view.findViewById<ImageView>(R.id.img)
             ViewHelper.setImgview(img,url)
             container?.addView(view)
+            view?.setOnClickListener(object :View.OnClickListener{
+                override fun onClick(v: View?) {
+                    mItemClickListener?.onItemClick(v,position,mData?.get(position),null)
+                }
+
+            });
             return view
         }
 

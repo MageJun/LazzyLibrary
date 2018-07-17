@@ -7,7 +7,6 @@ import com.android.kotlindemo.R
 import com.android.kotlindemo.model.service.NewsThemeListManager
 import com.android.kotlindemo.presenter.MainActivityPresenter
 import com.android.kotlindemo.view.fragment.HomeFragment
-import com.android.kotlindemo.view.fragment.TestHomeFragment
 import com.lazzy.common.lib.utils.ViewHelper
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.naviagtion_header_layout.*
