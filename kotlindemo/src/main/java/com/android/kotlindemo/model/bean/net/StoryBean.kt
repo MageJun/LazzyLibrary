@@ -25,11 +25,11 @@ class StoryBean:Parcelable {
     var id: Int = 0
     var images: List<String>? = null
     var image: String? = null
-    var isMultipic: Boolean = false
+    var multipic: Boolean = false
     var mode:Mode=Mode.NORMAL
     var extra:Bundle?=null
     override fun toString(): String {
-        return "StoryBean(title=$title, ga_prefix=$ga_prefix, type=$type, id=$id, images=$images, image=$image, isMultipic=$isMultipic)"
+        return "StoryBean(title=$title, ga_prefix=$ga_prefix, type=$type, id=$id, images=$images, image=$image, isMultipic=$multipic)"
     }
 
     enum class Mode{

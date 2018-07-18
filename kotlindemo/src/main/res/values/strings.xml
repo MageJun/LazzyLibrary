@@ -18,6 +18,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="home">首页</string>
+    <string name="section_name">本文来自:%1$s·合集</string>
 
 
 </resources>

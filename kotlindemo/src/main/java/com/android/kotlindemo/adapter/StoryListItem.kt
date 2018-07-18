@@ -25,6 +25,11 @@ class StoryListItem : BaseItemView<StoryBean>() {
         if (imags != null && imags.size > 0) {
             ViewHelper.setImgview(img, imags[0])
         }
+        if(data?.multipic){
+            holder.setViewVisible(R.id.mulitpic_layout,View.VISIBLE)
+        }else{
+            holder.setViewVisible(R.id.mulitpic_layout,View.INVISIBLE)
+        }
         holder.setText(R.id.title, data.title)
         holder?.itemView?.setOnClickListener(object :View.OnClickListener{
             override fun onClick(v: View?) {

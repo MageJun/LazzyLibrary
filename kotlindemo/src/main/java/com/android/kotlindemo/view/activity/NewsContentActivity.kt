@@ -4,6 +4,9 @@ import android.graphics.Color
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
 import android.view.View
+import android.webkit.WebView
+import android.webkit.WebViewClient
+import android.widget.Toast
 import com.android.kotlindemo.R
 import com.android.kotlindemo.model.bean.net.NewsContentBean
 import com.android.kotlindemo.presenter.NewsContentPresenter
@@ -85,7 +88,25 @@ class NewsContentActivity : BaseActivity() {
 //        webview?.settings?.allowContentAccess = true
 //        webview?.settings?.domStorageEnabled = true
         var data = HtmlUtils.createHtmlData(mData?.body, mData?.css, mData?.js);
+        webview?.webViewClient=object :WebViewClient(){
+            override fun onPageFinished(view: WebView?, url: String?) {
+                super.onPageFinished(view, url)
+                Toast.makeText(this@NewsContentActivity,"加载完成！",Toast.LENGTH_SHORT).show()
+                updateSection()
+            }
+        }
         webview?.loadData(data, HtmlUtils.MIME_TYPE, HtmlUtils.ENCODING)
+    }
+
+    fun updateSection(){
+        if(mData?.section!=null){
+            section_layout?.visibility=View.VISIBLE
+            ViewHelper.setImgview(section_img,mData?.section?.thumbnail)
+            ViewHelper.setText(section_name,ResourceHelper.getStr(R.string.section_name,mData?.section?.name))
+
+        }else{
+            section_layout?.visibility=View.GONE
+        }
     }
 
 
