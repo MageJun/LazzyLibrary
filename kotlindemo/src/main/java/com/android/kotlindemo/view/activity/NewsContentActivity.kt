@@ -3,6 +3,7 @@ package com.android.kotlindemo.view.activity
 import android.graphics.Color
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
+import android.view.KeyEvent
 import android.view.View
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -15,6 +16,9 @@ import com.lazzy.common.lib.utils.L
 import com.lazzy.common.lib.utils.ResourceHelper
 import com.lazzy.common.lib.utils.ViewHelper
 import kotlinx.android.synthetic.main.activity_news_content.*
+import android.view.KeyEvent.KEYCODE_BACK
+
+
 
 class NewsContentActivity : BaseActivity() {
     var mData: NewsContentBean? = null
@@ -107,6 +111,18 @@ class NewsContentActivity : BaseActivity() {
         }else{
             section_layout?.visibility=View.GONE
         }
+    }
+
+
+
+   override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_BACK && webview?.canGoBack()!!) {
+            webview?.goBack()
+            return true
+        } else {
+            onBackPressed()
+        }
+        return super.onKeyDown(keyCode, event)
     }
 
 
