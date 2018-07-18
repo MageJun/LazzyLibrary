@@ -225,6 +225,9 @@ public class ViewHelper {
                 @Override
                 public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
                     Log.i(TAG,"setImgViewAdjust()#onResourceReady width = "+resource.getWidth()+",height = "+resource.getHeight()+", img = "+img.hashCode());
+                    if(img.getScaleType()!= ImageView.ScaleType.FIT_XY){
+                        img.setScaleType(ImageView.ScaleType.FIT_XY);
+                    }
                     double radio = ResourceHelper.getRadio(height,width);
                     ViewGroup.LayoutParams params = img.getLayoutParams();
                     params.height= (int) (img.getWidth()*radio);
