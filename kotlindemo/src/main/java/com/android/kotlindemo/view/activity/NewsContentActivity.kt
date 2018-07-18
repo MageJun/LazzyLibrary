@@ -1,5 +1,7 @@
 package com.android.kotlindemo.view.activity
 
+import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
@@ -17,6 +19,11 @@ import com.lazzy.common.lib.utils.ResourceHelper
 import com.lazzy.common.lib.utils.ViewHelper
 import kotlinx.android.synthetic.main.activity_news_content.*
 import android.view.KeyEvent.KEYCODE_BACK
+import android.view.MotionEvent
+import android.webkit.JavascriptInterface
+import com.android.kotlindemo.R.id.webview
+
+
 
 
 
@@ -51,16 +58,19 @@ class NewsContentActivity : BaseActivity() {
             override fun onOffsetChanged(appBarLayout: AppBarLayout?, verticalOffset: Int) {
                 var percent = Math.abs(verticalOffset*1.0f)/(appBarLayout?.totalScrollRange!!)
                 L.i("onOffsetChanged verticalOffset = "+percent)
-               /* if(percent==1.0f){
-                    appBarLayout?.visibility= View.GONE
-                    return
-                }else{
-                    appBarLayout?.visibility= View.VISIBLE
-                }*/
-
                 //监听滚动状态，改变toolBar的颜色
                 toolbar?.setBackgroundColor(changeAlpha(ResourceHelper.getColor(R.color.colorAccent),1.0f-Math.abs(verticalOffset*1.0f)/(appBarLayout?.totalScrollRange!!)))
 
+            }
+
+        })
+        //设置为true，可以加载html文件
+        webview.settings.javaScriptEnabled = true
+        //与JS进行交互
+        webview?.addJavascriptInterface(JsInterface(this),"imageClick")
+        webview?.setOnTouchListener(object :View.OnTouchListener{
+            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+                return this@NewsContentActivity.onTouch(v!!,event!!)
             }
 
         })
@@ -83,7 +93,6 @@ class NewsContentActivity : BaseActivity() {
 //        var imgView = titleimg
         ViewHelper.setImgview(titleimg, mData?.image)
 
-        webview.settings.javaScriptEnabled = true
         //屏幕自适应
 //        webview.settings.setUseWideViewPort(true);
 //        webview.settings.setLoadWithOverviewMode(true);
@@ -123,6 +132,51 @@ class NewsContentActivity : BaseActivity() {
             onBackPressed()
         }
         return super.onKeyDown(keyCode, event)
+    }
+
+    internal inner class JsInterface(var context: Context) {
+
+        //查看图片url
+        @JavascriptInterface
+        fun click(url: String) {
+            val intent = Intent()
+            intent.putExtra("img_url", url)
+            intent.setClass(this@NewsContentActivity, ImageShowActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    var x: Float = 0f
+    var y:Float = 0f
+
+
+    fun onTouch(v: View, event: MotionEvent): Boolean {
+        //通过wenview的touch来响应web上的图片点击事件
+        val density = resources.displayMetrics.density //屏幕密度
+        val touchX = event.getX() / density  //必须除以屏幕密度
+        val touchY = event.getY() / density
+        if (event.getAction() === MotionEvent.ACTION_DOWN) {
+            x = touchX
+            y = touchY
+        }
+
+        if (event.getAction() === MotionEvent.ACTION_UP) {
+            val dx = Math.abs(touchX - x)
+            val dy = Math.abs(touchY - y)
+            if (dx < 10.0 / density && dy < 10.0 / density) {
+                clickImage(touchX, touchY)
+            }
+        }
+        return false
+    }
+
+    private fun clickImage(touchX: Float, touchY: Float) {
+        //通过触控的位置来获取图片URL
+        val js = ("javascript:(function(){" +
+                "var  obj=document.elementFromPoint(" + touchX + "," + touchY + ");"
+                + "if(obj.src!=null){" + " window.imageClick.click(obj.src);}" +
+                "})()")
+        webview.loadUrl(js)
     }
 
 

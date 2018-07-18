@@ -15,7 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.activity.MainActivity"></activity>
+        <activity android:name=".view.activity.MainActivity" />
         <activity
             android:name=".view.activity.Main2Activity"
             android:label="@string/title_activity_main2"
@@ -31,7 +31,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activity.NewsContentActivity"></activity>
+        <activity android:name=".view.activity.NewsContentActivity" />
+        <activity android:name=".view.activity.ImageShowActivity"></activity>
     </application>
 
 </manifest>
