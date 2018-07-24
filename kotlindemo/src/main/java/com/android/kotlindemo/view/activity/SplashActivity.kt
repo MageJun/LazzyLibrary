@@ -71,7 +71,15 @@ class SplashActivity : AppCompatActivity() {
             }
 
         })
-        permissionHelper?.requestPermission(PermissionHelper.PermissionModel("存储权限",Manifest.permission.READ_EXTERNAL_STORAGE,"我们需要获取存储权限，来优化用户体验",PermissionHelper.obtionCode()))
+      var result =   permissionHelper?.requestPermission(PermissionHelper.PermissionModel("存储权限",Manifest.permission.READ_EXTERNAL_STORAGE,"我们需要获取存储权限，来优化用户体验",PermissionHelper.obtionCode()))
+        if(result!!){
+            var intent:Intent?=Intent(this@SplashActivity, MainActivity::class.java)
+            NewsThemeListManager.getInstance()?.getNewsThemeList()
+
+            startActivity(intent)
+
+            finish()
+        }
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
