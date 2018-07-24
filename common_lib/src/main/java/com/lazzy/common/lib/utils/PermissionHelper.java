@@ -118,9 +118,9 @@ public class PermissionHelper {
                     ActivityCompat.requestPermissions(mActivity, new String[]{model.permission}, model.requestCode);
                     return false;
                 }
-                if (mOnApplyPermissionListener != null) {
+                /*if (mOnApplyPermissionListener != null) {
                     mOnApplyPermissionListener.onAfterApplyAllPermission();
-                }
+                }*/
             } else {
                 return true;
             }
