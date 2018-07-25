@@ -34,6 +34,7 @@ class StoryBean:Parcelable {
 
     enum class Mode{
         NORMAL,
+        IMG,
         VIEWPAGER
     }
 }

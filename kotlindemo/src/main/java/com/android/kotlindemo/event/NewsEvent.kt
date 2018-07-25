@@ -8,8 +8,9 @@ class NewsEvent: BaseEvent<INewsBean>() {
     enum class EventType{
         UNKNOW,
         HOME_NEWS,
-        OTEHR_NEWS,
+        THEME_NEWS,
         MORE_NEWS,
+        MORE_THEME_NEWS,
         NEWS_CONTENT
     }
 }

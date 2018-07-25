@@ -1,20 +1,44 @@
 package com.android.kotlindemo.view.activity
 
 import android.os.Bundle
+import android.support.design.widget.NavigationView
+import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.ActionBarDrawerToggle
+import android.support.v7.widget.Toolbar
+import android.view.MenuItem
+import android.view.View
 import com.android.kotlindemo.R
+import com.android.kotlindemo.model.bean.net.NewsThemeBean
+import com.android.kotlindemo.model.service.NewsManager
 import com.android.kotlindemo.model.service.NewsThemeListManager
 import com.android.kotlindemo.presenter.MainActivityPresenter
 import com.android.kotlindemo.view.fragment.HomeFragment
+import com.android.kotlindemo.view.fragment.TestHomeFragment
+import com.android.kotlindemo.view.fragment.ThemeFragment
+import com.lazzy.common.lib.utils.ResourceHelper
 import com.lazzy.common.lib.utils.ViewHelper
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_news_content.*
 import kotlinx.android.synthetic.main.naviagtion_header_layout.*
 
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity(),View.OnClickListener {
+    override fun onClick(v: View?) {
+        when(v?.id){
+            R.id.homeline ->{
+                switchHomeFragment()
+                updateTitleText(ResourceHelper.getStr(R.string.home))
+                drawerlayout?.closeDrawers()
+            }
+            else ->{
+
+            }
+        }
+    }
 
     private var mPresenter: MainActivityPresenter?=null
     private var mHomeFragment:HomeFragment?=null
+    private var mThemeFragment:ThemeFragment?=null
 
     override  fun onActivityCreate(savedInstanceState: Bundle?) {
         setContentView(R.layout.activity_main)
@@ -23,9 +47,9 @@ class MainActivity : BaseActivity() {
     override fun initView() {
         mPresenter= MainActivityPresenter()
         mPresenter?.bindView(this)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(toolbar_main)
         supportActionBar?.setDisplayHomeAsUpEnabled(true);
-        var toggle = ActionBarDrawerToggle(this,drawerlayout,toolbar,0,0);
+        var toggle = ActionBarDrawerToggle(this,drawerlayout,toolbar_main,0,0);
         drawerlayout.addDrawerListener(toggle)
         toggle.syncState()
 
@@ -39,15 +63,48 @@ class MainActivity : BaseActivity() {
         updateThemeListShow();
 
         initFragment()
+
+        updateTitleText(ResourceHelper.getStr(R.string.home))
+
+        initListener()
+    }
+
+    private fun initListener(){
+        var homeline = navigationview?.getHeaderView(0)?.findViewById<View>(R.id.homeline)
+        homeline?.setOnClickListener(this)
+        navigationview?.setNavigationItemSelectedListener( object : NavigationView.OnNavigationItemSelectedListener{
+            override fun onNavigationItemSelected(item: MenuItem): Boolean {
+                var  titleMsg = item?.title
+                updateTitleText(titleMsg?.toString()!!)
+                var newsThemeBean = NewsThemeListManager.getInstance().getNewsThemeBean()
+                if(newsThemeBean!=null){
+                    var  themeBeanList = newsThemeBean.others
+                    var index = item?.itemId
+                    if(themeBeanList?.size!! >index){
+                        var themBean = themeBeanList?.get(index)
+                        switchThemeFragment(themBean)
+                    }
+                }
+                drawerlayout?.closeDrawers()
+                return true
+            }
+        })
     }
 
     private fun initFragment() {
         if(mHomeFragment==null){
             mHomeFragment = HomeFragment()
         }
+        if(mThemeFragment==null){
+            mThemeFragment = ThemeFragment()
+        }
         var transaction = supportFragmentManager?.beginTransaction()
         transaction?.add(R.id.content,mHomeFragment/*TestHomeFragment()*/)
+        transaction?.add(R.id.content,mThemeFragment)
+        transaction?.hide(mThemeFragment)
         transaction?.commit()
+
+        mCurrentFragment = mHomeFragment
 
     }
 
@@ -78,6 +135,47 @@ class MainActivity : BaseActivity() {
             var title = themeList.get(i).name
             menu.add(R.id.news_theme_list,i,i,title)
         }
+    }
+
+    private fun updateTitleText(title:String){
+        supportActionBar?.title=title
+    }
+
+    private var mCurrentFragment:Fragment? = null;
+
+    private fun switchHomeFragment(){
+        if(mCurrentFragment == mHomeFragment){
+            return
+        }
+        var  transaction = supportFragmentManager?.beginTransaction()
+       /* if(mHomeFragment==null){
+            mHomeFragment = HomeFragment();
+            transaction?.add(R.id.content,mHomeFragment)
+        }*/
+        transaction?.show(mHomeFragment)
+        transaction?.hide(mThemeFragment)
+        transaction?.commit()
+        mCurrentFragment = mHomeFragment
+    }
+
+    private fun switchThemeFragment(bean:NewsThemeBean.ThemeBean){
+        if(bean == null){
+            return
+        }
+        mThemeFragment?.setThemeBean(bean)
+        if(mCurrentFragment == mThemeFragment){
+            return
+        }
+        var  transaction = supportFragmentManager?.beginTransaction()
+      /*  if(mThemeFragment == null){
+            mThemeFragment = ThemeFragment()
+            transaction?.add(R.id.content,mThemeFragment)
+        }*/
+        transaction?.hide(mHomeFragment)
+        transaction?.show(mThemeFragment)
+        transaction?.commit()
+        mCurrentFragment = mThemeFragment
+
     }
 
 

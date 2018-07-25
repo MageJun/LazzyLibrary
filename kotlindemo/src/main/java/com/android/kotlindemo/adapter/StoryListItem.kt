@@ -21,14 +21,18 @@ class StoryListItem : BaseItemView<StoryBean>() {
 
     override fun onBindVH(holder: BaseViewHolder, position: Int, data: StoryBean) {
         val img = holder.getView<ImageView>(R.id.img)
+        val img_layout = holder.getView<View>(R.id.img_layout)
         val imags = data.images
         if (imags != null && imags.size > 0) {
+            img_layout?.visibility = View.VISIBLE
             ViewHelper.setImgview(img, imags[0])
-        }
-        if(data?.multipic){
-            holder.setViewVisible(R.id.mulitpic_layout,View.VISIBLE)
+            if(data?.multipic){
+                holder.setViewVisible(R.id.mulitpic_layout,View.VISIBLE)
+            }else{
+                holder.setViewVisible(R.id.mulitpic_layout,View.INVISIBLE)
+            }
         }else{
-            holder.setViewVisible(R.id.mulitpic_layout,View.INVISIBLE)
+            img_layout?.visibility = View.GONE
         }
         holder.setText(R.id.title, data.title)
         holder?.itemView?.setOnClickListener(object :View.OnClickListener{

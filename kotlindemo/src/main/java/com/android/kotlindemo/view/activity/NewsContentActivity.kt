@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
+import android.text.TextUtils
 import android.view.KeyEvent
 import android.view.View
 import android.webkit.WebView
@@ -21,6 +22,7 @@ import kotlinx.android.synthetic.main.activity_news_content.*
 import android.view.KeyEvent.KEYCODE_BACK
 import android.view.MotionEvent
 import android.webkit.JavascriptInterface
+import android.widget.TextView
 import com.android.kotlindemo.R.id.webview
 
 
@@ -30,9 +32,12 @@ import com.android.kotlindemo.R.id.webview
 class NewsContentActivity : BaseActivity() {
     var mData: NewsContentBean? = null
     var mPresenter: NewsContentPresenter? = null
+    var mTitleMsg:TextView?=null
+    var mIsCollapsible = true;
 
     override fun onActivityCreate(savedInstanceState: Bundle?) {
         setContentView(R.layout.activity_news_content)
+        mTitleMsg = findViewById(R.id.titlemsg)
     }
 
     override fun onActivityDestory() {
@@ -56,11 +61,14 @@ class NewsContentActivity : BaseActivity() {
              * 通过Math.abs(verticalOffset*1.0f)/appBarLayout.getTotalScrollRange() 计算偏移量的百分比来改变Toolbar背景透明度
              */
             override fun onOffsetChanged(appBarLayout: AppBarLayout?, verticalOffset: Int) {
+                if(!mIsCollapsible){
+                    return
+                }
                 var percent = Math.abs(verticalOffset*1.0f)/(appBarLayout?.totalScrollRange!!)
                 L.i("onOffsetChanged verticalOffset = "+percent)
                 //监听滚动状态，改变toolBar的颜色
-                toolbar?.setBackgroundColor(changeAlpha(ResourceHelper.getColor(R.color.colorAccent),1.0f-Math.abs(verticalOffset*1.0f)/(appBarLayout?.totalScrollRange!!)))
-
+                toolbar?.setBackgroundColor(changeAlpha(ResourceHelper.getColor(R.color.colorAccent),Math.abs(verticalOffset*1.0f)/(appBarLayout?.totalScrollRange!!)))
+                mTitleMsg?.setTextColor(changeAlpha(ResourceHelper.getColor(R.color.xydj_color_white),Math.abs(verticalOffset*1.0f)/(appBarLayout?.totalScrollRange!!)))
             }
 
         })
@@ -88,11 +96,22 @@ class NewsContentActivity : BaseActivity() {
         return Color.argb(alpha, red, green, blue)
     }
 
+    private fun updateTitleView(){
+        if(mData!=null){
+            if(TextUtils.isEmpty(mData?.image)){
+                mIsCollapsible = false
+                appbarLayout?.layoutParams?.height = toolbar?.height
+                titleimg.visibility = View.GONE
+                mTitleMsg?.setTextColor(ResourceHelper.getColor(R.color.xydj_color_white))
+            }
+        }
+    }
+
     override fun dataLoadComplete(any: Any?) {
         mData = any as NewsContentBean
 //        var imgView = titleimg
         ViewHelper.setImgview(titleimg, mData?.image)
-
+        updateTitleView()
         //屏幕自适应
 //        webview.settings.setUseWideViewPort(true);
 //        webview.settings.setLoadWithOverviewMode(true);

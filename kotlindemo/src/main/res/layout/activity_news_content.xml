@@ -13,16 +13,18 @@
         android:background="@color/colorAccent"><!--需要固定高度-->
 
         <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/coolapsing_toobar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_scrollFlags="scroll"><!--设置可滚动,|exitUntilCollapsed可折叠在顶部-->
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"><!--设置可滚动,|exitUntilCollapsed可折叠在顶部-->
 
             <ImageView
                 android:id="@+id/titleimg"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/xydj_color_white"
-                app:layout_collapseMode="parallax" /><!--设置视差模式-->
+                app:layout_collapseParallaxMultiplier="0.8"
+                app:layout_collapseMode="parallax" /><!--设置视差模式  collapseParallaxMultiplier设置影响值，值越大滚动效果越明显-->
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"

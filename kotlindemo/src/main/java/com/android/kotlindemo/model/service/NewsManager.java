@@ -8,6 +8,7 @@ import com.android.kotlindemo.event.NewsEvent;
 import com.android.kotlindemo.model.bean.net.HomeNewsBean;
 import com.android.kotlindemo.model.bean.net.INewsBean;
 import com.android.kotlindemo.model.bean.net.NewsContentBean;
+import com.android.kotlindemo.model.bean.net.ThemeNewsBean;
 import com.android.kotlindemo.utils.ZhiHuRiBaoAPI;
 import com.android.kotlindemo.utils.net.MyCallBack;
 import com.android.kotlindemo.utils.net.XUtil;
@@ -100,6 +101,46 @@ public class NewsManager {
                     Gson gson = new Gson();
                     NewsContentBean bean = gson.fromJson(result,NewsContentBean.class);
                     dispatchEvent(null,bean,null, NewsEvent.EventType.NEWS_CONTENT);
+                }
+            }
+        });
+    }
+
+    /**
+     * 根据ThemeID获取相关新闻
+     * @param themeId
+     */
+    public void getThemeNewsByThemeID(int themeId){
+        Map<String,String> params = new HashMap<>();
+        String url = String.format(ZhiHuRiBaoAPI.Companion.getNEWS_LIST_BY_THEME(),themeId);
+        L.i("url = "+url);
+        XUtil.Get(url,params,new MyCallBack<String>(){
+
+            @Override
+            public void onSuccess(String result) {
+                super.onSuccess(result);
+                if(!TextUtils.isEmpty(result)){
+                    Gson gson = new Gson();
+                    ThemeNewsBean bean = gson.fromJson(result,ThemeNewsBean.class);
+                    dispatchEvent(null,bean,null, NewsEvent.EventType.THEME_NEWS);
+                }
+            }
+        });
+    }
+
+    public void getMoreThemeNewsByThemeID(int themeID,int lastStoryID){
+        Map<String,String> params = new HashMap<>();
+        String url = String.format(ZhiHuRiBaoAPI.Companion.getNEWS_LIST_BY_THEME_BEFORE(),themeID,lastStoryID);
+        L.i("url = "+url);
+        XUtil.Get(url,params,new MyCallBack<String>(){
+
+            @Override
+            public void onSuccess(String result) {
+                super.onSuccess(result);
+                if(!TextUtils.isEmpty(result)){
+                    Gson gson = new Gson();
+                    ThemeNewsBean bean = gson.fromJson(result,ThemeNewsBean.class);
+                    dispatchEvent(null,bean,null, NewsEvent.EventType.MORE_THEME_NEWS);
                 }
             }
         });

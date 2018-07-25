@@ -1,5 +1,6 @@
 package com.android.kotlindemo.adapter
 
+import android.content.Context
 import android.support.v4.view.PagerAdapter
 import android.support.v4.view.ViewPager
 import android.view.LayoutInflater
@@ -9,10 +10,15 @@ import android.widget.ImageView
 
 import com.android.kotlindemo.R
 import com.android.kotlindemo.model.bean.net.StoryBean
+import com.lazzy.common.lib.utils.ResourceHelper
 import com.lazzy.common.lib.utils.ViewHelper
 import com.lazzy.common.lib.widget.recyclerview.adapter.BaseItemView
 import com.lazzy.common.lib.widget.recyclerview.adapter.BaseViewHolder
 import com.lazzy.common.lib.widget.recyclerview.adapter.ItemViewManager
+import net.lucode.hackware.magicindicator.buildins.circlenavigator.CircleNavigator
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView
 
 class TopStoryListItem : BaseItemView<StoryBean>() {
 
@@ -49,6 +55,24 @@ class TopStoryListItem : BaseItemView<StoryBean>() {
 
         override fun getItemPosition(`object`: Any): Int {
             return POSITION_NONE
+        }
+
+    }
+
+    private val mNavigatorAdapter=object :CommonNavigatorAdapter(){
+        override fun getCount(): Int {
+            return mData?.size
+        }
+
+        override fun getTitleView(context: Context?, index: Int): IPagerTitleView? {
+            return null
+        }
+
+        override fun getIndicator(context: Context?): IPagerIndicator? {
+            val circlePageIndicator = CircleNavigator(context)
+            circlePageIndicator?.circleColor=ResourceHelper.getColor(R.color.xydj_color_white)
+            circlePageIndicator?.circleCount=mData?.size
+            return circlePageIndicator as IPagerIndicator
         }
 
     }

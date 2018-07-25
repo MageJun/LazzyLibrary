@@ -61,5 +61,11 @@ class ZhiHuRiBaoAPI {
          */
         val NEWS_BODY_URL = "https://news-at.zhihu.com/api/4/news/%s"
 
+
+        /**
+         * 获取主编个人信息简介
+         */
+        val NEWS_EDITOR_INFO = "https://news-at.zhihu.com/api/4/editor/%1s/profile-page/android"
+
     }
 }
