@@ -1,6 +1,7 @@
 package com.android.kotlindemo.adapter
 
 import android.content.Context
+import android.graphics.Color
 import android.support.v4.view.PagerAdapter
 import android.support.v4.view.ViewPager
 import android.view.LayoutInflater
@@ -15,7 +16,10 @@ import com.lazzy.common.lib.utils.ViewHelper
 import com.lazzy.common.lib.widget.recyclerview.adapter.BaseItemView
 import com.lazzy.common.lib.widget.recyclerview.adapter.BaseViewHolder
 import com.lazzy.common.lib.widget.recyclerview.adapter.ItemViewManager
+import net.lucode.hackware.magicindicator.MagicIndicator
+import net.lucode.hackware.magicindicator.ViewPagerHelper
 import net.lucode.hackware.magicindicator.buildins.circlenavigator.CircleNavigator
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView
@@ -58,8 +62,8 @@ class TopStoryListItem : BaseItemView<StoryBean>() {
         }
 
     }
-
-    private val mNavigatorAdapter=object :CommonNavigatorAdapter(){
+    private var mCircleNavigator:CircleNavigator?=null
+ /*   private val mNavigatorAdapter=object :CommonNavigatorAdapter(){
         override fun getCount(): Int {
             return mData?.size
         }
@@ -76,11 +80,19 @@ class TopStoryListItem : BaseItemView<StoryBean>() {
         }
 
     }
+    */
 
     override fun getItemView(parent: ViewGroup, viewType: Int): View? {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_news_top_story, parent, false)
         var viewPager = view.findViewById<ViewPager>(R.id.titleViewPager)
+        var indicator = view.findViewById<MagicIndicator>(R.id.indicator)
         viewPager?.adapter = mViewPagerAdapter
+        mCircleNavigator = CircleNavigator(parent.context)
+        mCircleNavigator?.radius = ResourceHelper.getDimen(3)
+        mCircleNavigator?.circleColor = ResourceHelper.getColor(R.color.colorAccent)
+        mCircleNavigator?.circleSpacing = ResourceHelper.getDimen(5)
+        indicator?.navigator = mCircleNavigator
+        ViewPagerHelper.bind(indicator,viewPager)
         return view
     }
 
@@ -90,6 +102,9 @@ class TopStoryListItem : BaseItemView<StoryBean>() {
             mData?.clear()
             mData?.addAll(listData)
             mViewPagerAdapter?.notifyDataSetChanged()
+
+            mCircleNavigator?.circleCount = mData?.size
+            mCircleNavigator?.notifyDataSetChanged()
         }
     }
 
