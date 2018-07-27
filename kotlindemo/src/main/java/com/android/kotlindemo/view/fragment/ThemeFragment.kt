@@ -68,7 +68,7 @@ class ThemeFragment: BaseFragment(),IViewer {
     private fun createTopData():StoryBean {
         val topData = StoryBean()
         topData.mode = StoryBean.Mode.IMG
-        topData?.image = mData?.image
+        topData?.image = mData?.background
         val bundle = Bundle()
         bundle?.putParcelableArrayList("editors", mData?.editors)
         topData?.extra = bundle

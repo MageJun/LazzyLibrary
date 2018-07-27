@@ -1,19 +1,29 @@
 package com.android.kotlindemo.adapter;
 
+import android.animation.ValueAnimator;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.ViewUtils;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 
 import com.android.kotlindemo.R;
 import com.android.kotlindemo.model.bean.net.StoryBean;
 import com.android.kotlindemo.model.bean.net.ThemeNewsBean;
+import com.lazzy.common.lib.utils.BitmapTask;
+import com.lazzy.common.lib.utils.L;
 import com.lazzy.common.lib.utils.ResourceHelper;
+import com.lazzy.common.lib.utils.ThreadPoolProxyFactory;
 import com.lazzy.common.lib.utils.ViewHelper;
 import com.lazzy.common.lib.widget.recyclerview.adapter.BaseItemView;
 import com.lazzy.common.lib.widget.recyclerview.adapter.BaseRecycleViewAdapter;
@@ -26,6 +36,18 @@ import java.util.ArrayList;
 public class TopStoryListItem2 extends BaseItemView<StoryBean> {
 
     private LinearLayoutManager layoutManager ;
+    private SparseArray<BitmapFactory.Options> mOptionsArray = new SparseArray<>();
+    private final ValueAnimator valueAnimator;
+
+    public TopStoryListItem2(){
+        valueAnimator = new ValueAnimator();
+        valueAnimator.setFloatValues(1f,1.15f);
+        valueAnimator.setDuration(8*1000);
+        valueAnimator.setRepeatCount(Integer.MAX_VALUE);
+        valueAnimator.setRepeatMode(ValueAnimator.RESTART);
+        valueAnimator.setInterpolator(new LinearInterpolator());
+        valueAnimator.setStartDelay(1*1000);
+    }
 
     private BaseRecycleViewAdapter<ThemeNewsBean.EditorsBean> mAdapter = new BaseRecycleViewAdapter<ThemeNewsBean.EditorsBean>() {
         @Override
@@ -35,6 +57,9 @@ public class TopStoryListItem2 extends BaseItemView<StoryBean> {
     };
 
     private RecyclerView mListView;
+    private Matrix matrix =null;
+    private int repeatCount = 0;
+    private float preValue = 0f;
 
     @Override
     public View getItemView(ViewGroup parent, int viewType) {
@@ -47,13 +72,50 @@ public class TopStoryListItem2 extends BaseItemView<StoryBean> {
         decoration.setOffset(ResourceHelper.getDimen(6));
         mListView.addItemDecoration(decoration);
         mListView.setAdapter(mAdapter);
+        matrix = new Matrix();
         return view;
     }
 
     @Override
     public void onBindVH(@NonNull BaseViewHolder holder, int position, StoryBean data) {
+        L.i("TopStoryListItem2","TopStoryListItem2 onBindVH");
+        valueAnimator.pause();
+        valueAnimator.removeAllUpdateListeners();
+        repeatCount = 0;
+        preValue = 0f;
+        final ImageView img = holder.getView(R.id.imgview);
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                float value = (float) animation.getAnimatedValue();
+                Matrix matrix = new Matrix();
+                if(value<preValue){
+                    repeatCount++;
+                }
+                preValue = value;
+                int type = repeatCount%4;
+                L.i("TopStoryListItem2","onAnimationUpdate value = "+value +",repeatCount= "+repeatCount);
 
-        ImageView img = holder.getView(R.id.imgview);
+                switch (type){
+                    case 0://第一遍，左上角
+                        matrix.postScale(value,value);
+                        break;
+                    case 1://第四遍，右下角
+                        matrix.postScale(value,value,img.getWidth(),img.getHeight());
+                        break;
+                    case 2://第三遍，左下角
+                        matrix.postScale(value,value,0,img.getHeight());
+                        break;
+                    case 3://第二遍，右上角
+                        matrix.postScale(value,value,img.getWidth(),0);
+                        break;
+                }
+                img.setImageMatrix(matrix);
+
+            }
+        });
+        valueAnimator.start();
+
 
         holder.setText(R.id.description,data.getTitle());
 
