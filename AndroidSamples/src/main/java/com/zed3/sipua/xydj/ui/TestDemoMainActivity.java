@@ -4,11 +4,14 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baidu.navisdk.adapter.BaiduNaviManagerFactory;
+import com.baidu.navisdk.adapter.IBaiduNaviManager;
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.listener.CustomListener;
 import com.bigkoo.pickerview.listener.OnTimeSelectChangeListener;
@@ -16,7 +19,9 @@ import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.TimePickerView;
 import com.city.helper.ChinaCityHelper;
 import com.city.view.CitySearchActivity;
+import com.lazzy.common.lib.utils.L;
 import com.lazzy.common.lib.utils.ViewHelper;
+import com.lw.demo.android.samples.AppApplication;
 import com.lw.demo.android.samples.R;
 import com.lw.demo.android.samples.SingleSelectListActivity;
 import com.lw.demo.android.samples.SlidingUpPannelActivity;
@@ -42,10 +47,46 @@ import java.util.List;
 
 public class TestDemoMainActivity extends BaseActivity {
 
+    private final static String SD_ROOT = Environment.getExternalStorageDirectory().getAbsolutePath();
+    private final static String APP_SD_ROOT_NAME = AppApplication.sContext.getPackageName();
+
     @Override
     public void onActivityCreate(Bundle savedInstanceState) {
         setContentView(R.layout.xydj_activity_test_demo_main);
 
+        initNavi();
+    }
+
+    private void initNavi() {
+        /**
+         * 参数1 Activity，最好是应用主页面
+         * 参数2：系统SD卡根目录路径
+         * 参数3：应用在SD卡中的目录名
+         * 参数4：初始状态监听方法
+         */
+        BaiduNaviManagerFactory.getBaiduNaviManager().init(this, SD_ROOT, APP_SD_ROOT_NAME, new IBaiduNaviManager.INaviInitListener() {
+            public static final String TAG ="NaviInitTrace" ;
+
+            @Override
+            public void onAuthResult(int i, String s) {
+                L.i(TAG,"onAuthResult i = "+i + ",s = "+s);
+            }
+
+            @Override
+            public void initStart() {
+                L.i(TAG,"initStart ");
+            }
+
+            @Override
+            public void initSuccess() {
+                L.i(TAG,"initSuccess ");
+            }
+
+            @Override
+            public void initFailed() {
+                L.i(TAG,"initFailed ");
+            }
+        });
     }
 
     public void onClick(View view){

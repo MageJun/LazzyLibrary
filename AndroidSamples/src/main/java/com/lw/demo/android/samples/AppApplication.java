@@ -2,6 +2,7 @@ package com.lw.demo.android.samples;
 
 import android.app.Application;
 import android.content.Context;
+import android.support.multidex.MultiDex;
 
 import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.SDKInitializer;
@@ -22,5 +23,12 @@ public class AppApplication extends Application {
         //包括BD09LL和GCJ02两种坐标，默认是BD09LL坐标。
         SDKInitializer.setCoordType(CoordType.BD09LL);
         ChinaCityHelper.getInstance(this).init();
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        //解决方法数超出了65535，导致出现NoClassDefFoundError的为问题
+        MultiDex.install(base);
     }
 }
