@@ -122,6 +122,13 @@ public class ViewHelper {
         }
     }
 
+    public static void setImgViewDefault(ImageView img,String url){
+        if(!TextUtils.isEmpty(url)&&img!=null){
+            Glide.with(GlobalInit.appContext()).load(url).into(img);
+        }
+    }
+
+
     public static void setImgviewCenterInside(ImageView img,String filePath){
         if(!TextUtils.isEmpty(filePath)&&img!=null){
             Glide.with(GlobalInit.appContext()).load(filePath).apply(RequestOptions.centerInsideTransform()).into(img);

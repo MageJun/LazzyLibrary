@@ -6,6 +6,8 @@ import android.os.Handler;
 import android.os.Message;
 
 public class BitmapTask implements Runnable {
+    public final static String KEY_INDEX ="index" ;
+    public final static String KEY_URL ="url" ;
     private int index;
     private String url;
     private Bundle data;
@@ -24,15 +26,15 @@ public class BitmapTask implements Runnable {
     public BitmapTask(String url){
         this.url = url;
         data = new Bundle();
-        data.putString("url",url);
+        data.putString(KEY_URL,url);
     }
 
     public BitmapTask(int index, String url){
         this.index = index;
         this.url = url;
         data = new Bundle();
-        data.putInt("index",index);
-        data.putString("url",url);
+        data.putInt(KEY_INDEX,index);
+        data.putString(KEY_URL,url);
     }
     public void setCallBack(Handler.Callback callBack){
         this.callBack = callBack;
