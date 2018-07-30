@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.baidu.navisdk.adapter.BaiduNaviManagerFactory;
+import com.baidu.navisdk.adapter.IBNTTSManager;
 import com.baidu.navisdk.adapter.IBaiduNaviManager;
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.listener.CustomListener;
@@ -80,11 +81,37 @@ public class TestDemoMainActivity extends BaseActivity {
             @Override
             public void initSuccess() {
                 L.i(TAG,"initSuccess ");
+
+                initTTS();
             }
 
             @Override
             public void initFailed() {
                 L.i(TAG,"initFailed ");
+            }
+        });
+    }
+
+    /**
+     * 初始化百度地图的内置TTS
+     */
+    private void initTTS() {
+        BaiduNaviManagerFactory.getTTSManager().initTTS(this,SD_ROOT,APP_SD_ROOT_NAME,"11301528");
+        BaiduNaviManagerFactory.getTTSManager().setOnTTSStateChangedListener(new IBNTTSManager.IOnTTSPlayStateChangedListener() {
+            public static final String TAG ="NaviInitTrace" ;
+            @Override
+            public void onPlayStart() {
+                L.i(TAG,"onPlayStart ");
+            }
+
+            @Override
+            public void onPlayEnd(String s) {
+                L.i(TAG,"onPlayEnd ");
+            }
+
+            @Override
+            public void onPlayError(int i, String s) {
+                L.i(TAG,"onPlayError ");
             }
         });
     }
