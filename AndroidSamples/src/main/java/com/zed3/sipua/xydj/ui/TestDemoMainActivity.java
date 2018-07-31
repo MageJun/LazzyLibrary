@@ -5,12 +5,17 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baidu.navisdk.adapter.BNRoutePlanNode;
 import com.baidu.navisdk.adapter.BaiduNaviManagerFactory;
+import com.baidu.navisdk.adapter.IBNRoutePlanManager;
 import com.baidu.navisdk.adapter.IBNTTSManager;
 import com.baidu.navisdk.adapter.IBaiduNaviManager;
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
@@ -31,6 +36,7 @@ import com.lw.demo.android.samples.ViewPagerActivity2;
 import com.lw.demo.android.samples.customviews.TimePickerBuilderExtend;
 import com.lw.demo.android.samples.customviews.TimePickerViewExtend;
 import com.lw.demo.android.samples.sharetran.ShareTranstraction;
+import com.map.view.MapNaviActivity;
 import com.map.view.MapViewActivity;
 import com.map.view.WaveCircleActivity;
 import com.zed3.sipua.xydj.ui.friend.FriendListActivity;
@@ -200,8 +206,67 @@ public class TestDemoMainActivity extends BaseActivity {
             case R.id.time_picker:
                 showTimePicker();
                 break;
+
+            case R.id.navi:
+                startNavi();
+                break;
         }
     }
+
+    private void startNavi() {
+        BNRoutePlanNode sNode = new BNRoutePlanNode(116.30784537597782, 40.057009624099436, "百度大厦", "百度大厦", BNRoutePlanNode.CoordinateType.BD09LL);
+        BNRoutePlanNode  eNode = new BNRoutePlanNode(116.40386525193937, 39.915160800132085, "北京天安门", "北京天安门", BNRoutePlanNode.CoordinateType.BD09LL);
+
+        if (sNode != null && eNode != null) {
+            List<BNRoutePlanNode> list = new ArrayList<BNRoutePlanNode>();
+            list.add(sNode);
+            list.add(eNode);
+
+            BaiduNaviManagerFactory.getRoutePlanManager().routeplanToNavi(
+                    list,
+                    IBNRoutePlanManager.RoutePlanPreference.ROUTE_PLAN_PREFERENCE_DEFAULT,
+                    null,
+                    new Handler(Looper.getMainLooper()) {
+                        @Override
+                        public void handleMessage(Message msg) {
+                            switch (msg.what) {
+                                case IBNRoutePlanManager.MSG_NAVI_ROUTE_PLAN_START:
+                                    Toast.makeText(TestDemoMainActivity.this, "算路开始", Toast.LENGTH_SHORT)
+                                            .show();
+                                    break;
+                                case IBNRoutePlanManager.MSG_NAVI_ROUTE_PLAN_SUCCESS:
+                                    Toast.makeText(TestDemoMainActivity.this, "算路成功", Toast.LENGTH_SHORT)
+                                            .show();
+                                    break;
+                                case IBNRoutePlanManager.MSG_NAVI_ROUTE_PLAN_FAILED:
+                                    Toast.makeText(TestDemoMainActivity.this, "算路失败", Toast.LENGTH_SHORT)
+                                            .show();
+                                    break;
+                                case IBNRoutePlanManager.MSG_NAVI_ROUTE_PLAN_TO_NAVI:
+                                    Toast.makeText(TestDemoMainActivity.this, "算路成功准备进入导航", Toast.LENGTH_SHORT)
+                                            .show();
+
+                                  /*  for (Activity ac : activityList) {
+                                        if (ac.getClass().getName().endsWith("BNNewIFNormalDemoGuideActivity")) {
+                                            return;
+                                        }
+                                    }*/
+                                    Intent intent = new Intent(TestDemoMainActivity.this,
+                                            MapNaviActivity.class);
+                                   /* Bundle bundle = new Bundle();
+                                    bundle.putSerializable(ROUTE_PLAN_NODE, (BNRoutePlanNode) mStartNode);
+                                    intent.putExtras(bundle);*/
+                                    startActivity(intent);
+                                    break;
+                                default:
+                                    // nothing
+                                    break;
+                            }
+                        }
+                    });
+        }
+    }
+
     SimpleDateFormat dateFormat = new SimpleDateFormat("MM月dd日 HH:mm");
     int mode = 0;//0 取车时间 1 还车时间
     int defaultDelayDay = 2;//默认租车时间间隔

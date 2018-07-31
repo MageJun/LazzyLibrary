@@ -96,7 +96,8 @@
         <activity android:name="com.zed3.sipua.xydj.ui.friend.FriendListActivity" />
         <activity android:name="com.city.view.CitySearchActivity" />
         <activity android:name=".SingleSelectListActivity" />
-        <activity android:name=".TimePickerActivity"></activity>
+        <activity android:name=".TimePickerActivity" />
+        <activity android:name="com.map.view.MapNaviActivity"></activity>
     </application>
 
 </manifest>
