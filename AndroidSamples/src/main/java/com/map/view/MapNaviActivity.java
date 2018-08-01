@@ -94,6 +94,10 @@ public class MapNaviActivity extends AppCompatActivity {
         speechSynthesizer.release();
         speechSynthesizer = null;
         EventBus.getDefault().unregister(this);
+        mBaiduMap.clear();
+        mBaiduMap = null;
+        mMapView.onDestroy();
+        mMapView = null;
 
     }
 
