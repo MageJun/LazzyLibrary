@@ -58,138 +58,12 @@ import java.util.List;
 
 public class TestDemoMainActivity extends BaseActivity {
 
-    private final static String SD_ROOT = Environment.getExternalStorageDirectory().getAbsolutePath();
-    private final static String APP_SD_ROOT_NAME = AppApplication.sContext.getPackageName();
     private static final String TAG = "TestDemoTrace";
 
     @Override
     public void onActivityCreate(Bundle savedInstanceState) {
         setContentView(R.layout.xydj_activity_test_demo_main);
 
-        initNavi();
-    }
-
-    private void initNavi() {
-        /**
-         * 参数1 Activity，最好是应用主页面
-         * 参数2：系统SD卡根目录路径
-         * 参数3：应用在SD卡中的目录名
-         * 参数4：初始状态监听方法
-         */
-        BaiduNaviManagerFactory.getBaiduNaviManager().init(this, SD_ROOT, APP_SD_ROOT_NAME, new IBaiduNaviManager.INaviInitListener() {
-            public static final String TAG ="NaviInitTrace" ;
-
-            @Override
-            public void onAuthResult(int i, String s) {
-                L.i(TAG,"onAuthResult i = "+i + ",s = "+s);
-            }
-
-            @Override
-            public void initStart() {
-                L.i(TAG,"initStart ");
-            }
-
-            @Override
-            public void initSuccess() {
-                L.i(TAG,"initSuccess ");
-
-                initTTS();
-            }
-
-            @Override
-            public void initFailed() {
-                L.i(TAG,"initFailed ");
-            }
-        });
-    }
-    private SpeechSynthesizer speechSynthesizer = SpeechSynthesizer.getInstance();
-    private boolean isSpeaking = false;
-    /**
-     * 初始化百度TTS
-     */
-    private void initTTS() {
-        isSpeaking = false;
-        speechSynthesizer.setContext(this);
-        speechSynthesizer.setAppId("11613278");
-        speechSynthesizer.setApiKey("xnOWC7swG88qzBX6XBZUT1Aj","8WUPpPHRhecdIe0TRAZnvcSsohfRMzDu");
-        speechSynthesizer.setSpeechSynthesizerListener(new SpeechSynthesizerListener() {
-            @Override
-            public void onSynthesizeStart(String s) {
-
-            }
-
-            @Override
-            public void onSynthesizeDataArrived(String s, byte[] bytes, int i) {
-
-            }
-
-            @Override
-            public void onSynthesizeFinish(String s) {
-
-            }
-
-            @Override
-            public void onSpeechStart(String s) {
-                isSpeaking = true;
-            }
-
-            @Override
-            public void onSpeechProgressChanged(String s, int i) {
-
-            }
-
-            @Override
-            public void onSpeechFinish(String s) {
-                isSpeaking = false;
-            }
-
-            @Override
-            public void onError(String s, SpeechError speechError) {
-                isSpeaking = false;
-            }
-        });
-
-        int initCode = speechSynthesizer.initTts(TtsMode.MIX);//离在线混合模式
-        L.i(TAG,"TTS initCode = "+initCode);
-        BaiduNaviManagerFactory.getTTSManager().initTTS(new IBNTTSManager.IBNOuterTTSPlayerCallback() {
-            @Override
-            public int getTTSState() {
-                /** 播放器空闲 */
-//            int PLAYER_STATE_IDLE = 1;
-//            /** 播放器正在播报 */
-//            int PLAYER_STATE_PLAYING = 2;
-                return isSpeaking?2:1;
-            }
-
-            @Override
-            public int playTTSText(String s, String s1, int i, String s2) {
-                return speechSynthesizer.speak(s);
-            }
-
-            @Override
-            public void stopTTS() {
-                speechSynthesizer.pause();
-            }
-        });
-//        BaiduNaviManagerFactory.getTTSManager().initTTS(this,SD_ROOT,APP_SD_ROOT_NAME,"11613278");
-        //设置导航内置TTS同步状态回调
-       /* BaiduNaviManagerFactory.getTTSManager().setOnTTSStateChangedListener(new IBNTTSManager.IOnTTSPlayStateChangedListener() {
-            public static final String TAG ="NaviInitTrace" ;
-            @Override
-            public void onPlayStart() {
-                L.i(TAG,"onPlayStart ");
-            }
-
-            @Override
-            public void onPlayEnd(String s) {
-                L.i(TAG,"onPlayEnd  s = "+ s);
-            }
-
-            @Override
-            public void onPlayError(int i, String s) {
-                L.i(TAG,"onPlayError i= "+i+",s = "+s);
-            }
-        });*/
     }
 
     public void onClick(View view){
@@ -284,57 +158,9 @@ public class TestDemoMainActivity extends BaseActivity {
     }
 
     private void startNavi() {
-        BNRoutePlanNode sNode = new BNRoutePlanNode(116.30784537597782, 40.057009624099436, "百度大厦", "百度大厦", BNRoutePlanNode.CoordinateType.BD09LL);
-        BNRoutePlanNode  eNode = new BNRoutePlanNode(116.40386525193937, 39.915160800132085, "北京天安门", "北京天安门", BNRoutePlanNode.CoordinateType.BD09LL);
-
-        if (sNode != null && eNode != null) {
-            List<BNRoutePlanNode> list = new ArrayList<BNRoutePlanNode>();
-            list.add(sNode);
-            list.add(eNode);
-
-            BaiduNaviManagerFactory.getRoutePlanManager().routeplanToNavi(
-                    list,
-                    IBNRoutePlanManager.RoutePlanPreference.ROUTE_PLAN_PREFERENCE_DEFAULT,
-                    null,
-                    new Handler(Looper.getMainLooper()) {
-                        @Override
-                        public void handleMessage(Message msg) {
-                            switch (msg.what) {
-                                case IBNRoutePlanManager.MSG_NAVI_ROUTE_PLAN_START:
-                                    Toast.makeText(TestDemoMainActivity.this, "算路开始", Toast.LENGTH_SHORT)
-                                            .show();
-                                    break;
-                                case IBNRoutePlanManager.MSG_NAVI_ROUTE_PLAN_SUCCESS:
-                                    Toast.makeText(TestDemoMainActivity.this, "算路成功", Toast.LENGTH_SHORT)
-                                            .show();
-                                    break;
-                                case IBNRoutePlanManager.MSG_NAVI_ROUTE_PLAN_FAILED:
-                                    Toast.makeText(TestDemoMainActivity.this, "算路失败", Toast.LENGTH_SHORT)
-                                            .show();
-                                    break;
-                                case IBNRoutePlanManager.MSG_NAVI_ROUTE_PLAN_TO_NAVI:
-                                    Toast.makeText(TestDemoMainActivity.this, "算路成功准备进入导航", Toast.LENGTH_SHORT)
-                                            .show();
-
-                                  /*  for (Activity ac : activityList) {
-                                        if (ac.getClass().getName().endsWith("BNNewIFNormalDemoGuideActivity")) {
-                                            return;
-                                        }
-                                    }*/
-                                    Intent intent = new Intent(TestDemoMainActivity.this,
-                                            MapNaviActivity.class);
-                                   /* Bundle bundle = new Bundle();
-                                    bundle.putSerializable(ROUTE_PLAN_NODE, (BNRoutePlanNode) mStartNode);
-                                    intent.putExtras(bundle);*/
-                                    startActivity(intent);
-                                    break;
-                                default:
-                                    // nothing
-                                    break;
-                            }
-                        }
-                    });
-        }
+        Intent intent = new Intent(TestDemoMainActivity.this,
+                MapNaviActivity.class);
+        startActivity(intent);
     }
 
     SimpleDateFormat dateFormat = new SimpleDateFormat("MM月dd日 HH:mm");

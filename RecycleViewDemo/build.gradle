@@ -30,7 +30,7 @@ dependencies {
     compile project(':CommonUI')
     compile 'com.android.support:recyclerview-v7:27.0.2'
 
-    //添加Glid库的依赖,Glid编译版本是27+，支持库的版本也必须是27+,否则会运行时异常
+    //glid是图片加载框架，添加Glid库的依赖,Glid编译版本是27+，支持库的版本也必须是27+,否则会运行时异常
     compile 'com.github.bumptech.glide:glide:4.6.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
 }

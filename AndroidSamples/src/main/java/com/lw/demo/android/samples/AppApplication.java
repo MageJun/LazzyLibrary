@@ -7,7 +7,6 @@ import android.support.multidex.MultiDex;
 import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.SDKInitializer;
 import com.city.helper.ChinaCityHelper;
-import com.map.helper.MapCommon;
 
 public class AppApplication extends Application {
 

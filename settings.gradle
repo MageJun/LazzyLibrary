@@ -1,1 +1,1 @@
-include ':RecycleViewDemo', ':CommonUI', ':ZedDemo', ':AndroidSamples',':magicindicator', ':common_lib', ':kotlindemo'
+include ':RecycleViewDemo', ':CommonUI', ':ZedDemo', ':AndroidSamples',':magicindicator', ':common_lib', ':kotlindemo', ':CommonLocationlib', ':CommonMapLib'

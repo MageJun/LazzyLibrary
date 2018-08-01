@@ -55,9 +55,8 @@ dependencies {
     //implementation 'com.github.MageJun:LazzyLibrary:master-SNAPSHOT'
     //    compile 'com.yanzhenjie:recyclerview-swipe:1.1.4'
     implementation project(':common_lib')
-
     implementation 'com.contrarywind:Android-PickerView:4.1.4'
-
     //解决方法数超出了65535，导致出现NoClassDefFoundError的为问题
     implementation 'com.android.support:multidex:1.0.1'
+    implementation project(':CommonMapLib')
 }

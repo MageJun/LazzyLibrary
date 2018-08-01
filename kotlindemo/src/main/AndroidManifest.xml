@@ -15,6 +15,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data android:name="com.baidu.lbsapi.API_KEY"
+            android:value="9RBI2z0jO1PezMg2UgVadFcctn8FqKl1"
+            />
         <activity android:name=".view.activity.MainActivity" />
         <activity
             android:name=".view.activity.Main2Activity"
