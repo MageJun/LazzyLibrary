@@ -10,6 +10,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.android.lw.map.lib.location.service.LocationChangeEvent;
+import com.android.lw.map.lib.location.service.LocationServiceManager;
+import com.baidu.location.BDLocation;
+import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.MapStatus;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
+import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.TextureMapView;
+import com.baidu.mapapi.model.LatLng;
 import com.baidu.navisdk.adapter.BNRoutePlanNode;
 import com.baidu.navisdk.adapter.BaiduNaviManagerFactory;
 import com.baidu.navisdk.adapter.IBNRouteGuideManager;
@@ -25,6 +34,10 @@ import com.lw.demo.android.samples.AppApplication;
 import com.lw.demo.android.samples.R;
 import com.zed3.sipua.xydj.ui.TestDemoMainActivity;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,11 +50,42 @@ public class MapNaviActivity extends AppCompatActivity {
     private SpeechSynthesizer speechSynthesizer = SpeechSynthesizer.getInstance();
     private boolean isSpeaking = false;
 
+    private TextureMapView mMapView;
+    private BaiduMap mBaiduMap;
+    private boolean isFirstLoad = false;
+    private LatLng mLocLatLng;
+    private BDLocation mLocData;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_navi);
+        EventBus.getDefault().register(this);
+        isFirstLoad = true;
+        initView();
         initNavi();
+    }
+
+    private void initView() {
+        mMapView = findViewById(R.id.mapview);
+        mBaiduMap = mMapView.getMap();
+        mBaiduMap.setOnMapLoadedCallback(new BaiduMap.OnMapLoadedCallback() {
+            @Override
+            public void onMapLoaded() {//地图加载完成后，开始定位
+                if(isFirstLoad){
+                    isFirstLoad = false;
+                    requestLocation();
+                }
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(!isFirstLoad){
+            requestLocation();
+        }
     }
 
     @Override
@@ -49,7 +93,35 @@ public class MapNaviActivity extends AppCompatActivity {
         super.onDestroy();
         speechSynthesizer.release();
         speechSynthesizer = null;
+        EventBus.getDefault().unregister(this);
 
+    }
+
+    private long time = 0l;
+    private void requestLocation(){
+        if(System.currentTimeMillis()-time<3*1000){
+            return ;
+        }
+        LocationServiceManager.getInstance().requestLocation();
+        time = System.currentTimeMillis();
+    }
+
+    private void moveTo(LatLng latLng) {
+        MapStatus.Builder builder = new MapStatus.Builder();
+        builder.target(latLng).zoom(19.0f);
+        mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void handleLocationEvent(LocationChangeEvent event){
+        if(event!=null){
+            BDLocation locationData = event.getBdLocation();
+            if(locationData!=null){
+                mLocData = locationData;
+                mLocLatLng = new LatLng(locationData.getLatitude(),locationData.getLongitude());
+                moveTo(mLocLatLng);
+            }
+        }
     }
 
     private void initNavi() {
@@ -156,6 +228,9 @@ public class MapNaviActivity extends AppCompatActivity {
 
     private void startNavi() {
         BNRoutePlanNode sNode = new BNRoutePlanNode(116.30784537597782, 40.057009624099436, "百度大厦", "百度大厦", BNRoutePlanNode.CoordinateType.BD09LL);
+        if(mLocData!=null){
+            sNode =new BNRoutePlanNode(mLocData.getLongitude(), mLocData.getLatitude(), mLocData.getBuildingName(), mLocData.getDistrict(), BNRoutePlanNode.CoordinateType.BD09LL);
+        }
         BNRoutePlanNode  eNode = new BNRoutePlanNode(116.40386525193937, 39.915160800132085, "北京天安门", "北京天安门", BNRoutePlanNode.CoordinateType.BD09LL);
 
         if (sNode != null && eNode != null) {
@@ -197,6 +272,17 @@ public class MapNaviActivity extends AppCompatActivity {
                             }
                         }
                     });
+        }
+    }
+
+    public void onClick(View view){
+        switch (view.getId()){
+            case R.id.request_loc_icon:
+                requestLocation();
+                break;
+            case R.id.navi_icon:
+                startNavi();
+                break;
         }
     }
 }

@@ -98,6 +98,7 @@
         <activity android:name=".SingleSelectListActivity" />
         <activity android:name=".TimePickerActivity" />
         <activity android:name="com.map.view.MapNaviActivity"></activity>
+        <activity android:name="com.map.view.NaviShowActivity"></activity>
     </application>
 
 </manifest>

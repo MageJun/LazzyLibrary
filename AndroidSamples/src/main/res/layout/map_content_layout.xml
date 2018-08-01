@@ -28,6 +28,7 @@
         android:layout_height="24dp"
         android:src="@drawable/request_loc_icon"
         android:layout_gravity="left|bottom"
+        android:onClick="onClick"
         android:layout_margin="20dp"/>
 
     <ImageView
@@ -36,6 +37,7 @@
         android:layout_height="24dp"
         android:src="@drawable/map_navi_icon"
         android:layout_gravity="right|top"
+        android:onClick="onClick"
         android:layout_margin="20dp"/>
 
 </FrameLayout>
