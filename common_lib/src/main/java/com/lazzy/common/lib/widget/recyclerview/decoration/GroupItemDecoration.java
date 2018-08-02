@@ -85,7 +85,7 @@ public class GroupItemDecoration extends ItemDividerDecoration {
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         int position = ((RecyclerView.LayoutParams) view.getLayoutParams()).getViewLayoutPosition();
         //我记得Rv的item position在重置时可能为-1.保险点判断一下吧
-        if (position > -1) {
+        if (position > -1&&mDatas.size()>position) {
             String tag = mDatas.get(position).getLetter();
             if(TextUtils.isEmpty(tag)){
                 super.getItemOffsets(outRect, view, parent, state);
@@ -118,7 +118,7 @@ public class GroupItemDecoration extends ItemDividerDecoration {
             final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child
                     .getLayoutParams();
             int position = params.getViewLayoutPosition();
-            if (position > -1) {
+            if (position > -1&&mDatas.size()>position) {
                 String tag = mDatas.get(position).getLetter();
                 if(TextUtils.isEmpty(tag)){
                     continue;
@@ -146,7 +146,7 @@ public class GroupItemDecoration extends ItemDividerDecoration {
             LinearLayoutManager lm = (LinearLayoutManager) parent.getLayoutManager();
             if(lm!=null){
               int pos =   lm.findFirstVisibleItemPosition();
-              if(pos<0||pos>mDatas.size()){
+              if(pos<0||pos>=mDatas.size()){
                   super.onDrawOver(c,parent,state);
                   return ;
               }

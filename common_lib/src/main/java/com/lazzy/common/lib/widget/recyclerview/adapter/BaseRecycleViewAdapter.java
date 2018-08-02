@@ -88,12 +88,12 @@ public abstract class BaseRecycleViewAdapter<T> extends RecyclerView.Adapter {
     }
 
     @Override
-   final public int getItemCount() {
+    public int getItemCount() {
         return mDatas.size();
     }
 
     @Override
-   final public int getItemViewType(int position) {
+    public int getItemViewType(int position) {
         return mItemViewManager.getViewType(mDatas.get(position), position);
     }
 }
