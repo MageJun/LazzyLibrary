@@ -6,9 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.common.widget.recyclerview.adapter.BaseItemView;
-import com.common.widget.recyclerview.adapter.BaseViewHolder;
-import com.common.widget.recyclerview.adapter.ItemViewManager;
+import com.lazzy.common.lib.widget.recyclerview.adapter.BaseItemView;
+import com.lazzy.common.lib.widget.recyclerview.adapter.BaseViewHolder;
+import com.lazzy.common.lib.widget.recyclerview.adapter.ItemViewManager;
 import com.lw.demo.android.samples.R;
 import com.zed3.sipua.xydj.ui.friend.bean.FrindInfo;
 

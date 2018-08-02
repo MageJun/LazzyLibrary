@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.android.lw.map.lib.location.service.LocationChangeEvent;
 import com.android.lw.map.lib.location.service.LocationServiceManager;
+import com.android.lw.map.lib.overlayutil.DrivingRouteOverlay;
 import com.baidu.location.BDLocation;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.MapStatus;
@@ -19,6 +20,19 @@ import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.TextureMapView;
 import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.model.LatLngBounds;
+import com.baidu.mapapi.search.route.BikingRouteResult;
+import com.baidu.mapapi.search.route.DrivingRouteLine;
+import com.baidu.mapapi.search.route.DrivingRoutePlanOption;
+import com.baidu.mapapi.search.route.DrivingRouteResult;
+import com.baidu.mapapi.search.route.IndoorRouteResult;
+import com.baidu.mapapi.search.route.MassTransitRouteResult;
+import com.baidu.mapapi.search.route.OnGetRoutePlanResultListener;
+import com.baidu.mapapi.search.route.PlanNode;
+import com.baidu.mapapi.search.route.RoutePlanSearch;
+import com.baidu.mapapi.search.route.TransitRoutePlanOption;
+import com.baidu.mapapi.search.route.TransitRouteResult;
+import com.baidu.mapapi.search.route.WalkingRouteResult;
 import com.baidu.navisdk.adapter.BNRoutePlanNode;
 import com.baidu.navisdk.adapter.BaiduNaviManagerFactory;
 import com.baidu.navisdk.adapter.IBNRouteGuideManager;
@@ -30,6 +44,7 @@ import com.baidu.tts.client.SpeechSynthesizer;
 import com.baidu.tts.client.SpeechSynthesizerListener;
 import com.baidu.tts.client.TtsMode;
 import com.lazzy.common.lib.utils.L;
+import com.lazzy.common.lib.utils.ResourceHelper;
 import com.lw.demo.android.samples.AppApplication;
 import com.lw.demo.android.samples.R;
 import com.zed3.sipua.xydj.ui.TestDemoMainActivity;
@@ -55,6 +70,9 @@ public class MapNaviActivity extends AppCompatActivity {
     private boolean isFirstLoad = false;
     private LatLng mLocLatLng;
     private BDLocation mLocData;
+    private LatLng sLatlng,eLatlng;
+    private RoutePlanSearch mRouteSearch;
+    private DrivingRouteOverlay mDrivingRouteOverlay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +82,21 @@ public class MapNaviActivity extends AppCompatActivity {
         isFirstLoad = true;
         initView();
         initNavi();
+        initData();
+    }
+
+    private void initData() {
+        //北大 116.32608,39.997896
+        //天安门  116.401969,39.913385
+        sLatlng = new LatLng(39.997896,116.32608);
+        eLatlng = new LatLng(39.913385,116.401969);
+
+        mRouteSearch = RoutePlanSearch.newInstance();
+        mRouteSearch.setOnGetRoutePlanResultListener(mRoutePlanListener);
+        mDrivingRouteOverlay = new DrivingRouteOverlay(mBaiduMap){
+
+        };
+
     }
 
     private void initView() {
@@ -98,6 +131,7 @@ public class MapNaviActivity extends AppCompatActivity {
         mBaiduMap = null;
         mMapView.onDestroy();
         mMapView = null;
+        mRouteSearch.destroy();
 
     }
 
@@ -108,6 +142,14 @@ public class MapNaviActivity extends AppCompatActivity {
         }
         LocationServiceManager.getInstance().requestLocation();
         time = System.currentTimeMillis();
+    }
+
+    private void zoomToSpan(List<LatLng> latLngs) {
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        for (int i = 0; i < latLngs.size(); i++) {
+            builder.include(latLngs.get(i));
+        }
+        mBaiduMap.setMapStatus(MapStatusUpdateFactory.newLatLngBounds(builder.build()));
     }
 
     private void moveTo(LatLng latLng) {
@@ -123,6 +165,8 @@ public class MapNaviActivity extends AppCompatActivity {
             if(locationData!=null){
                 mLocData = locationData;
                 mLocLatLng = new LatLng(locationData.getLatitude(),locationData.getLongitude());
+                if(mLocData!=null)
+                    sLatlng = mLocLatLng;
                 moveTo(mLocLatLng);
             }
         }
@@ -229,8 +273,13 @@ public class MapNaviActivity extends AppCompatActivity {
             }
         });
     }
-
+    private boolean isRoutePlatn = false;
     private void startNavi() {
+        if(!isRoutePlatn){
+            showRoute();
+            return ;
+        }
+        isRoutePlatn = false;
         BNRoutePlanNode sNode = new BNRoutePlanNode(116.30784537597782, 40.057009624099436, "百度大厦", "百度大厦", BNRoutePlanNode.CoordinateType.BD09LL);
         if(mLocData!=null){
             sNode =new BNRoutePlanNode(mLocData.getLongitude(), mLocData.getLatitude(), mLocData.getBuildingName(), mLocData.getDistrict(), BNRoutePlanNode.CoordinateType.BD09LL);
@@ -279,6 +328,46 @@ public class MapNaviActivity extends AppCompatActivity {
         }
     }
 
+    private void showRoute() {
+        /**
+         * 设置当前城市,检索打车信息时必需
+         * currentCity(java.lang.String cityName)
+         设置起点
+         DrivingRoutePlanOption   from(PlanNode from)
+         设置途经点
+         DrivingRoutePlanOptionpassBy(java.util.List<PlanNode> wayPoints)
+         设置驾车路线规划策略
+         DrivingRoutePlanOption policy(DrivingRoutePlanOption.DrivingPolicy policy)
+         设置终点
+         DrivingRoutePlanOption to(PlanNode to)
+         设置是否支持路况数据
+         DrivingRoutePlanOption trafficPolicy(DrivingRoutePlanOption.DrivingTrafficPolicy trafficPolicy)
+
+
+         DrivingPolicy policy
+         设置驾车路线规划策略
+         ECAR_AVOID_JAM
+         驾车策略： 躲避拥堵
+         ECAR_DIS_FIRST
+         驾乘检索策略常量：最短距离
+         ECAR_FEE_FIRST
+         驾乘检索策略常量：较少费用
+         ECAR_TIME_FIRST
+         驾乘检索策略常量：时间优先
+
+
+         */
+        PlanNode sNode = PlanNode.withLocation(sLatlng);
+        PlanNode tNode =  PlanNode.withLocation(eLatlng);
+        DrivingRoutePlanOption option = new DrivingRoutePlanOption();
+        option.from(sNode).to(tNode);
+        //时间优先
+        option.policy(DrivingRoutePlanOption.DrivingPolicy.ECAR_TIME_FIRST);
+        //显示路线和交通情况
+        option.trafficPolicy(DrivingRoutePlanOption.DrivingTrafficPolicy.ROUTE_PATH_AND_TRAFFIC);
+        mRouteSearch.drivingSearch(option);
+    }
+
     public void onClick(View view){
         switch (view.getId()){
             case R.id.request_loc_icon:
@@ -289,4 +378,43 @@ public class MapNaviActivity extends AppCompatActivity {
                 break;
         }
     }
+
+    private OnGetRoutePlanResultListener mRoutePlanListener = new OnGetRoutePlanResultListener() {
+        @Override
+        public void onGetWalkingRouteResult(WalkingRouteResult walkingRouteResult) {
+
+        }
+
+        @Override
+        public void onGetTransitRouteResult(TransitRouteResult transitRouteResult) {
+
+        }
+
+        @Override
+        public void onGetMassTransitRouteResult(MassTransitRouteResult massTransitRouteResult) {
+
+        }
+
+        @Override
+        public void onGetDrivingRouteResult(DrivingRouteResult drivingRouteResult) {
+            //获取驾车路线
+            if(drivingRouteResult!=null&&drivingRouteResult.getRouteLines()!=null&&drivingRouteResult.getRouteLines().size()>0){
+                DrivingRouteLine line = drivingRouteResult.getRouteLines().get(0);
+                mDrivingRouteOverlay.setData(line);
+                mDrivingRouteOverlay.addToMap();
+                mDrivingRouteOverlay.zoomToSpan();
+            }
+            isRoutePlatn = true;
+        }
+
+        @Override
+        public void onGetIndoorRouteResult(IndoorRouteResult indoorRouteResult) {
+
+        }
+
+        @Override
+        public void onGetBikingRouteResult(BikingRouteResult bikingRouteResult) {
+
+        }
+    };
 }

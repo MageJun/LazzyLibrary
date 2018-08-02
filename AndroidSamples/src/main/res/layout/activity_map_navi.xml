@@ -7,4 +7,6 @@
     tools:context="com.map.view.MapNaviActivity">
     <include layout="@layout/map_content_layout"/>
 
+
+
 </android.support.constraint.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.zed3.sipua.xydj.ui.friend;
 
 import android.graphics.drawable.Drawable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,8 +9,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
-import com.common.widget.recyclerview.adapter.BaseRecycleViewAdapter;
+import com.lazzy.common.lib.widget.recyclerview.adapter.LoadMoreItemView;
+import com.lazzy.common.lib.widget.recyclerview.adapter.LoadMoreRecyclerViewAdapter;
 import com.lw.demo.android.samples.R;
 import com.zed3.sipua.xydj.ui.friend.adapter.FriendListItemView;
 import com.zed3.sipua.xydj.ui.friend.bean.FrindInfo;
@@ -28,7 +31,8 @@ public class FriendListActivity extends AppCompatActivity implements OnItemLongC
 
     private RecyclerView mListView;
     private EditText mEditText;
-    private BaseRecycleViewAdapter mAdapter;
+    private LoadMoreRecyclerViewAdapter mAdapter;
+    private SwipeRefreshLayout mSwipeRefresh;
     private LetterSideBar mSideBar;
     private List<FrindInfo> mData ;
     private LetterSideBar.OnIndexSelectChanged mChangedListener = new LetterSideBar.OnIndexSelectChanged() {
@@ -45,6 +49,7 @@ public class FriendListActivity extends AppCompatActivity implements OnItemLongC
             }
         }
     };
+    private GroupItemDecoration groupItemDecoration;
 
     private int findCurPos(String letter) {
         for (int i = 0;i<mData.size();i++){
@@ -104,31 +109,79 @@ public class FriendListActivity extends AppCompatActivity implements OnItemLongC
 
         initView();
         initData();
+        initListener();
     }
 
     private void initView() {
         mListView = findViewById(R.id.listView);
         mSideBar = findViewById(R.id.sidebar);
         mEditText = findViewById(R.id.search_edt);
+        mSwipeRefresh = findViewById(R.id.swipeRefresh);
         calcLeftDrawableSize();
+    }
+
+    private void initListener(){
+        mSwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener(){
+            @Override
+            public void onRefresh() {
+                Toast.makeText(FriendListActivity.this,"shuaxin",Toast.LENGTH_SHORT).show();
+                Random random = new Random();
+                int count = random.nextInt(12);
+                List<FrindInfo> tmpData = createDecData(count);
+                mData.clear();
+                mData.addAll(tmpData);
+                groupItemDecoration.setData(mData);
+                mAdapter.setData(mData);
+                mSwipeRefresh.setRefreshing(false);
+            }
+
+        });
+        mAdapter.setLoadMoreListener(new LoadMoreRecyclerViewAdapter.OnLoadMoreListener() {
+            @Override
+            public void loadMore() {
+                List<FrindInfo> tmpData = createDecData(2);
+                mAdapter.insertData(tmpData);
+                mAdapter.setFooterAvaible(false);
+            }
+        });
+    }
+    private boolean isSlideToBottom(RecyclerView recyclerView) {
+        if (recyclerView == null) return false;
+        if (recyclerView.computeVerticalScrollExtent() + recyclerView.computeVerticalScrollOffset() >= recyclerView.computeVerticalScrollRange())
+            return  true;
+        else
+            return  false;
     }
 
     private void initData(){
         LinearLayoutManager lm = new LinearLayoutManager(this);
-        GroupItemDecoration decoration = new GroupItemDecoration(this,LinearLayout.VERTICAL);
-        decoration.setOffset(4);
-        decoration.setTitleTextSize(14);
-        decoration.setTitleHight(30);
-        decoration.setTitleTextColor(R.color.xydj_group_member_detail_text_color);
-        decoration.setTitleBgColor(R.color.xydj_gray_2);
-        decoration.setColor(getResources().getColor(R.color.xydj_gray_2));
-        decoration.setStickTitle(true);
+        groupItemDecoration = new GroupItemDecoration(this, LinearLayout.VERTICAL);
+        groupItemDecoration.setOffset(4);
+        groupItemDecoration.setTitleTextSize(14);
+        groupItemDecoration.setTitleHight(30);
+        groupItemDecoration.setTitleTextColor(R.color.xydj_group_member_detail_text_color);
+        groupItemDecoration.setTitleBgColor(R.color.xydj_gray_2);
+        groupItemDecoration.setColor(getResources().getColor(R.color.xydj_gray_2));
+        groupItemDecoration.setStickTitle(true);
         mListView.setAdapter(mAdapter);
         mListView.setLayoutManager(lm);
-        mListView.addItemDecoration(decoration);
+        mListView.addItemDecoration(groupItemDecoration);
         mListView.addOnScrollListener(mScrollListener);
         mData = createDecData(2);
-        mAdapter = new BaseRecycleViewAdapter<FrindInfo>() {
+      /*  mAdapter = new BaseRecycleViewAdapter<FrindInfo>() {
+            @Override
+            public void onCreateMulitTypeItemView() {
+                FriendListItemView itemView = new FriendListItemView();
+                addItemView(itemView);
+            }
+        };*/
+        mAdapter = new LoadMoreRecyclerViewAdapter<FrindInfo>(mListView){
+
+            @Override
+            public LoadMoreItemView createLoadMoreItemView() {
+                return null;
+            }
+
             @Override
             public void onCreateMulitTypeItemView() {
                 FriendListItemView itemView = new FriendListItemView();
@@ -162,7 +215,7 @@ public class FriendListActivity extends AppCompatActivity implements OnItemLongC
                     return o1.getSpellName().compareTo(o2.getSpellName());
             }
         });
-        decoration.setData(mData);
+        groupItemDecoration.setData(mData);
         mAdapter.setData(mData);
     }
 
@@ -193,7 +246,7 @@ public class FriendListActivity extends AppCompatActivity implements OnItemLongC
     private List<FrindInfo> createDecData(int count){
         List<FrindInfo> infos = new ArrayList<>();
         Random random = new Random();
-        for (int i = 0;i<NAMES.length;i++){
+        for (int i = 0;i<count;i++){
             FrindInfo info = new FrindInfo();
             String name = NAMES[i].trim();
             String tag = "#" ;
@@ -235,6 +288,9 @@ public class FriendListActivity extends AppCompatActivity implements OnItemLongC
                     int lastItemPosition = linearManager.findLastVisibleItemPosition();
                     //获取第一个可见view的位置
                     int firstItemPosition = linearManager.findFirstVisibleItemPosition();
+                    if(firstItemPosition==-1||mData.size()<=firstItemPosition){
+                        return;
+                    }
                     FrindInfo info = mData.get(firstItemPosition);
                     if(mSideBar!=null){
                         mSideBar.setCurrentLetter(info.getTag());

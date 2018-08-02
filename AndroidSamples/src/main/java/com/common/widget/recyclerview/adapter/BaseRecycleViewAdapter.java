@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 
@@ -13,8 +14,8 @@ import java.util.List;
  * @param <T>
  */
 public abstract class BaseRecycleViewAdapter<T> extends RecyclerView.Adapter {
-    private List<T> mDatas = new ArrayList<>();//所有的数据
-    private ItemViewManager<T> mItemViewManager;
+    protected List<T> mDatas = new ArrayList<>();//所有的数据
+    protected ItemViewManager<T> mItemViewManager;
 
     public abstract void onCreateMulitTypeItemView();
 
@@ -37,15 +38,25 @@ public abstract class BaseRecycleViewAdapter<T> extends RecyclerView.Adapter {
         mDatas.addAll(data);
         notifyDataSetChanged();
     }
+    public void insertData(T data){
+        int size = mDatas.size();
+        mDatas.add(data);
+        notifyItemChanged(size);
+    }
+    public void insertData(Collection<T> data){
+        int size = mDatas.size();
+        mDatas.addAll(data);
+        notifyItemChanged(size,data.size()-1);
+    }
 
     @NonNull
     @Override
-   final public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
          return mItemViewManager.getItemView(viewType).onCreateViewHolder(parent,viewType);
     }
 
     @Override
-   final public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         int viewType = getItemViewType(position);
         IItemView itemView = mItemViewManager.getItemView(viewType);
         if (itemView != null) {
@@ -54,12 +65,12 @@ public abstract class BaseRecycleViewAdapter<T> extends RecyclerView.Adapter {
     }
 
     @Override
-   final public int getItemCount() {
+    public int getItemCount() {
         return mDatas.size();
     }
 
     @Override
-   final public int getItemViewType(int position) {
+    public int getItemViewType(int position) {
         return mItemViewManager.getViewType(mDatas.get(position), position);
     }
 }
