@@ -43,6 +43,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     compile project(':CommonUI')
     compile project(':magicindicator')
+
     implementation 'com.j256.ormlite:ormlite-android:5.1'
     implementation 'com.shizhefei:ViewPagerIndicator:1.1.6'
     //glid是图片加载框架，添加Glid库的依赖,Glid编译版本是27+，支持库的版本也必须是27+,否则会运行时异常
