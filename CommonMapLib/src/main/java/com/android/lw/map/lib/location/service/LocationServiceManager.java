@@ -46,6 +46,7 @@ public class LocationServiceManager {
     private ServiceConnection mServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
+            isRunning = true;
             mLocationService = (MapLocationService.LocationBind) service;
             mLocationService.setLocationListener(mLocationListener);
             mLocationService.requestLocation();
@@ -76,6 +77,7 @@ public class LocationServiceManager {
 
     public void stopService(){
         mContext.unbindService(mServiceConnection);
+        isRunning = false;
     }
 
     public void setLocationClientOption(LocationClientOption option){
