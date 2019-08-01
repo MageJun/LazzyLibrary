@@ -19,5 +19,6 @@ android {
 
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
-    compileOnly 'androidx.appcompat:appcompat:1.0.0'
+    implementation "androidx.appcompat:appcompat:$ANDROIDX_APPCOMPAT"
+
 }

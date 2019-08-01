@@ -44,7 +44,7 @@ dependencies {
     //implementation 只给当前的工程使用
 //    implementation fileTree(include: ['*.jar','*.aar'], dir: 'libs')
     api fileTree(include: ['*.jar','*.aar'], dir: 'libs')
-    compileOnly 'androidx.appcompat:appcompat:1.0.0'
+    api "androidx.appcompat:appcompat:$ANDROIDX_APPCOMPAT"
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
