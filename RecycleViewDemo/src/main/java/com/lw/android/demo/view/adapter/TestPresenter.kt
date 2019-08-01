@@ -5,9 +5,7 @@ object TestPresenter {
     fun requestInNewThread(position:Int,callback: Callback){
         Thread(Runnable {
             Thread.sleep(2000)
-            if(callback!=null){
-                callback.callBack(position)
-            }
+            callback.callBack(position)
         }).start()
     }
 
