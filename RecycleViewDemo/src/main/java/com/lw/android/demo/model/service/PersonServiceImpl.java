@@ -47,7 +47,7 @@ public class PersonServiceImpl implements IPersonService {
     private void listPersonsInner(){
         Log.i(TAG,"listPersonsInner tName = "+Thread.currentThread().getName());
         try{
-            List<PersonalData> data = createTmpData(20);
+            List<PersonalData> data = createTmpData(40);
             Log.i(TAG,"listPersonsInner datas = "+data.toString());
 
             if(mListener!=null){

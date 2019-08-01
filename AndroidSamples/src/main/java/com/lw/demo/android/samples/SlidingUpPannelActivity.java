@@ -1,11 +1,9 @@
 package com.lw.demo.android.samples;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
-
-import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 public class SlidingUpPannelActivity extends AppCompatActivity {
     private SlidingUpPannelLayoutCustom mLayout;

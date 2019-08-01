@@ -1,16 +1,13 @@
 package com.common.widget.recyclerview.adapter;
 
 
-import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.lw.demo.android.samples.R;
 
 /**
  * 通用ViewHolder

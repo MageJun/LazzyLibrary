@@ -1,8 +1,8 @@
 package com.lw.demo.android.samples;
 
 import android.content.Context;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
+import androidx.test.InstrumentationRegistry;
+import androidx.test.runner.AndroidJUnit4;
 import android.util.Log;
 
 import com.helper.SqliteHelper;
@@ -14,7 +14,6 @@ import org.junit.runner.RunWith;
 
 import java.util.List;
 
-import static android.support.constraint.Constraints.TAG;
 import static org.junit.Assert.*;
 
 /**

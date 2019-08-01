@@ -1,6 +1,6 @@
 package com.lw.android.demo.view;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * Created by zed on 2018/4/13.

@@ -1,6 +1,6 @@
 package com.zed3.sipua.xydj.ui.group.adapter;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
 public interface OnItemSelectedListener<T> {

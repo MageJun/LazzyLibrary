@@ -18,7 +18,7 @@ package com.lw.android.commonui.customView.otherlibrary;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.v4.view.ViewCompat;
+import androidx.core.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -75,9 +75,9 @@ public class SwipeMenuLayoutSample extends FrameLayout implements SwipeSwitch {
         super(context, attrs, defStyle);
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.SwipeMenuLayoutSample);
-        mLeftViewId = typedArray.getResourceId(R.styleable.SwipeMenuLayoutSample_leftViewId, mLeftViewId);
-        mContentViewId = typedArray.getResourceId(R.styleable.SwipeMenuLayoutSample_contentViewId, mContentViewId);
-        mRightViewId = typedArray.getResourceId(R.styleable.SwipeMenuLayoutSample_rightViewId, mRightViewId);
+        mLeftViewId = typedArray.getResourceId(R.styleable.SwipeMenuLayoutSample_leftSampleViewId, mLeftViewId);
+        mContentViewId = typedArray.getResourceId(R.styleable.SwipeMenuLayoutSample_rightSampleViewId, mContentViewId);
+        mRightViewId = typedArray.getResourceId(R.styleable.SwipeMenuLayoutSample_contentSampleViewId, mRightViewId);
         typedArray.recycle();
 
         ViewConfiguration configuration = ViewConfiguration.get(getContext());

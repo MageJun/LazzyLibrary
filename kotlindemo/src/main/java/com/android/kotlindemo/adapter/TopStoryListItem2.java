@@ -3,13 +3,14 @@ package com.android.kotlindemo.adapter;
 import android.animation.ValueAnimator;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
-import android.os.Handler;
-import android.os.Message;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.ViewUtils;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.ViewUtils;
+
+import android.os.Build;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,10 +21,8 @@ import android.widget.ImageView;
 import com.android.kotlindemo.R;
 import com.android.kotlindemo.model.bean.net.StoryBean;
 import com.android.kotlindemo.model.bean.net.ThemeNewsBean;
-import com.lazzy.common.lib.utils.BitmapTask;
 import com.lazzy.common.lib.utils.L;
 import com.lazzy.common.lib.utils.ResourceHelper;
-import com.lazzy.common.lib.utils.ThreadPoolProxyFactory;
 import com.lazzy.common.lib.utils.ViewHelper;
 import com.lazzy.common.lib.widget.recyclerview.adapter.BaseItemView;
 import com.lazzy.common.lib.widget.recyclerview.adapter.BaseRecycleViewAdapter;
@@ -76,6 +75,7 @@ public class TopStoryListItem2 extends BaseItemView<StoryBean> {
         return view;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void onBindVH(@NonNull BaseViewHolder holder, int position, StoryBean data) {
         L.i("TopStoryListItem2","TopStoryListItem2 onBindVH");

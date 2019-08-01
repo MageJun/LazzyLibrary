@@ -1,25 +1,20 @@
 package com.android.kotlindemo.view.activity
 
 import android.os.Bundle
-import android.support.design.widget.NavigationView
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentTransaction
-import android.support.v7.app.ActionBarDrawerToggle
-import android.support.v7.widget.Toolbar
+import com.google.android.material.navigation.NavigationView
+import androidx.fragment.app.Fragment
+import androidx.appcompat.app.ActionBarDrawerToggle
 import android.view.MenuItem
 import android.view.View
 import com.android.kotlindemo.R
 import com.android.kotlindemo.model.bean.net.NewsThemeBean
-import com.android.kotlindemo.model.service.NewsManager
 import com.android.kotlindemo.model.service.NewsThemeListManager
 import com.android.kotlindemo.presenter.MainActivityPresenter
 import com.android.kotlindemo.view.fragment.HomeFragment
-import com.android.kotlindemo.view.fragment.TestHomeFragment
 import com.android.kotlindemo.view.fragment.ThemeFragment
 import com.lazzy.common.lib.utils.ResourceHelper
 import com.lazzy.common.lib.utils.ViewHelper
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_news_content.*
 import kotlinx.android.synthetic.main.naviagtion_header_layout.*
 
 class MainActivity : BaseActivity(),View.OnClickListener {
@@ -99,9 +94,9 @@ class MainActivity : BaseActivity(),View.OnClickListener {
             mThemeFragment = ThemeFragment()
         }
         var transaction = supportFragmentManager?.beginTransaction()
-        transaction?.add(R.id.content,mHomeFragment/*TestHomeFragment()*/)
-        transaction?.add(R.id.content,mThemeFragment)
-        transaction?.hide(mThemeFragment)
+        transaction?.add(R.id.content, mHomeFragment!!/*TestHomeFragment()*/)
+        transaction?.add(R.id.content, mThemeFragment!!)
+        transaction?.hide(mThemeFragment!!)
         transaction?.commit()
 
         mCurrentFragment = mHomeFragment
@@ -141,7 +136,7 @@ class MainActivity : BaseActivity(),View.OnClickListener {
         supportActionBar?.title=title
     }
 
-    private var mCurrentFragment:Fragment? = null;
+    private var mCurrentFragment: Fragment? = null;
 
     private fun switchHomeFragment(){
         if(mCurrentFragment == mHomeFragment){
@@ -152,8 +147,8 @@ class MainActivity : BaseActivity(),View.OnClickListener {
             mHomeFragment = HomeFragment();
             transaction?.add(R.id.content,mHomeFragment)
         }*/
-        transaction?.show(mHomeFragment)
-        transaction?.hide(mThemeFragment)
+        transaction?.show(mHomeFragment!!)
+        transaction?.hide(mThemeFragment!!)
         transaction?.commit()
         mCurrentFragment = mHomeFragment
     }
@@ -171,8 +166,8 @@ class MainActivity : BaseActivity(),View.OnClickListener {
             mThemeFragment = ThemeFragment()
             transaction?.add(R.id.content,mThemeFragment)
         }*/
-        transaction?.hide(mHomeFragment)
-        transaction?.show(mThemeFragment)
+        transaction?.hide(mHomeFragment!!)
+        transaction?.show(mThemeFragment!!)
         transaction?.commit()
         mCurrentFragment = mThemeFragment
 

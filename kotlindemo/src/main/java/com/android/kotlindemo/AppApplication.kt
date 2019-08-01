@@ -35,7 +35,7 @@ class AppApplication: Application() {
      *
      * @return process name
      */
-    fun getProcessName(): String {
+    fun getProcessNameInner(): String {
         val cmdFile = File("/proc/self/cmdline")
 
         if (cmdFile.exists() && !cmdFile.isDirectory) {

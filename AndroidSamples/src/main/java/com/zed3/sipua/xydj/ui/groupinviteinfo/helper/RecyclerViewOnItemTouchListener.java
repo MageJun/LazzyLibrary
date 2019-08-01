@@ -1,6 +1,6 @@
 package com.zed3.sipua.xydj.ui.groupinviteinfo.helper;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.MotionEvent;
 
 public class RecyclerViewOnItemTouchListener implements RecyclerView.OnItemTouchListener {

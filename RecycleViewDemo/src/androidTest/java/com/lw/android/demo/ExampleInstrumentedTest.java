@@ -2,18 +2,15 @@ package com.lw.android.demo;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
+import androidx.test.InstrumentationRegistry;
+import androidx.test.runner.AndroidJUnit4;
 import android.util.Log;
 
-import com.lw.android.demo.model.PersonalData;
 import com.lw.android.demo.model.service.GlobalServiceManager;
 import com.lw.android.demo.model.service.IPersonService;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import java.util.List;
 
 import static org.junit.Assert.*;
 

@@ -1,6 +1,5 @@
 package com.zed3.sipua.xydj.ui.group.adapter;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 /**

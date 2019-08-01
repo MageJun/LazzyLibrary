@@ -2,9 +2,9 @@ package com.lw.android.demo.view.adapter;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -72,8 +72,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int i) {
-            PersonalData data = mData.get(i);
+    public void onBindViewHolder(final ViewHolder viewHolder, final int i) {
+        final  PersonalData data = mData.get(i);
         viewHolder.mTV.setText(data.getName());
         RequestOptions options = RequestOptions.placeholderOf(R.drawable.ic_launcher_background);
         RequestManager rm = Glide.with(mContext);
@@ -85,6 +85,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             @Override
             public void onClick(View v) {
                 Toast.makeText(mContext,"position = "+position,Toast.LENGTH_SHORT).show();
+            }
+        });
+        TestPresenter.INSTANCE.requestInNewThread(position, new TestPresenter.Callback() {
+            @Override
+            public void callBack(int position) {
+                Log.i(TAG,"onBindViewHolder callBack position = "+position+", viewHoler = "+i);
+//                viewHolder.mTV.setText(data.getName()+"pos "+position);
             }
         });
         rm.load(data.getImgUrl()).into(new ImageViewTarget<Drawable>(viewHolder.mIM) {

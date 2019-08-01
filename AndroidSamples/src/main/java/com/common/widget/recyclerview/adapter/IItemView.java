@@ -1,7 +1,7 @@
 package com.common.widget.recyclerview.adapter;
 
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.ViewGroup;
 
 /**
@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 public interface IItemView<T> {
 
     /**
-     * 作用同{@link android.support.v7.widget.RecyclerView.Adapter#onCreateViewHolder(ViewGroup, int)}
+     * 作用同{@link RecyclerView.Adapter#onCreateViewHolder(ViewGroup, int)}
      * @param parent
      * @param viewType
      * @return
@@ -22,7 +22,7 @@ public interface IItemView<T> {
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType);
 
     /**
-     * 作用同{@link android.support.v7.widget.RecyclerView.Adapter#onBindViewHolder(RecyclerView.ViewHolder, int)}
+     * 作用同{@link RecyclerView.Adapter#onBindViewHolder(RecyclerView.ViewHolder, int)}
      * @param holder
      * @param position
      * @param data

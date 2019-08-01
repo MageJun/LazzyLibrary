@@ -1,8 +1,6 @@
 package com.lazzy.common.lib.widget.recyclerview.adapter;
 
-import android.support.annotation.NonNull;
-import android.view.View;
-import android.view.ViewGroup;
+import androidx.annotation.NonNull;
 
 public abstract class SingleSelectItemView<T> extends BaseItemView {
 

@@ -10,9 +10,14 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/AndroidSamples" />
+            <option value="$PROJECT_DIR$/CommonLocationlib" />
+            <option value="$PROJECT_DIR$/CommonMapLib" />
             <option value="$PROJECT_DIR$/CommonUI" />
             <option value="$PROJECT_DIR$/RecycleViewDemo" />
-            <option value="$PROJECT_DIR$/ZedDemo" />
+            <option value="$PROJECT_DIR$/common_lib" />
+            <option value="$PROJECT_DIR$/kotlindemo" />
+            <option value="$PROJECT_DIR$/magicindicator" />
+            <option value="$PROJECT_DIR$/rxjavademo" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

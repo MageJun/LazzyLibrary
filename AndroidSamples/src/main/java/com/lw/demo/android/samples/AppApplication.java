@@ -2,7 +2,7 @@ package com.lw.demo.android.samples;
 
 import android.app.Application;
 import android.content.Context;
-import android.support.multidex.MultiDex;
+import androidx.multidex.MultiDex;
 
 import com.android.lw.map.lib.location.service.LocationServiceManager;
 import com.baidu.mapapi.CoordType;

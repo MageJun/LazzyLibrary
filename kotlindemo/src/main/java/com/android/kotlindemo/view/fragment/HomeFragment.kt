@@ -2,11 +2,11 @@ package com.android.kotlindemo.view.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.view.PagerAdapter
-import android.support.v4.view.ViewPager
-import android.support.v4.widget.SwipeRefreshLayout
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.viewpager.widget.PagerAdapter
+import androidx.viewpager.widget.ViewPager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -66,9 +66,9 @@ class HomeFragment: BaseFragment(),IViewer {
 
     private var mHomePresenter:HomeFragmentPresenter?=null
     private var mData:HomeNewsBean?=null
-    private var mListView:RecyclerView?=null
+    private var mListView: RecyclerView?=null
     private var mListAdapter:BaseRecycleViewAdapter<StoryBean>?=null
-    private var mSwipeRefreshLayout:SwipeRefreshLayout?=null
+    private var mSwipeRefreshLayout: SwipeRefreshLayout?=null
     private var isRefreshing = false;
     private var mDate:String?=null
     override fun onFragmentCreate(savedInstanceState: Bundle?) {
@@ -101,7 +101,7 @@ class HomeFragment: BaseFragment(),IViewer {
         mListView?.layoutManager = lm
         mListView?.adapter = mListAdapter
 
-        mSwipeRefreshLayout?.setOnRefreshListener(object :SwipeRefreshLayout.OnRefreshListener{
+        mSwipeRefreshLayout?.setOnRefreshListener(object : SwipeRefreshLayout.OnRefreshListener{
             override fun onRefresh() {
                 Toast.makeText(context,"shuaxin",Toast.LENGTH_SHORT).show()
                 isRefreshing = true
@@ -111,14 +111,15 @@ class HomeFragment: BaseFragment(),IViewer {
         })
 
         mListView?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 if(isSlideToBottom(mListView)){
                     mHomePresenter?.loadMoreData(mDate)
                 }
             }
 
-            override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
             }
         })

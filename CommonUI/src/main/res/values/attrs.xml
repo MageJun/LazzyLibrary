@@ -13,9 +13,9 @@
 
     <!-- SwipeMenuLayout自定义属性-->
     <declare-styleable name="SwipeMenuLayoutSample">
-        <attr name="leftViewId" format="reference" />
-        <attr name="rightViewId" format="reference" />
-        <attr name="contentViewId" format="reference" />
+        <attr name="leftSampleViewId" format="reference" />
+        <attr name="rightSampleViewId" format="reference" />
+        <attr name="contentSampleViewId" format="reference" />
     </declare-styleable>
 
 </resources>

@@ -1,13 +1,12 @@
 package com.lazzy.common.lib.utils;
 
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import com.google.android.material.tabs.TabLayout;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.text.TextUtils;

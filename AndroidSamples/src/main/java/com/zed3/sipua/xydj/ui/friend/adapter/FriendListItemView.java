@@ -1,7 +1,6 @@
 package com.zed3.sipua.xydj.ui.friend.adapter;
 
-import android.os.Build;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

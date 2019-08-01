@@ -1,6 +1,6 @@
 package com.lazzy.common.lib.widget.recyclerview.adapter;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 public abstract class MulitItemView<T> extends BaseItemView {
 

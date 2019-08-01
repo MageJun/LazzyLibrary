@@ -2,7 +2,7 @@ package com.zed3.sipua.xydj.ui;
 
 import android.content.Context;
 import android.graphics.Rect;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
 import com.common.widget.recyclerview.decoration.ItemDividerDecoration;
